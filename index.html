@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html class="dark" dir="rtl" lang="ar">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>تريبل بريديد - خدمات مسك الدفاتر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@500&amp;display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/framer-motion@10.16.4/dist/framer-motion.js"></script>
+    <script type="module" src="/src/main.js"></script>
+    <!-- Meta Pixel Code -->
+    <script>
+        !function (f, b, e, v, n, t, s) {
+            if (f.fbq) return; n = f.fbq = function () {
+                n.callMethod ?
+                    n.callMethod.apply(n, arguments) : n.queue.push(arguments)
+            };
+            if (!f._fbq) f._fbq = n; n.push = n; n.loaded = !0; n.version = '2.0';
+            n.queue = []; t = b.createElement(e); t.async = !0;
+            t.src = v; s = b.getElementsByTagName(e)[0];
+            s.parentNode.insertBefore(t, s)
+        }(window, document, 'script',
+            'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '2399743503840819');
+        fbq('track', 'PageView');
+    </script>
+    <!-- End Meta Pixel Code -->
+</head>
+
+<body class="relative min-h-screen grid-glow-effect" data-mode="connect" style="background-color: #000000;">
+    <!-- Meta Pixel Noscript Fallback -->
+    <noscript><img height="1" width="1" style="display:none"
+            src="https://www.facebook.com/tr?id=2399743503840819&ev=PageView&noscript=1" /></noscript>
+    <!-- End Meta Pixel Noscript Fallback -->
+    <div class="mouse-glow hidden md:block" id="mouse-glow"></div>
+    <!-- Ambient Glows -->
+    <div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        <div class="glow-blob top-0 right-0 translate-x-1/4 -translate-y-1/4"></div>
+        <div class="glow-blob top-1/2 left-0 -translate-x-1/4 -translate-y-1/2"></div>
+        <div class="glow-blob bottom-0 right-0 translate-x-1/4 translate-y-1/4"></div>
+    </div>
+    <!-- TopNavBar -->
+    <nav
+        class="fixed top-2 md:top-4 left-0 right-0 mx-auto z-50 bg-black/80 backdrop-blur-xl border border-border-subtle shadow-2xl shadow-glow-primary/20 rounded-[24px] md:rounded-full w-[92%] md:w-[90%] max-w-5xl transition-all duration-300">
+        <div class="flex justify-between items-center px-4 md:px-8 py-2.5 md:py-3 w-full">
+            <!-- Hamburger button on mobile: left side (order-3, which in RTL layout ends up on the left side) -->
+            <button id="mobile-menu-btn"
+                class="order-3 md:hidden flex items-center justify-center text-primary p-1.5 focus:outline-none hover:text-white transition-colors"
+                aria-label="Toggle Menu">
+                <span class="material-symbols-outlined text-3xl">menu</span>
+            </button>
+
+            <!-- Logo: order-2 on mobile (centers it), order-1 on desktop (right side in RTL) -->
+            <div class="order-2 md:order-1 font-hero-headline text-card-title text-primary flex items-center">
+                <div class="flex items-center gap-2 md:gap-3">
+                    <img alt="Triple Braided Logo" class="w-auto object-contain h-9 md:h-12" src="/logo.png">
+                    <span class="text-base md:text-2xl hidden sm:block font-bold">Triple Braided</span>
+                </div>
+            </div>
+
+            <!-- Navigation Links: Hidden on mobile, order-2 on desktop -->
+            <div class="hidden md:flex order-2 gap-8 items-center">
+                <a class="font-body-base text-body-base text-primary font-bold border-b-2 border-primary pb-1"
+                    href="#">الرئيسية</a>
+                <a class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors duration-300"
+                    href="#services">خدماتنا</a>
+                <a class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors duration-300"
+                    href="#why-us">المميزات</a>
+                <a class="font-body-base text-body-base text-on-surface-variant hover:text-primary transition-colors duration-300"
+                    href="#faq">الأسئلة الشائعة</a>
+            </div>
+
+            <!-- CTA Button: order-1 on mobile (right side in RTL), order-3 on desktop (left side in RTL) -->
+            <div class="order-1 md:order-3">
+                <a href="https://wa.me/+201553704450" target="_blank"
+                    class="font-body-base text-xs md:text-sm text-black bg-primary font-bold px-4 md:px-6 py-1.5 md:py-2 rounded-full border border-primary hover:bg-primary/95 hover:shadow-[0_0_15px_rgba(15,180,120,0.5)] transition-all scale-105 active:scale-95 inline-block text-center whitespace-nowrap">تواصل
+                    معنا</a>
+            </div>
+        </div>
+
+        <!-- Mobile Dropdown Menu -->
+        <div id="mobile-dropdown"
+            class="hidden md:hidden px-6 pb-6 pt-2 border-t border-border-subtle flex flex-col gap-4 bg-black/90 backdrop-blur-xl rounded-b-[24px]">
+            <a class="font-body-base text-sm text-primary font-bold py-2 border-b border-white/5" href="#">الرئيسية</a>
+            <a class="font-body-base text-sm text-on-surface-variant hover:text-primary py-2 border-b border-white/5 transition-colors"
+                href="#services">خدماتنا</a>
+            <a class="font-body-base text-sm text-on-surface-variant hover:text-primary py-2 border-b border-white/5 transition-colors"
+                href="#why-us">المميزات</a>
+            <a class="font-body-base text-sm text-on-surface-variant hover:text-primary py-2 transition-colors"
+                href="#faq">الأسئلة الشائعة</a>
+        </div>
+    </nav>
+    <!-- Hero Section -->
+    <section
+        class="relative pt-24 md:pt-40 pb-section-py-desktop px-container-px max-w-container-max mx-auto z-10 flex flex-col items-center gap-16">
+        <div class="flex-1 space-y-8 fade-in-section is-visible text-center">
+            <div class="flex justify-center w-full mb-12">
+                <div
+                    class="inline-flex items-center gap-2 md:gap-3 px-3 py-1.5 md:px-6 md:py-2 rounded-full bg-primary/10 border-2 border-primary/30 shadow-[0_0_20px_rgba(15, 180, 120,0.2)]">
+                    <span class="relative flex h-2.5 w-2.5 md:h-3 md:w-3 shrink-0">
+                        <span
+                            class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 md:h-3 md:w-3 bg-primary"></span>
+                    </span>
+                    <span class="font-bold text-[15px] sm:text-base md:text-xl text-primary tracking-wide text-center">
+                        للشركات و المتاجر&nbsp;بمبيعات 50 – 300 ألف ريال شهرياً
+                    </span>
+                </div>
+            </div>
+            <h1 class="font-hero-headline text-primary text-3xl md:text-5xl lg:text-6xl mb-4 leading-tight">خل إدارة
+                حساباتك علينا</h1>
+            <h2 class="font-hero-headline text-2xl md:text-3xl font-bold text-white mx-auto leading-relaxed">
+                بنظام محاسبي <span class="text-primary growing-underline">ذكي</span> يدير شغلك بكفاءة... وبأقل من <span
+                    class="text-primary animated-draw-underline">ربع تكلفة</span> محاسب دوام كامل.
+            </h2>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <a href="https://wa.me/+201553704450" target="_blank"
+                    class="px-8 py-3 rounded-full bg-primary text-black font-bold hover:bg-primary/95 hover:shadow-[0_0_25px_rgba(15,180,120,0.6)] transition-all text-center inline-block">تواصل
+                    معنا</a>
+                <a href="#how-it-works"
+                    class="px-8 py-3 rounded-full bg-transparent border border-primary text-primary hover:bg-primary/10 transition-colors text-center inline-block">شوف
+                    كيف نشتغل ←</a>
+            </div>
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-2 text-xs md:text-sm text-text-muted justify-center">
+                <span class="whitespace-nowrap">✓ ضمان استرداد كامل خلال أول شهر</span>
+                <span class="hidden sm:inline">·</span>
+                <span class="whitespace-nowrap">✓ بدون عقود طويلة</span>
+                <span class="hidden sm:inline">·</span>
+                <span class="whitespace-nowrap">✓ أونلاين 100%</span>
+            </div>
+        </div>
+        <div class="flex-1 relative fade-in-section is-visible w-full flex flex-col items-center gap-6"
+            style="transition-delay: 200ms;">
+            <!-- Badge/Label -->
+            <div
+                class="inline-flex items-center gap-2 px-4 py-1.5 rounded bg-primary/10 border-l-4 border-primary text-primary text-xs md:text-sm font-bold tracking-wide shadow-[0_0_15px_rgba(15,180,120,0.15)]">
+                <span class="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+                <span>نظرة عامة على أعمالك</span>
+            </div>
+
+            <div class="relative w-full max-w-3xl flex flex-col items-center">
+                <svg class="absolute inset-0 w-full h-full pointer-events-none z-20 overflow-visible"
+                    style="filter: drop-shadow(0 0 5px rgba(15, 180, 120, 0.4));">
+                    <path class="heartbeat-line" d="M85% 15% Q 95% 5%, 95% -5%" fill="none" stroke="#0FB478"
+                        stroke-width="1.5" style="filter: drop-shadow(0 0 5px #0FB478);"></path>
+                    <path class="heartbeat-line" d="M15% 85% Q 5% 95%, 5% 105%" fill="none" stroke="#0FB478"
+                        stroke-width="1.5" style="filter: drop-shadow(0 0 5px #0FB478);"></path>
+                </svg>
+                <div
+                    class="glass-panel rounded-xl p-4 md:p-8 relative z-10 aspect-auto h-auto min-h-[400px] md:min-h-[460px] w-full max-w-3xl shadow-[0_0_50px_rgba(15,180,120,0.25)] dashboard-interactive-glow transition-all duration-300 border border-primary/20">
+                    <div
+                        class="h-full w-full flex flex-col gap-4 md:gap-6 overflow-hidden items-center justify-center py-4 md:py-6">
+                        <!-- Header/Metric Widgets -->
+                        <div class="grid grid-cols-2 gap-4 md:gap-6 items-center w-full max-w-full md:max-w-[92%]">
+                            <!-- Revenue KPI Card -->
+                            <div
+                                class="bg-white/5 border border-primary/20 rounded-lg p-4 backdrop-blur-sm kpi-card-hover transition-all duration-300 cursor-pointer">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="text-[11px] md:text-sm text-[#bbc9c7] font-bold mb-1.5 leading-none">
+                                            الإيرادات الشهرية</p>
+                                        <div class="flex items-baseline gap-2">
+                                            <h3
+                                                class="font-technical-stat text-lg md:text-3xl text-white font-extrabold">
+                                                125,400 ر.س</h3>
+                                            <span
+                                                class="text-xs md:text-sm text-primary font-bold tracking-tight">+12.5%</span>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-primary text-2xl drop-shadow-[0_0_8px_#0FB478]">trending_up</span>
+                                </div>
+                                <div class="mt-4 h-14 w-full relative">
+                                    <canvas id="revenue-chart" class="w-full h-full"></canvas>
+                                </div>
+                            </div>
+                            <!-- Profit KPI Card (Changed line color from orange to match brand green #0FB478) -->
+                            <div
+                                class="bg-white/5 border border-primary/20 rounded-lg p-4 backdrop-blur-sm kpi-card-hover transition-all duration-300 cursor-pointer">
+                                <div class="flex justify-between items-start">
+                                    <div>
+                                        <p class="text-[11px] md:text-sm text-[#bbc9c7] font-bold mb-1.5 leading-none">
+                                            صافي
+                                            الربح</p>
+                                        <div class="flex items-baseline gap-2">
+                                            <h3
+                                                class="font-technical-stat text-lg md:text-3xl text-white font-extrabold">
+                                                48,200 ر.س</h3>
+                                            <span
+                                                class="text-xs md:text-sm text-primary font-bold tracking-tight">+8.3%</span>
+                                        </div>
+                                    </div>
+                                    <span
+                                        class="material-symbols-outlined text-primary text-2xl drop-shadow-[0_0_8px_#0FB478]">payments</span>
+                                </div>
+                                <div class="mt-4 h-14 w-full relative">
+                                    <canvas id="profit-chart" class="w-full h-full"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Main Chart Area (Cash Flow) -->
+                        <div
+                            class="w-full md:flex-1 bg-white/5 border border-primary/10 rounded-lg p-4 relative overflow-hidden max-w-full md:max-w-[92%]">
+                            <div class="flex justify-between items-center mb-4">
+                                <p class="text-xs md:text-sm font-bold text-white">تدفقات السيولة</p>
+                                <div class="flex gap-2">
+                                    <span class="w-2.5 h-2.5 rounded-full bg-primary shadow-[0_0_8px_#0FB478]"></span>
+                                    <span
+                                        class="w-2.5 h-2.5 rounded-full bg-primary/60 shadow-[0_0_8px_#0FB478]"></span>
+                                </div>
+                            </div>
+                            <div class="relative h-24 md:h-44 w-full flex items-end gap-1">
+                                <canvas id="cashflow-chart" class="w-full h-full"></canvas>
+                            </div>
+                            <div
+                                class="absolute top-3 left-4 bg-accent-dark/95 backdrop-blur-md border border-primary/40 px-4 py-1.5 rounded-full text-xs flex items-center gap-2 shadow-lg shadow-[0_0_20px_rgba(15,180,120,0.3)] z-30">
+                                <span
+                                    class="w-2.5 h-2.5 bg-primary rounded-full animate-pulse shadow-[0_0_8px_#0FB478]"></span>
+                                <span class="text-white font-bold">تحديث مباشر: +12%</span>
+                            </div>
+                        </div>
+                        <!-- Monthly Expenses (Bar Chart with all bars using #0FB478 brand green) -->
+                        <div
+                            class="h-20 md:h-28 bg-white/5 border border-primary/10 rounded-lg p-3 w-full max-w-full md:max-w-[92%]">
+                            <p class="text-[11px] md:text-sm text-[#bbc9c7] font-bold mb-2">المصاريف الشهرية</p>
+                            <div class="h-14 md:h-16 w-full relative">
+                                <canvas id="expenses-chart" class="w-full h-full"></canvas>
+                            </div>
+                        </div>
+                        <!-- Interactive styling line overlay moved inside the overflow-hidden inner container -->
+                        <div class="scanner-line absolute inset-0 pointer-events-none z-10"></div>
+                    </div>
+
+                    <!-- Redesigned 3 Non-overlapping Floating Badges placed outside/on the borders -->
+                    <!-- 1. Top-Left Badge (ضمان جودة) -->
+                    <div
+                        class="absolute -top-4 left-2 md:-left-4 z-40 px-4 py-2 rounded-full glass-panel border border-primary/40 shadow-[0_0_15px_rgba(15,180,120,0.3)] animate-float-slow bg-accent-dark/60 backdrop-blur-md flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-sm md:text-base">verified</span>
+                        <span class="font-bold text-white text-[10px] md:text-xs">ضمان جودة</span>
+                    </div>
+
+                    <!-- 2. Bottom-Right Badge (توفير 75% من التكلفة) -->
+                    <div
+                        class="absolute -bottom-4 right-2 md:-right-4 z-40 px-4 py-2 rounded-full glass-panel border border-primary/40 shadow-[0_0_15px_rgba(15,180,120,0.3)] animate-float-fast bg-accent-dark/60 backdrop-blur-md flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary text-sm md:text-base">bolt</span>
+                        <span class="font-bold text-white text-[10px] md:text-xs">توفير 75% من التكلفة</span>
+                    </div>
+
+                    <!-- 3. Bottom-Left Badge (محاسبون معتمدون دولياً) -->
+                    <div
+                        class="absolute -bottom-4 left-2 md:-left-4 z-40 px-4 py-2 rounded-full glass-panel border border-primary/40 shadow-[0_0_15px_rgba(15,180,120,0.3)] animate-float-slow bg-accent-dark/60 backdrop-blur-md flex items-center gap-2">
+                        <span
+                            class="material-symbols-outlined text-primary text-sm md:text-base">workspace_premium</span>
+                        <span class="font-bold text-white text-[10px] md:text-xs">محاسبون معتمدون دولياً</span>
+                    </div>
+                </div>
+                <div
+                    class="absolute inset-0 bg-gradient-to-tr from-accent-dark/50 to-transparent rounded-xl blur-xl -z-10">
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 1. Pain Points (Sticky Stacking Cards) -->
+    <section class="py-section-py-desktop px-container-px relative z-10 fade-in-section is-visible">
+        <div class="max-w-3xl mx-auto text-center mb-16">
+            <h2 class="font-section-title text-section-title text-primary mb-4">أغلب أصحاب المشاريع الصغيرة يعانون من
+                واحد من هالأمور</h2>
+        </div>
+        <div class="max-w-4xl mx-auto stacking-cards-container pb-24"><!-- Top Row: Grid for side-by-side cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sticky top-[15vh] z-30 mb-6">
+                <!-- Card 1 -->
+                <div
+                    class="glass-panel rounded-2xl p-8 border-t-4 border-t-primary shadow-[0_10px_30px_rgba(0,0,0,0.5)] transform transition-transform duration-500 hover:-translate-y-2 h-full">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-accent-dark flex items-center justify-center shrink-0 border border-primary/30">
+                            <span class="material-symbols-outlined text-2xl text-primary">warning</span>
+                        </div>
+                        <div>
+                            <h3 class="font-card-title text-xl text-white">💸 يدفعون راتب عالي لمحاسب أكبر من احتياجهم
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div
+                    class="glass-panel rounded-2xl p-8 border-t-4 border-t-secondary shadow-[0_10px_30px_rgba(0,0,0,0.5)] transform transition-transform duration-500 hover:-translate-y-2 h-full">
+                    <div class="flex items-start gap-4">
+                        <div
+                            class="w-12 h-12 rounded-full bg-accent-dark flex items-center justify-center shrink-0 border border-secondary/30">
+                            <span class="material-symbols-outlined text-2xl text-secondary">trending_down</span>
+                        </div>
+                        <div>
+                            <h3 class="font-card-title text-xl text-white">😵 يمسكون الحسابات بنفسهم وتتلخبط الأرقام
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bottom Card: Full width base -->
+            <div class="stacking-card sticky top-[25vh] z-40">
+                <div
+                    class="glass-panel rounded-2xl p-8 border-t-4 border-t-tertiary shadow-[0_20px_50px_rgba(0,0,0,0.7)] transform transition-transform duration-500 hover:-translate-y-2">
+                    <div class="flex flex-col md:flex-row items-start gap-6">
+                        <div
+                            class="w-16 h-16 rounded-full bg-accent-dark flex items-center justify-center shrink-0 border border-tertiary/30">
+                            <span class="material-symbols-outlined text-3xl text-tertiary">timer</span>
+                        </div>
+                        <div>
+                            <h3 class="font-card-title text-2xl text-white mb-4">وبالنهاية يواجهون:</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+                                <div
+                                    class="bg-surface-container-low border border-primary/20 rounded-lg p-4 flex items-center gap-3 shadow-[0_0_10px_rgba(15, 180, 120,0.1)] transition-all hover:shadow-[0_0_15px_rgba(15, 180, 120,0.2)] hover:border-primary/40">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-xl shrink-0">error_outline</span>
+                                    <p class="font-body-base text-sm text-on-surface-variant leading-tight">توتر من
+                                        موضوع الضريبة والزكاة</p>
+                                </div>
+                                <div
+                                    class="bg-surface-container-low border border-primary/20 rounded-lg p-4 flex items-center gap-3 shadow-[0_0_10px_rgba(15, 180, 120,0.1)] transition-all hover:shadow-[0_0_15px_rgba(15, 180, 120,0.2)] hover:border-primary/40">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-xl shrink-0">query_stats</span>
+                                    <p class="font-body-base text-sm text-on-surface-variant leading-tight">مو عارفين كم
+                                        صافي الربح الحقيقي</p>
+                                </div>
+                                <div
+                                    class="bg-surface-container-low border border-primary/20 rounded-lg p-4 flex items-center gap-3 shadow-[0_0_10px_rgba(15, 180, 120,0.1)] transition-all hover:shadow-[0_0_15px_rgba(15, 180, 120,0.2)] hover:border-primary/40">
+                                    <span class="material-symbols-outlined text-primary text-xl shrink-0">gavel</span>
+                                    <p class="font-body-base text-sm text-on-surface-variant leading-tight">خوف من
+                                        الأخطاء والغرامات</p>
+                                </div>
+                                <div
+                                    class="bg-surface-container-low border border-primary/20 rounded-lg p-4 flex items-center gap-3 shadow-[0_0_10px_rgba(15, 180, 120,0.1)] transition-all hover:shadow-[0_0_15px_rgba(15, 180, 120,0.2)] hover:border-primary/40">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-xl shrink-0">analytics</span>
+                                    <p class="font-body-base text-sm text-on-surface-variant leading-tight">قرارات مبنية
+                                        على توقعات مو أرقام واضحة</p>
+                                </div>
+                                <div
+                                    class="bg-surface-container-low border border-primary/20 rounded-lg p-4 flex items-center gap-3 shadow-[0_0_10px_rgba(15, 180, 120,0.1)] transition-all hover:shadow-[0_0_15px_rgba(15, 180, 120,0.2)] hover:border-primary/40">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-xl shrink-0">trending_down</span>
+                                    <p class="font-body-base text-sm text-on-surface-variant leading-tight">مصاريف أكثر
+                                        من اللازم</p>
+                                </div>
+                                <div
+                                    class="bg-surface-container-low border border-primary/20 rounded-lg p-4 flex items-center gap-3 shadow-[0_0_10px_rgba(15, 180, 120,0.1)] transition-all hover:shadow-[0_0_15px_rgba(15, 180, 120,0.2)] hover:border-primary/40">
+                                    <span
+                                        class="material-symbols-outlined text-primary text-xl shrink-0">psychology_alt</span>
+                                    <p class="font-body-base text-sm text-on-surface-variant leading-tight">وصداع يومي
+                                        بسبب الحسابات والمتابعة</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 2. Solution (Service Overview) -->
+    <section
+        class="py-section-py-desktop px-container-px relative z-10 bg-black border-y border-border-subtle fade-in-section is-visible"
+        id="services">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-primary font-bold tracking-wider text-sm uppercase mb-2 block">كل اللي تحتاجه... بمكان
+                    واحد 📍</span>
+                <h2 class="font-section-title text-section-title text-white mb-4">عشان كذا صممنا لك خدمة مسك دفاتر
+                    متكاملة أونلاين</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">receipt_long</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">تسجيل العمليات اليومية</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">نسجل إيراداتك ومصروفاتك أول بأول عشان تكون الصورة
+                        واضحة.</p>
+                </div>
+                <!-- Feature 2 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform">account_balance</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">الشجرة المحاسبية</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">نبني شجرة حسابات مفصلة تناسب نشاطك وتسهل عليك
+                        قراءة الأرقام.</p>
+                </div>
+                <!-- Feature 3 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">insert_chart</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">إصدار الفواتير</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">نجهز لك فواتير متوافقة مع متطلبات هيئة الزكاة
+                        والضريبة.</p>
+                </div>
+                <!-- Feature 4 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform">payments</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">مطابقة البنوك</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">نطابق كشوفاتك البنكية مع النظام المحاسبي عشان
+                        نضمن دقة الأرقام.</p>
+                </div>
+                <!-- Feature 5 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">calculate</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">مسيرات الرواتب</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">ندير حسابات رواتب موظفيك والبدلات والخصومات بدقة.
+                    </p>
+                </div>
+                <!-- Feature 6 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform">monitoring</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">الميزانية العمومية وقائمة الدخل</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">تقارير توضح لك إيش تملك، إيش عليك، وكم ربحان
+                        فعلياً.</p>
+                </div>
+                <!-- Feature 7 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">inventory</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">تسجيل الأصول الثابتة</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">نثبت أصولك ونحسب إهلاكاتها بالطريقة الصحيحة.</p>
+                </div>
+                <!-- Feature 8 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform">point_of_sale</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">نقاط البيع والمخزون</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">نتابع حركة المبيعات وتحديثات المخزون عشان ما
+                        ينقصك شيء.</p>
+                </div>
+                <!-- Feature 9 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-primary mb-4 group-hover:scale-110 transition-transform">description</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">إقرارات الضريبة</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">نجهز لك بياناتك وتكون جاهزة لرفع الإقرار الضريبي
+                        في وقته وبدون أخطاء.</p>
+                </div>
+                <!-- Feature 10 -->
+                <div class="glass-panel p-6 rounded-xl hover:bg-white/5 transition-colors group">
+                    <span
+                        class="material-symbols-outlined text-4xl text-secondary mb-4 group-hover:scale-110 transition-transform">co_present</span>
+                    <h3 class="font-card-title text-xl text-white mb-2">اجتماع شهري لتحليل الأداء المالي</h3>
+                    <p class="text-text-muted text-sm leading-relaxed">نجلس معك شهرياً لمناقشة التقارير وتحديد اتجاهات
+                        النمو والتوفير في مشروعك.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 3. Why Us (Glowing Feature Cards) -->
+    <section class="py-section-py-desktop px-container-px relative z-10 fade-in-section is-visible" id="why-us">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                <div class="max-w-2xl">
+                    <h2 class="font-section-title text-section-title text-white mb-4">لماذا تختار تريبل بريديد؟</h2>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Glowing Card 1 -->
+                <div class="relative group p-[1px] rounded-2xl overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-primary via-secondary to-accent-dark opacity-50 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative bg-surface-container-highest p-8 rounded-2xl h-full backdrop-blur-xl">
+                        <div
+                            class="w-14 h-14 bg-accent-dark rounded-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(15, 180, 120,0.3)] group-hover:shadow-[0_0_30px_rgba(15, 180, 120,0.6)] transition-shadow">
+                            <span class="material-symbols-outlined text-primary text-3xl">verified_user</span>
+                        </div>
+                        <h3 class="font-card-title text-2xl text-white mb-3">سعر يبدأ من 700 ريال فقط</h3>
+                        <p class="text-text-muted">مع خصم خاص الشهر الأول — أقل من ربع تكلفة موظف داخلي</p>
+                    </div>
+                </div>
+                <!-- Glowing Card 2 -->
+                <div class="relative group p-[1px] rounded-2xl overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-secondary via-primary to-accent-dark opacity-50 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative bg-surface-container-highest p-8 rounded-2xl h-full backdrop-blur-xl">
+                        <div
+                            class="w-14 h-14 bg-accent-dark rounded-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(159,209,193,0.3)] group-hover:shadow-[0_0_30px_rgba(159,209,193,0.6)] transition-shadow">
+                            <span class="material-symbols-outlined text-secondary text-3xl">speed</span>
+                        </div>
+                        <h3 class="font-card-title text-2xl text-white mb-3">كل ما تحتاجه — بدون باقات</h3>
+                        <p class="text-text-muted">نسوي كل الأعمال المحاسبية، ما عندنا نظام باقات مقيد</p>
+                    </div>
+                </div>
+                <!-- Glowing Card 3 -->
+                <div class="relative group p-[1px] rounded-2xl overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-primary via-accent-dark to-secondary opacity-50 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative bg-surface-container-highest p-8 rounded-2xl h-full backdrop-blur-xl">
+                        <div
+                            class="w-14 h-14 bg-accent-dark rounded-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(15, 180, 120,0.3)] group-hover:shadow-[0_0_30px_rgba(15, 180, 120,0.6)] transition-shadow">
+                            <span class="material-symbols-outlined text-primary text-3xl">lock</span>
+                        </div>
+                        <h3 class="font-card-title text-2xl text-white mb-3">بدون عقود أو التزام</h3>
+                        <p class="text-text-muted">تعامل مرن شهر بشهر — تقدر تلغي في أي وقت</p>
+                    </div>
+                </div>
+                <!-- Glowing Card 4 -->
+                <div class="relative group p-[1px] rounded-2xl overflow-hidden">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-secondary via-accent-dark to-primary opacity-50 group-hover:opacity-100 transition-opacity duration-500">
+                    </div>
+                    <div class="relative bg-surface-container-highest p-8 rounded-2xl h-full backdrop-blur-xl">
+                        <div
+                            class="w-14 h-14 bg-accent-dark rounded-xl flex items-center justify-center mb-6 shadow-[0_0_20px_rgba(159,209,193,0.3)] group-hover:shadow-[0_0_30px_rgba(159,209,193,0.6)] transition-shadow">
+                            <span class="material-symbols-outlined text-secondary text-3xl">support_agent</span>
+                        </div>
+                        <h3 class="font-card-title text-2xl text-white mb-3">ضمان استرجاع كامل</h3>
+                        <p class="text-text-muted">مبلغك يرجع 100% خلال الشهر الأول إذا ما ناسبك الشغل — بدون أسئلة</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 4. How It Works (Timeline) -->
+    <section id="how-it-works"
+        class="py-section-py-mobile md:py-section-py-desktop px-container-px relative z-10 bg-black border-y border-border-subtle fade-in-section is-visible">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="font-section-title text-section-title text-white mb-4">آلية العمل معنا</h2>
+            </div>
+            <div class="relative">
+                <!-- Vertical Line -->
+                <div
+                    class="absolute right-8 md:right-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-primary via-secondary to-accent-dark rounded-full transform translate-x-1/2 md:translate-x-1/2">
+                </div>
+                <!-- Timeline Items -->
+                <div class="space-y-8 md:space-y-12">
+                    <!-- Step 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center md:justify-between group">
+                        <div class="hidden md:block w-5/12 text-left pr-8">
+                            <h3 class="text-2xl font-bold text-primary mb-2">1. نفهم طبيعة نشاطك</h3>
+                            <p class="text-text-muted">نجلس معك ونحلل وضعك المالي وتفاصيل شغلك.</p>
+                        </div>
+                        <div
+                            class="absolute right-8 md:right-1/2 w-8 h-8 rounded-full bg-surface-container-highest border-4 border-primary transform translate-x-1/2 flex items-center justify-center z-10 group-hover:scale-125 transition-transform shadow-[0_0_15px_#0FB478]">
+                            <span class="w-2 h-2 bg-primary rounded-full"></span>
+                        </div>
+                        <div class="w-full pr-20 md:hidden">
+                            <h3 class="text-xl font-bold text-primary mb-2">1. نفهم طبيعة نشاطك</h3>
+                            <p class="text-text-muted text-sm">نجلس معك ونحلل وضعك المالي وتفاصيل شغلك.</p>
+                        </div>
+                        <div class="hidden md:block w-5/12"></div>
+                    </div>
+                    <!-- Step 2 -->
+                    <div class="relative flex flex-col md:flex-row items-center md:justify-between group">
+                        <div class="hidden md:block w-5/12"></div>
+                        <div
+                            class="absolute right-8 md:right-1/2 w-8 h-8 rounded-full bg-surface-container-highest border-4 border-secondary transform translate-x-1/2 flex items-center justify-center z-10 group-hover:scale-125 transition-transform shadow-[0_0_15px_#9fd1c1]">
+                            <span class="w-2 h-2 bg-secondary rounded-full"></span>
+                        </div>
+                        <div class="w-full pr-20 md:pr-8 md:pl-0 md:w-5/12 text-right">
+                            <h3 class="text-xl md:text-2xl font-bold text-secondary mb-2">2. نرتب الشجرة المحاسبية</h3>
+                            <p class="text-text-muted text-sm md:text-base">نؤسس لك نظام محاسبي واضح يسهل عليك القراءة.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Step 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center md:justify-between group">
+                        <div class="hidden md:block w-5/12 text-left pr-8">
+                            <h3 class="text-2xl font-bold text-primary mb-2">3. نبدأ مسك الدفاتر</h3>
+                            <p class="text-text-muted">نسجل كل شيء أول بأول بدقة واحترافية.</p>
+                        </div>
+                        <div
+                            class="absolute right-8 md:right-1/2 w-8 h-8 rounded-full bg-surface-container-highest border-4 border-primary transform translate-x-1/2 flex items-center justify-center z-10 group-hover:scale-125 transition-transform shadow-[0_0_15px_#0FB478]">
+                            <span class="w-2 h-2 bg-primary rounded-full"></span>
+                        </div>
+                        <div class="w-full pr-20 md:hidden">
+                            <h3 class="text-xl font-bold text-primary mb-2">3. نبدأ مسك الدفاتر</h3>
+                            <p class="text-text-muted text-sm">نسجل كل شيء أول بأول بدقة واحترافية.</p>
+                        </div>
+                        <div class="hidden md:block w-5/12"></div>
+                    </div>
+                    <!-- Step 4 -->
+                    <div class="relative flex flex-col md:flex-row items-center md:justify-between group">
+                        <div class="hidden md:block w-5/12"></div>
+                        <div
+                            class="absolute right-8 md:right-1/2 w-8 h-8 rounded-full bg-surface-container-highest border-4 border-secondary transform translate-x-1/2 flex items-center justify-center z-10 group-hover:scale-125 transition-transform shadow-[0_0_15px_#9fd1c1]">
+                            <span class="w-2 h-2 bg-secondary rounded-full"></span>
+                        </div>
+                        <div class="w-full pr-20 md:pr-8 md:pl-0 md:w-5/12 text-right">
+                            <h3 class="text-xl md:text-2xl font-bold text-secondary mb-2">4. توصلك تقارير واضحة</h3>
+                            <p class="text-text-muted text-sm md:text-base">نرسل لك تقارير دورية عشان تتخذ قراراتك بثقة.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 5. Bonuses Section -->
+    <section class="py-section-py-desktop px-container-px relative z-10 fade-in-section is-visible">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="font-section-title text-section-title text-white mb-4">والبونصات علينا 🎁</h2>
+                <p class="font-body-base text-text-muted">هدايا إضافية لعملائنا عشان نساعدك تحقق أهدافك أسرع.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div
+                    class="glass-panel p-8 rounded-2xl border-t-2 border-primary hover:shadow-[0_0_30px_rgba(15, 180, 120,0.2)] transition-shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="material-symbols-outlined text-4xl text-primary">analytics</span>
+                        <h3 class="font-card-title text-2xl text-white">تشخيص مالي مجاني</h3>
+                    </div>
+                    <p class="text-text-muted text-lg">نحلل وضعك المالي ونعطيك نصائح استراتيجية لتحسين الأداء وتقليل
+                        التكاليف.</p>
+                </div>
+                <div
+                    class="glass-panel p-8 rounded-2xl border-t-2 border-secondary hover:shadow-[0_0_30px_rgba(159,209,193,0.2)] transition-shadow">
+                    <div class="flex items-center gap-4 mb-4">
+                        <span class="material-symbols-outlined text-4xl text-secondary">dashboard</span>
+                        <h3 class="font-card-title text-2xl text-white">لوحة تحكم مالية سهلة وواضحة</h3>
+                    </div>
+                    <p class="text-text-muted text-lg">تتابع فيها أرقامك المهمة بكل سهولة وبشكل لحظي، عشان تكون دائماً
+                        بالصورة.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 5. Guarantee Section -->
+    <section class="py-section-py-desktop px-container-px relative z-10 fade-in-section is-visible">
+        <div class="max-w-4xl mx-auto">
+            <div class="glass-panel p-12 rounded-3xl text-center relative overflow-hidden border-primary/30">
+                <div
+                    class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent">
+                </div>
+                <div class="absolute -top-24 -right-24 w-48 h-48 bg-primary/20 rounded-full blur-3xl"></div>
+                <div class="absolute -bottom-24 -left-24 w-48 h-48 bg-secondary/20 rounded-full blur-3xl"></div>
+                <span
+                    class="material-symbols-outlined text-6xl text-primary mb-6 drop-shadow-[0_0_15px_rgba(15, 180, 120,0.5)]">shield_locked</span>
+                <h2 class="font-section-title text-3xl md:text-4xl text-white mb-6">ضمانك معنا 🤝</h2>
+                <div
+                    class="font-body-base text-lg text-text-muted max-w-2xl mx-auto mb-8 whitespace-pre-line text-right inline-block">
+                    • ضمان استرداد كامل المبلغ خلال أول 30 يوم إذا ما شفت القيمة اللي نوعدك فيها.
+                    • بدون عقود طويلة ومقيدة... تقدر توقف الخدمة بأي وقت بدون أي شروط تعجيزية.
+                </div>
+                <br>
+                <div
+                    class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary/10 border border-primary/20 text-primary font-bold">
+                    <span class="material-symbols-outlined text-sm">check_circle</span>
+                    <span class="">التزام تام بالمعايير المحاسبية</span>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 7. Not For Everyone -->
+    <section
+        class="py-section-py-desktop px-container-px relative z-10 bg-black border-y border-border-subtle fade-in-section is-visible">
+        <div class="max-w-4xl mx-auto">
+            <div class="bg-error-container/10 border border-error/20 rounded-2xl p-8 md:p-12">
+                <div class="flex items-center gap-4 mb-8">
+                    <span class="material-symbols-outlined text-4xl text-error">cancel</span>
+                    <h2 class="font-section-title text-2xl md:text-3xl text-white">الخدمة هذي مو مناسبة لـ:</h2>
+                </div>
+                <ul class="space-y-4 text-text-muted text-lg mb-8">
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-error mt-1 text-sm">close</span>
+                        <span class="">الشركات اللي مبيعاتها أقل من 50 ألف ريال شهرياً.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-error mt-1 text-sm">close</span>
+                        <span class="">الشركات اللي مبيعاتها أكثر من 300 ألف ريال شهرياً وتحتاج فريق مالي متكامل.</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-error mt-1 text-sm">close</span>
+                        <span class="">المشاريع غير المسجلة رسمياً (بدون سجل تجاري).</span>
+                    </li>
+                </ul>
+                <div class="bg-primary/10 border border-primary/30 rounded-xl p-4 text-center">
+                    <p class="font-bold text-primary text-lg">بس إذا كنت من ضمن الفئة المستهدفة، فأنت في المكان الصح! 🎉
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 9 & 10. Credentials & Clients -->
+    <section class="py-section-py-desktop px-container-px relative z-10 fade-in-section overflow-hidden is-visible">
+        <div class="max-w-7xl mx-auto">
+            <div class="space-y-24">
+                <!-- Part 1: Credentials -->
+                <div class="fade-in-section is-visible">
+                    <div class="text-center mb-12">
+                        <h2 class="font-section-title text-2xl text-white mb-2">محاسبون معتمدون دولياً</h2>
+                        <div class="h-1 w-24 bg-primary mx-auto rounded-full shadow-[0_0_10px_#0FB478]"></div>
+                    </div>
+                    <div class="logo-scroller relative w-full h-16">
+                        <div class="logo-track items-center flex w-max">
+                            <div class="flex items-center gap-16 pl-16">
+                                <img src="/certificates/ACCA.png" alt="ACCA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/CFA.png" alt="CFA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/CMA.png" alt="CMA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/IFRS.png" alt="IFRS"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/ACCA.png" alt="ACCA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/CFA.png" alt="CFA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/CMA.png" alt="CMA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/IFRS.png" alt="IFRS"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                            </div>
+                            <!-- Duplicate Set -->
+                            <div class="flex items-center gap-16 pl-16" aria-hidden="true">
+                                <img src="/certificates/ACCA.png" alt="ACCA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/CFA.png" alt="CFA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/CMA.png" alt="CMA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/IFRS.png" alt="IFRS"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/ACCA.png" alt="ACCA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/CFA.png" alt="CFA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/CMA.png" alt="CMA"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/certificates/IFRS.png" alt="IFRS"
+                                    class="h-12 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Part 2: Saudi Market Experience -->
+                <div class="fade-in-section is-visible">
+                    <div class="text-center mb-12">
+                        <h2 class="font-section-title text-2xl text-white mb-2">خبرة بالسوق السعودي</h2>
+                        <div class="h-1 w-24 bg-secondary mx-auto rounded-full shadow-[0_0_10px_#9fd1c1]"></div>
+                    </div>
+                    <div class="logo-scroller relative w-full h-16">
+                        <div class="logo-track items-center flex w-max">
+                            <div class="flex items-center gap-16 pl-16">
+                                <img src="/logos/Actera.png" alt="Actera"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/arc store.jpg" alt="Arc Store"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/boxooo.png" alt="Boxooo"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/Espectro Sports.png" alt="Espectro Sports"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/horeca.png" alt="Horeca"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/International printing house.png" alt="International Printing House"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/kepler.png" alt="Kepler"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/LA FANN.png" alt="LA FANN"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/Luyan.png" alt="Luyan"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/maqadi express.jpg" alt="Maqadi Express"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/ME.png" alt="ME"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/nady nano.jpg" alt="Nady Nano"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/rawna.jpg" alt="Rawna"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/Saba travek.png" alt="Saba Travel"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/U coffee.png" alt="U Coffee"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/wood cut.jpg" alt="Wood Cut"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/ابتكار العلوم.png" alt="ابتكار العلوم"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/أصالة للاستقدام.png" alt="أصالة للاستقدام"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/بيت الترياق.png" alt="بيت الترياق"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/عالم الطب.png" alt="عالم الطب"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/عبد العزيز المضحي.png" alt="عبد العزيز المضحي"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/عيادات الدكتور القناص.png" alt="عيادات الدكتور القناص"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/مجموعة محمد الشهري.jpg" alt="مجموعة محمد الشهري"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/مكتب هرمز.png" alt="مكتب هرمز"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/وتد للتأمين.png" alt="وتد للتأمين"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                            </div>
+                            <!-- Duplicate Set -->
+                            <div class="flex items-center gap-16 pl-16" aria-hidden="true">
+                                <img src="/logos/Actera.png" alt="Actera"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/arc store.jpg" alt="Arc Store"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/boxooo.png" alt="Boxooo"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/Espectro Sports.png" alt="Espectro Sports"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/horeca.png" alt="Horeca"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/International printing house.png" alt="International Printing House"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/kepler.png" alt="Kepler"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/LA FANN.png" alt="LA FANN"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/Luyan.png" alt="Luyan"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/maqadi express.jpg" alt="Maqadi Express"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/ME.png" alt="ME"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/nady nano.jpg" alt="Nady Nano"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/rawna.jpg" alt="Rawna"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/Saba travek.png" alt="Saba Travel"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/U coffee.png" alt="U Coffee"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/wood cut.jpg" alt="Wood Cut"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/ابتكار العلوم.png" alt="ابتكار العلوم"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/أصالة للاستقدام.png" alt="أصالة للاستقدام"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/بيت الترياق.png" alt="بيت الترياق"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/عالم الطب.png" alt="عالم الطب"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/عبد العزيز المضحي.png" alt="عبد العزيز المضحي"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/عيادات الدكتور القناص.png" alt="عيادات الدكتور القناص"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/مجموعة محمد الشهري.jpg" alt="مجموعة محمد الشهري"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/مكتب هرمز.png" alt="مكتب هرمز"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                                <img src="/logos/وتد للتأمين.png" alt="وتد للتأمين"
+                                    class="h-10 w-auto object-contain opacity-60 hover:opacity-100 hover:scale-105 transition-all duration-300 cursor-default shrink-0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- 6. FAQ (Accordion) -->
+    <section
+        class="py-section-py-desktop px-container-px relative z-10 bg-black border-t border-border-subtle fade-in-section is-visible"
+        id="faq">
+        <div class="max-w-3xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="font-section-title text-section-title text-white mb-4">الأسئلة الشائعة</h2>
+            </div>
+            <div class="space-y-4"><!-- FAQ Item 1 -->
+                <details class="group glass-panel rounded-xl [&amp;_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-white font-bold text-lg">
+                        <span class="">هل الخدمة تناسب نشاطي؟</span>
+                        <span
+                            class="transition group-open:rotate-180 material-symbols-outlined text-primary">expand_more</span>
+                    </summary>
+                    <div
+                        class="px-6 pb-6 text-text-muted text-base leading-relaxed border-t border-border-subtle pt-4 mt-2">
+                        إذا عندك متجر أو شركة صغيرة ومبيعاتك بين 50 و300 ألف ريال شهرياً، فغالباً نعم.
+                    </div>
+                </details>
+                <!-- FAQ Item 2 -->
+                <details class="group glass-panel rounded-xl [&amp;_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-white font-bold text-lg">
+                        <span class="">هل لازم أوظف محاسب داخلي؟</span>
+                        <span
+                            class="transition group-open:rotate-180 material-symbols-outlined text-primary">expand_more</span>
+                    </summary>
+                    <div
+                        class="px-6 pb-6 text-text-muted text-base leading-relaxed border-t border-border-subtle pt-4 mt-2">
+                        لا أبداً، نكون فريق المحاسبة الخاص فيك عن بُعد بالكامل.
+                    </div>
+                </details>
+                <!-- FAQ Item 3 -->
+                <details class="group glass-panel rounded-xl [&amp;_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-white font-bold text-lg">
+                        <span class="">وش الفرق بين المحاسب الأونلاين والمحاسب الحضوري؟</span>
+                        <span
+                            class="transition group-open:rotate-180 material-symbols-outlined text-primary">expand_more</span>
+                    </summary>
+                    <div
+                        class="px-6 pb-6 text-text-muted text-base leading-relaxed border-t border-border-subtle pt-4 mt-2">
+                        من ناحية الشغل والكفاءة ما فيه فرق. لكن الأونلاين يوفر عليك تكلفة كبيرة.
+                    </div>
+                </details>
+                <!-- FAQ Item 4 -->
+                <details class="group glass-panel rounded-xl [&amp;_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-white font-bold text-lg">
+                        <span class="">كم ممكن أوفر؟</span>
+                        <span
+                            class="transition group-open:rotate-180 material-symbols-outlined text-primary">expand_more</span>
+                    </summary>
+                    <div
+                        class="px-6 pb-6 text-text-muted text-base leading-relaxed border-t border-border-subtle pt-4 mt-2">
+                        غالباً تدفع ربع تكلفة محاسب دوام كامل.
+                    </div>
+                </details>
+                <!-- FAQ Item 5 -->
+                <details class="group glass-panel rounded-xl [&amp;_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-white font-bold text-lg">
+                        <span class="">كيف يتم الشغل عن بُعد؟</span>
+                        <span
+                            class="transition group-open:rotate-180 material-symbols-outlined text-primary">expand_more</span>
+                    </summary>
+                    <div
+                        class="px-6 pb-6 text-text-muted text-base leading-relaxed border-t border-border-subtle pt-4 mt-2">
+                        كل شيء يتم بطريقة مرتبة: نستلم البيانات، نرتب النظام، نسجل المعاملات، نرسل التقارير.
+                    </div>
+                </details>
+                <!-- FAQ Item 6 -->
+                <details class="group glass-panel rounded-xl [&amp;_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-white font-bold text-lg">
+                        <span class="">هل تشمل الخدمة الضريبة والزكاة؟</span>
+                        <span
+                            class="transition group-open:rotate-180 material-symbols-outlined text-primary">expand_more</span>
+                    </summary>
+                    <div
+                        class="px-6 pb-6 text-text-muted text-base leading-relaxed border-t border-border-subtle pt-4 mt-2">
+                        نعم، نجهز ونرفع الإقرارات بدقة عالية.
+                    </div>
+                </details>
+                <!-- FAQ Item 7 -->
+                <details class="group glass-panel rounded-xl [&amp;_summary::-webkit-details-marker]:hidden">
+                    <summary class="flex items-center justify-between p-6 cursor-pointer text-white font-bold text-lg">
+                        <span class="">هل بياناتي المالية آمنة؟</span>
+                        <span
+                            class="transition group-open:rotate-180 material-symbols-outlined text-primary">expand_more</span>
+                    </summary>
+                    <div
+                        class="px-6 pb-6 text-text-muted text-base leading-relaxed border-t border-border-subtle pt-4 mt-2">
+                        أكيد، نستخدم أنظمة آمنة وسرية بياناتك مضمونة.
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Final CTA -->
+    <section class="py-24 px-container-px relative z-10 fade-in-section is-visible">
+        <div class="absolute inset-0 bg-gradient-cta opacity-10 rounded-3xl max-w-6xl mx-auto -z-10 blur-xl"></div>
+        <div
+            class="max-w-4xl mx-auto bg-surface-container-highest/80 backdrop-blur-xl border border-primary/30 rounded-3xl p-12 text-center shadow-[0_0_50px_rgba(15, 180, 120,0.15)]">
+            <h2 class="font-hero-headline text-4xl md:text-5xl text-white mb-6 font-extrabold">خطوة واحدة تفصلك عن راحة
+                بالك 🧘</h2>
+            <p class="font-body-base text-xl text-text-muted mb-10 max-w-2xl mx-auto">تفرغ لتطوير شغلك... وخل هم
+                الحسابات علينا.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-6">
+                <a href="https://wa.me/+201553704450" target="_blank"
+                    class="px-10 py-4 rounded-full font-bold text-lg hover:shadow-[0_0_25px_rgba(15, 180, 120,0.6)] transform hover:-translate-y-1 transition-all duration-300 text-center inline-block"
+                    style="background-color: #0FB478; color: rgb(0, 0, 0);">راسلنا واتساب</a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer class="bg-black w-full pt-24 pb-4 border-t border-border-subtle relative z-10">
+        <div class="max-w-7xl mx-auto px-gutter flex flex-col md:flex-row justify-between items-center gap-grid-gap">
+            <div class="font-hero-headline text-card-title text-primary">Triple Braided</div>
+            <div class="flex gap-6 items-center flex-wrap justify-center">
+                <a class="font-body-base text-body-base text-text-muted hover:text-primary transition-colors"
+                    href="https://www.triple-braided.com/terms">الشروط والأحكام</a>
+                <a class="font-body-base text-body-base text-text-muted hover:text-primary transition-colors"
+                    href="https://wa.me/+201553704450" target="_blank">تواصل معنا</a>
+                <span class="text-text-muted/30 hidden md:inline">|</span>
+                <a class="font-body-base text-body-base text-text-muted hover:text-primary transition-colors"
+                    href="mailto:hello@triple-braided.com">hello@triple-braided.com</a>
+                <span class="text-text-muted/30 hidden md:inline">|</span>
+                <div class="flex gap-4 items-center">
+                    <a class="text-text-muted hover:text-primary transition-all duration-300 hover:scale-110 flex items-center justify-center"
+                        href="https://www.instagram.com/triple_braided1/" target="_blank" aria-label="Instagram">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                        </svg>
+                    </a>
+                    <a class="text-text-muted hover:text-primary transition-all duration-300 hover:scale-110 flex items-center justify-center"
+                        href="https://x.com/triple_braided1" target="_blank" aria-label="X">
+                        <svg class="w-4.5 h-4.5 fill-current" viewBox="0 0 24 24" style="width: 18px; height: 18px;">
+                            <path
+                                d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="font-body-base text-body-base text-text-muted">
+                © 2026 تريبل بريديد. جميع الحقوق محفوظة.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('mobile-menu-btn');
+            const dropdown = document.getElementById('mobile-dropdown');
+            if (menuBtn && dropdown) {
+                menuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    dropdown.classList.toggle('hidden');
+                });
+                // Close when clicking a link
+                dropdown.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        dropdown.classList.add('hidden');
+                    });
+                });
+                // Close when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!dropdown.contains(e.target) && e.target !== menuBtn) {
+                        dropdown.classList.add('hidden');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>

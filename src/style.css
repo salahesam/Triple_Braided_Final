@@ -1,0 +1,276 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    html, body {
+        background-color: #000000;
+        color: theme('colors.text-primary');
+        overflow-x: hidden;
+        width: 100%;
+    }
+}
+
+@layer components {
+    .bg-grid {
+        background-image:
+            linear-gradient(to right, rgba(15, 180, 120, 0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(15, 180, 120, 0.06) 1px, transparent 1px);
+        background-size: 48px 48px;
+    }
+
+    .mouse-glow {
+        position: fixed;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(15, 180, 120, 0.08) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 1;
+        filter: blur(150px);
+        transform: translate(-50%, -50%) translateZ(0);
+        will-change: transform;
+    }
+
+    .glow-blob {
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(15, 180, 120, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .glass-panel {
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        border: 1px solid theme('colors.border-subtle');
+        will-change: transform;
+        transform: translateZ(0);
+    }
+
+    /* Stacking Cards */
+    .stacking-cards-container {
+        perspective: 1000px;
+    }
+
+    .stacking-card {
+        position: sticky;
+        top: 20vh;
+    }
+
+    .fade-in-section {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        will-change: opacity, visibility;
+    }
+
+    .fade-in-section.is-visible {
+        opacity: 1;
+        transform: none;
+    }
+
+    .logo-scroller {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    }
+
+    .logo-track {
+        display: flex;
+        width: max-content;
+        animation: scrollX 40s linear infinite;
+        will-change: transform;
+        transform: translate3d(0, 0, 0);
+    }
+
+    .logo-track-reverse {
+        animation: scrollX 40s linear infinite reverse;
+    }
+
+    .scanner-line {
+        background: linear-gradient(90deg, transparent, rgba(15, 180, 120, 0.2), transparent);
+        animation: scanner 3s ease-in-out infinite;
+    }
+
+    .heartbeat-line {
+        animation: heartbeat 2s ease-in-out infinite;
+        transform: translateZ(0);
+        will-change: filter, opacity;
+    }
+
+    .dashboard-interactive-glow {
+        background: radial-gradient(circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(15, 180, 120, 0.15) 0%, transparent 60%);
+    }
+
+    .kpi-card-hover:hover {
+        transform: scale(1.02);
+        box-shadow: 0 0 20px rgba(15, 180, 120, 0.3);
+        border-color: #0FB478 !important;
+    }
+
+    .growing-underline {
+        position: relative;
+        display: inline-block;
+    }
+
+    .growing-underline::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        right: 0;
+        height: 2px;
+        background-color: #0FB478;
+        animation: growUnderline 1s ease-out forwards;
+        animation-delay: 0.5s;
+    }
+
+    .animated-draw-underline {
+        position: relative;
+        display: inline-block;
+    }
+
+    .animated-draw-underline::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        height: 3px;
+        background-color: #0FB478;
+        border-radius: 9999px;
+        animation: draw-erase-underline 4s ease-in-out infinite;
+        box-shadow: 0 0 8px rgba(15, 180, 120, 0.6);
+    }
+
+    .animate-float-slow {
+        animation: floating-badge 4s ease-in-out infinite;
+        will-change: transform;
+    }
+
+    .animate-float-fast {
+        animation: floating-badge 3s ease-in-out infinite;
+        will-change: transform;
+    }
+
+    .animate-credential-glow {
+        animation: credentialGlow 4s linear infinite;
+    }
+
+    .grid-glow-effect {
+        background-image:
+            radial-gradient(circle at center, rgba(15, 180, 120, 0.15) 0%, transparent 20%),
+            linear-gradient(to right, rgba(15, 180, 120, 0.06) 1px, transparent 1px),
+            linear-gradient(to bottom, rgba(15, 180, 120, 0.06) 1px, transparent 1px);
+        background-size: 200% 200%, 48px 48px, 48px 48px;
+    }
+}
+
+@layer utilities {
+    @keyframes scanner {
+        0% {
+            transform: translateX(-100%);
+        }
+
+        100% {
+            transform: translateX(200%);
+        }
+    }
+
+    @keyframes heartbeat {
+
+        0%,
+        100% {
+            opacity: 0.4;
+            filter: drop-shadow(0 0 2px #0FB478);
+        }
+
+        50% {
+            opacity: 1;
+            filter: drop-shadow(0 0 8px #0FB478);
+        }
+    }
+
+    @keyframes growUnderline {
+        from {
+            width: 0;
+        }
+
+        to {
+            width: 100%;
+        }
+    }
+
+    @keyframes draw-erase-underline {
+
+        0%,
+        100% {
+            width: 0;
+            right: 0;
+            left: auto;
+        }
+
+        40%,
+        60% {
+            width: 100%;
+            right: 0;
+            left: auto;
+        }
+
+        61% {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+
+        90% {
+            width: 0;
+            left: 0;
+            right: auto;
+        }
+    }
+
+    @keyframes floating-badge {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    @keyframes credentialGlow {
+        0% {
+            transform: translateX(350%);
+        }
+
+        100% {
+            transform: translateX(-350%);
+        }
+    }
+
+    @keyframes scrollX {
+        0% {
+            transform: translate3d(0, 0, 0);
+        }
+
+        100% {
+            transform: translate3d(50%, 0, 0);
+        }
+    }
+
+    @keyframes grid-glow {
+        0% {
+            background-position: 0% 0%, 0 0;
+        }
+
+        100% {
+            background-position: 100% 100%, 0 0;
+        }
+    }
+}
