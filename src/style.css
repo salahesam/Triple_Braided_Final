@@ -168,10 +168,17 @@
         border-radius: 9999px;
         animation: draw-erase-underline 4s ease-in-out infinite;
         box-shadow: 0 0 8px rgba(15, 180, 120, 0.6);
+        transform: scaleX(0);
+        will-change: transform;
     }
 
     .animate-float-slow {
         animation: floating-badge 4s ease-in-out infinite;
+        will-change: transform;
+    }
+
+    .animate-float-fast {
+        animation: floating-badge 3s ease-in-out infinite;
         will-change: transform;
     }
 
@@ -227,18 +234,21 @@
     }
 
     @keyframes draw-erase-underline {
-        0%,
-        100% {
-            clip-path: inset(0 100% 0 0);
+        0%, 100% {
+            transform: scaleX(0);
+            transform-origin: left;
         }
-
-        40%,
+        40% {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
         60% {
-            clip-path: inset(0 0 0 0);
+            transform: scaleX(1);
+            transform-origin: right;
         }
-
         90% {
-            clip-path: inset(0 0 0 100%);
+            transform: scaleX(0);
+            transform-origin: right;
         }
     }
 
