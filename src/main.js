@@ -83,12 +83,18 @@ class CanvasChart {
     if (!this.canvas) return;
     const rect = this.canvas.parentElement.getBoundingClientRect();
     const dpr = window.devicePixelRatio || 1;
-    this.canvas.width = rect.width * dpr;
-    this.canvas.height = rect.height * dpr;
-    this.ctx.scale(dpr, dpr);
-    this.width = rect.width;
-    this.height = rect.height;
-    this.draw();
+    const width = rect.width;
+    const height = rect.height;
+
+    requestAnimationFrame(() => {
+      if (!this.canvas) return;
+      this.canvas.width = width * dpr;
+      this.canvas.height = height * dpr;
+      this.ctx.scale(dpr, dpr);
+      this.width = width;
+      this.height = height;
+      this.draw();
+    });
   }
 
   startAnimation() {

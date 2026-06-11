@@ -1,3 +1,27 @@
+@font-face {
+    font-family: 'Cairo';
+    src: url('/fonts/cairo.woff2') format('woff2');
+    font-weight: 100 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DM Mono';
+    src: url('/fonts/dmmono.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Material Symbols Outlined';
+    src: url('/fonts/materialsymbolsoutlined.woff2') format('woff2');
+    font-weight: 100 700;
+    font-style: normal;
+    font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -123,8 +147,11 @@
         position: absolute;
         bottom: -2px;
         right: 0;
+        left: 0;
         height: 2px;
         background-color: #0FB478;
+        transform-origin: right;
+        transform: scaleX(0);
         animation: growUnderline 1s ease-out forwards;
         animation-delay: 0.5s;
     }
@@ -138,6 +165,8 @@
         content: '';
         position: absolute;
         bottom: 2px;
+        left: 0;
+        right: 0;
         height: 3px;
         background-color: #0FB478;
         border-radius: 9999px;
@@ -184,51 +213,36 @@
         0%,
         100% {
             opacity: 0.4;
-            filter: drop-shadow(0 0 2px #0FB478);
         }
 
         50% {
             opacity: 1;
-            filter: drop-shadow(0 0 8px #0FB478);
         }
     }
 
     @keyframes growUnderline {
         from {
-            width: 0;
+            transform: scaleX(0);
         }
 
         to {
-            width: 100%;
+            transform: scaleX(1);
         }
     }
 
     @keyframes draw-erase-underline {
-
         0%,
         100% {
-            width: 0;
-            right: 0;
-            left: auto;
+            clip-path: inset(0 100% 0 0);
         }
 
         40%,
         60% {
-            width: 100%;
-            right: 0;
-            left: auto;
-        }
-
-        61% {
-            width: 100%;
-            left: 0;
-            right: auto;
+            clip-path: inset(0 0 0 0);
         }
 
         90% {
-            width: 0;
-            left: 0;
-            right: auto;
+            clip-path: inset(0 0 0 100%);
         }
     }
 
