@@ -14,17 +14,13 @@
     font-display: swap;
 }
 
-@font-face {
-    font-family: 'Material Symbols Outlined';
-    src: url('/fonts/materialsymbolsoutlined.woff2') format('woff2');
-    font-weight: 100 700;
-    font-style: normal;
-    font-display: swap;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined' !important;
+}
 
 @layer base {
     html, body {
