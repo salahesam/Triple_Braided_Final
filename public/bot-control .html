@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Bot Control">
+<title>Bot Control</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f5f0;
+    min-height: 100vh;
+    padding: 20px 16px;
+    color: #1a1a1a;
+  }
+  .header {
+    margin-bottom: 24px;
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 600;
+    color: #1a1a1a;
+  }
+  .header p {
+    font-size: 14px;
+    color: #666;
+    margin-top: 4px;
+  }
+  .logo {
+    width: 40px;
+    height: 40px;
+    background: #1a1a1a;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+  .logo span {
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin-bottom: 12px;
+  }
+  label {
+    font-size: 13px;
+    color: #666;
+    margin-bottom: 8px;
+    display: block;
+    font-weight: 500;
+  }
+  select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 10px;
+    background: #fafafa;
+    color: #1a1a1a;
+    font-size: 15px;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: left 12px center;
+    padding-left: 36px;
+  }
+  select:focus { outline: none; border-color: #1a1a1a; }
+  input[type="tel"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 10px;
+    background: #fafafa;
+    color: #1a1a1a;
+    font-size: 15px;
+    font-family: inherit;
+    direction: ltr;
+    text-align: right;
+  }
+  input[type="tel"]:focus { outline: none; border-color: #1a1a1a; }
+  input[type="tel"]::placeholder { color: #aaa; }
+  .hint {
+    font-size: 12px;
+    color: #999;
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+  .status-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 8px 10px;
+    background: #f5f5f0;
+    border-radius: 8px;
+  }
+  .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #ccc;
+    flex-shrink: 0;
+  }
+  .dot.on { background: #1D9E75; }
+  .dot.off { background: #D85A30; }
+  .status-text { font-size: 13px; color: #444; }
+  .btn-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .btn {
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .btn:active { transform: scale(0.97); opacity: 0.85; }
+  .btn:disabled { opacity: 0.35; cursor: not-allowed; }
+  .btn-stop {
+    background: #FFF0EB;
+    color: #B83A1A;
+  }
+  .btn-start {
+    background: #E6F7F1;
+    color: #0A6644;
+  }
+  .result {
+    display: none;
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    align-items: center;
+    gap: 10px;
+    margin-top: 4px;
+  }
+  .result.success { background: #E6F7F1; color: #0A6644; display: flex; }
+  .result.error { background: #FFF0EB; color: #B83A1A; display: flex; }
+  .loading {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 0;
+    justify-content: center;
+  }
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #e5e5e5;
+    border-top-color: #1a1a1a;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .refresh-btn {
+    background: none;
+    border: 1.5px solid #e5e5e5;
+    border-radius: 8px;
+    padding: 7px 12px;
+    font-size: 13px;
+    color: #666;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 10px;
+    font-family: inherit;
+  }
+  .refresh-btn:active { background: #f0f0f0; }
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 18px 0;
+  }
+  .divider::before, .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e5e5;
+  }
+  .divider span {
+    font-size: 12px;
+    color: #aaa;
+    font-weight: 500;
+  }
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo"><span>TB</span></div>
+  <h1>Bot Control</h1>
+  <p>تحكم في البوت لكل عميل</p>
+</div>
+
+<div class="card">
+  <div class="card-title">من قائمة العملاء المسجلين</div>
+  <label for="clientSelect">اختر العميل</label>
+  <select id="clientSelect">
+    <option value="">جاري التحميل...</option>
+  </select>
+
+  <div class="divider"><span>أو</span></div>
+
+  <label for="manualPhone">أضف رقم يدوياً</label>
+  <input type="tel" id="manualPhone" placeholder="مثال: 201063717141" inputmode="numeric">
+  <div class="hint">الصيغة الصحيحة: كود الدولة بدون + أو أصفار، ثم الرقم — مثال مصر: 201063717141 — مثال السعودية: 966512345678</div>
+
+  <div class="status-row">
+    <div class="dot" id="dot"></div>
+    <span class="status-text" id="statusText">اختر عميلاً أو أدخل رقم</span>
+  </div>
+  <button class="refresh-btn" onclick="loadContacts()">
+    ↻ تحديث القائمة
+  </button>
+</div>
+
+<div class="card">
+  <div class="btn-grid">
+    <button class="btn btn-stop" id="stopBtn" onclick="sendAction('stop')" disabled>
+      ⏸ إيقاف البوت
+    </button>
+    <button class="btn btn-start" id="startBtn" onclick="sendAction('start')" disabled>
+      ▶ تشغيل البوت
+    </button>
+  </div>
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+    <span style="font-size:14px; color:#666">جاري التنفيذ...</span>
+  </div>
+  <div class="result" id="result"></div>
+</div>
+
+<div class="footer">Triple Braided © 2026</div>
+
+<script>
+const GET_URL = 'https://n8n-whats-docker.onrender.com/webhook/get-contacts';
+const POST_URL = 'https://n8n-whats-docker.onrender.com/webhook/human-takeover';
+
+const clientSelect = document.getElementById('clientSelect');
+const manualPhone = document.getElementById('manualPhone');
+const dot = document.getElementById('dot');
+const txt = document.getElementById('statusText');
+const stopBtn = document.getElementById('stopBtn');
+const startBtn = document.getElementById('startBtn');
+
+async function loadContacts() {
+  clientSelect.innerHTML = '<option value="">جاري التحميل...</option>';
+  document.getElementById('result').style.display = 'none';
+  try {
+    const res = await fetch(GET_URL);
+    const data = await res.json();
+    const contacts = Array.isArray(data) ? data : [];
+    clientSelect.innerHTML = '<option value="">-- اختر عميلاً --</option>';
+    contacts.forEach(c => {
+      if (!c.phone) return;
+      const opt = document.createElement('option');
+      opt.value = c.phone;
+      opt.dataset.active = (c.human_active === true || c.human_active === 'true' || c.human_active === 'TRUE') ? 'true' : 'false';
+      opt.textContent = (c.senderName || c.phone) + ' — ' + c.phone;
+      clientSelect.appendChild(opt);
+    });
+    if (contacts.length === 0) clientSelect.innerHTML = '<option value="">لا يوجد عملاء</option>';
+  } catch(e) {
+    clientSelect.innerHTML = '<option value="">خطأ في التحميل</option>';
+  }
+}
+
+function getActivePhone() {
+  // الأولوية للرقم اليدوي لو فيه رقم متكتوب
+  const manual = manualPhone.value.trim();
+  if (manual) return manual;
+  return clientSelect.value;
+}
+
+function updateStatusUI() {
+  document.getElementById('result').style.display = 'none';
+  const manual = manualPhone.value.trim();
+
+  if (manual) {
+    // رقم يدوي — مفيش حالة معروفة، البوت غالباً شغال طبيعي
+    dot.className = 'dot';
+    txt.textContent = 'رقم يدوي — اختر إجراء';
+    stopBtn.disabled = false;
+    startBtn.disabled = false;
+    return;
+  }
+
+  const phone = clientSelect.value;
+  if (!phone) {
+    dot.className = 'dot';
+    txt.textContent = 'اختر عميلاً أو أدخل رقم';
+    stopBtn.disabled = true;
+    startBtn.disabled = true;
+    return;
+  }
+
+  const opt = clientSelect.options[clientSelect.selectedIndex];
+  const isHuman = opt.dataset.active === 'true';
+  dot.className = isHuman ? 'dot off' : 'dot on';
+  txt.textContent = isHuman ? 'البوت متوقف — إنسان يتكلم' : 'البوت شغال';
+  stopBtn.disabled = false;
+  startBtn.disabled = false;
+}
+
+clientSelect.addEventListener('change', function() {
+  // اختيار من القائمة بيلغي أي رقم يدوي متكتوب
+  if (this.value) manualPhone.value = '';
+  updateStatusUI();
+});
+
+manualPhone.addEventListener('input', function() {
+  // الكتابة اليدوية بتلغي اختيار القائمة
+  if (this.value.trim()) clientSelect.value = '';
+  updateStatusUI();
+});
+
+async function sendAction(action) {
+  const phone = getActivePhone();
+  if (!phone) return;
+
+  const loading = document.getElementById('loading');
+  const result = document.getElementById('result');
+  stopBtn.disabled = true;
+  startBtn.disabled = true;
+  loading.style.display = 'flex';
+  result.style.display = 'none';
+
+  try {
+    await fetch(POST_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ phone, action })
+    });
+    loading.style.display = 'none';
+    result.className = 'result success';
+    result.textContent = action === 'stop' ? '✓ تم إيقاف البوت لهذا الرقم' : '✓ تم تشغيل البوت لهذا الرقم';
+
+    if (action === 'stop') { dot.className = 'dot off'; txt.textContent = 'البوت متوقف — إنسان يتكلم'; }
+    else { dot.className = 'dot on'; txt.textContent = 'البوت شغال'; }
+  } catch(e) {
+    loading.style.display = 'none';
+    result.className = 'result error';
+    result.textContent = '✕ حدث خطأ، حاول مرة تانية';
+  }
+
+  stopBtn.disabled = false;
+  startBtn.disabled = false;
+}
+
+loadContacts();
+</script>
+</body>
+</html>

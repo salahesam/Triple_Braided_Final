@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triple Braided — Proposal Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.47.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--font-sans:'Cairo',system-ui,sans-serif;--g:#10bb82;--gd:#00343d;--gm:#c7fae9;--bg:#000;--s1:#070d09;--s2:#0a1410;--card:#0a1510;--bdr:rgba(16,187,130,.16);--bdr2:rgba(16,187,130,.4);--txt:#f8faf8;--sub:#8aa896;--mut:rgba(138,168,150,.55);--red:#ff5252;--ylw:#ffaa30;--wrap:960px}
+html,body{background:#000;font-family:var(--font-sans)}
+body{margin:0;padding:0}
+.app{background:var(--bg);overflow:hidden;font-family:var(--font-sans);min-height:100vh;width:100%;position:relative}
+.app::before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 30% 20%,rgba(16,187,130,.05),transparent 60%),radial-gradient(circle at 80% 80%,rgba(16,187,130,.03),transparent 50%);pointer-events:none;animation:bgp 8s ease-in-out infinite;z-index:0}
+@keyframes bgp{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes bounceIn{0%{transform:scale(.92)}50%{transform:scale(1.06)}100%{transform:scale(1)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.pg{display:none;position:relative;z-index:1}
+.pg.on{display:block;animation:fu .35s ease both}
+.wrap{max-width:var(--wrap);margin:0 auto}
+
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:.5px solid var(--bdr);position:relative;z-index:2;background:rgba(0,0,0,.4)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{width:34px;height:34px;flex-shrink:0;animation:float 3s ease-in-out infinite}
+.logo-name{font-size:14px;font-weight:600;color:var(--g);letter-spacing:.3px;line-height:1.3}
+.logo-tag{font-size:9px;color:rgba(16,187,130,.4);letter-spacing:2px;margin-top:1px}
+.qbadge{font-size:9px;color:rgba(16,187,130,.6);letter-spacing:3px;font-weight:600;padding:5px 11px;border:.5px solid var(--bdr);border-radius:14px}
+.btn-gh{display:flex;align-items:center;gap:6px;background:transparent;border:.5px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--sub);cursor:pointer;font-family:inherit;transition:all .25s}
+.btn-gh:hover{border-color:var(--bdr2);color:var(--txt);transform:translateY(-1px)}
+
+.p1h{padding:44px 24px 10px;text-align:center;position:relative;z-index:2}
+.p1sub{font-size:11px;color:rgba(16,187,130,.55);letter-spacing:3px;margin-bottom:12px;font-weight:600}
+.p1t{font-size:30px;font-weight:700;color:var(--txt);margin-bottom:6px;letter-spacing:-.5px}
+.p1d{font-size:13px;color:var(--sub)}
+
+.form{padding:24px;direction:rtl;position:relative;z-index:2}
+.fld{margin-bottom:26px;animation:fu .4s ease both}
+.fld-l{font-size:11px;color:var(--g);letter-spacing:2px;margin-bottom:12px;display:flex;align-items:center;gap:10px;font-weight:600}
+.fld-l::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 10px rgba(16,187,130,.5);flex-shrink:0}
+.fld-l::after{content:"";flex:1;height:.5px;background:linear-gradient(90deg,var(--bdr),transparent)}
+.fin{width:100%;background:var(--s1);border:.5px solid var(--bdr);border-radius:12px;padding:15px 18px;font-size:17px;color:var(--txt);font-family:inherit;direction:rtl;outline:none;transition:all .3s;text-align:right}
+.fin::placeholder{color:rgba(138,168,150,.25)}
+.fin:focus{border-color:var(--g);background:var(--s2);box-shadow:0 0 0 4px rgba(16,187,130,.08)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.scard{background:var(--card);border:.5px solid var(--bdr);border-radius:14px;padding:16px 18px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden}
+.scard:hover{border-color:var(--bdr2);transform:translateY(-2px);background:var(--s2)}
+.scard.sel{border-color:var(--g);background:rgba(16,187,130,.07);box-shadow:0 0 18px rgba(16,187,130,.12)}
+.scard-top{display:flex;align-items:center;gap:11px;margin-bottom:9px}
+.scard-ic{font-size:21px;flex-shrink:0;line-height:1}
+.scard-t{font-size:15px;font-weight:700;color:var(--txt);flex:1;line-height:1.4}
+.scard-chk{width:22px;height:22px;border-radius:7px;border:1.5px solid var(--bdr);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .25s;color:transparent;font-size:13px}
+.scard.sel .scard-chk{background:var(--g);border-color:var(--g);color:#03100a;font-weight:800}
+.scard-pts{list-style:none;padding:0;margin:0}
+.scard-pts li{font-size:12px;color:var(--sub);padding:3px 0;padding-right:15px;position:relative;line-height:1.6}
+.scard-pts li::before{content:"";position:absolute;right:0;top:10px;width:5px;height:5px;border-radius:50%;background:var(--g);opacity:.65}
+
+.custom-row{display:flex;gap:8px;margin-bottom:10px}
+.custom-row .fin{flex:1;font-size:14px;padding:12px 16px}
+.cadd{padding:0 20px;background:var(--g);border:none;border-radius:12px;color:#03100a;font-weight:700;font-family:inherit;cursor:pointer;font-size:14px;transition:all .25s;white-space:nowrap}
+.cadd:hover{transform:translateY(-2px);box-shadow:0 8px 20px -8px rgba(16,187,130,.5)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:flex;align-items:center;gap:8px;background:rgba(16,187,130,.1);border:.5px solid var(--g);border-radius:20px;padding:7px 14px;font-size:13px;color:var(--gm);font-weight:500}
+.chip i{cursor:pointer;color:var(--sub);font-size:15px;transition:color .2s}
+.chip i:hover{color:var(--red)}
+
+.price-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.price-fld{background:var(--card);border:.5px solid var(--bdr);border-radius:14px;padding:16px 18px}
+.price-fld.hi{border-color:var(--bdr2)}
+.price-fld-l{font-size:11px;color:var(--sub);letter-spacing:1px;margin-bottom:10px;font-weight:600}
+.price-fld.hi .price-fld-l{color:var(--g)}
+.price-fld-l-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.price-fld-l-row .price-fld-l{margin-bottom:0}
+.toggle{display:inline-flex;align-items:center;cursor:pointer}
+.toggle input{display:none}
+.toggle-track{width:38px;height:22px;background:var(--s1);border:.5px solid var(--bdr);border-radius:20px;position:relative;transition:all .25s;flex-shrink:0}
+.toggle-thumb{position:absolute;top:2px;right:2px;width:16px;height:16px;border-radius:50%;background:var(--sub);transition:all .25s}
+.toggle input:checked + .toggle-track{background:rgba(16,187,130,.18);border-color:var(--g)}
+.toggle input:checked + .toggle-track .toggle-thumb{right:18px;background:var(--g);box-shadow:0 0 8px rgba(16,187,130,.5)}
+.price-fld.dim{opacity:.45}
+.price-fld.dim .price-in{pointer-events:none}
+.price-inwrap{display:flex;align-items:center;gap:8px}
+.price-in{flex:1;background:var(--s1);border:.5px solid var(--bdr);border-radius:10px;padding:12px 14px;font-size:22px;color:var(--txt);font-family:inherit;direction:ltr;text-align:right;outline:none;transition:all .3s;font-weight:700}
+.price-in:focus{border-color:var(--g);background:var(--s2);box-shadow:0 0 0 3px rgba(16,187,130,.07)}
+.price-cur{font-size:13px;color:var(--mut);font-weight:600;flex-shrink:0}
+
+.p1f{padding:6px 24px 48px;position:relative;z-index:2}
+.bcf{width:100%;padding:17px;background:var(--g);border:none;border-radius:13px;font-size:16px;font-weight:700;color:#03100a;cursor:pointer;font-family:inherit;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.bcf::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-100%);transition:transform .6s}
+.bcf:disabled{opacity:.25;cursor:not-allowed}
+.bcf:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 12px 32px -8px rgba(16,187,130,.5)}
+.bcf:not(:disabled):hover::before{transform:translateX(100%)}
+
+/* preview screen */
+.pv-bar{padding:18px 24px;display:flex;gap:10px;align-items:center;justify-content:space-between;border-bottom:.5px solid var(--bdr);position:relative;z-index:2;flex-wrap:wrap}
+.pv-title{font-size:15px;color:var(--txt);font-weight:700;direction:rtl}
+.pv-title span{color:var(--g)}
+.pv-actions{display:flex;gap:8px;flex-wrap:wrap}
+.bdl{padding:11px 18px;background:var(--g);border:none;border-radius:10px;font-size:13px;color:#03100a;cursor:pointer;font-family:inherit;transition:all .25s;display:flex;align-items:center;gap:7px;font-weight:700}
+.bdl:hover{transform:translateY(-2px);box-shadow:0 8px 22px -8px rgba(16,187,130,.5)}
+.bdl.ghost{background:transparent;border:.5px solid var(--bdr);color:var(--sub)}
+.bdl.ghost:hover{border-color:var(--bdr2);color:var(--txt);box-shadow:none}
+.pv-frame-wrap{padding:20px 24px 40px;position:relative;z-index:2}
+.pv-frame{width:100%;height:78vh;border:.5px solid var(--bdr);border-radius:14px;background:#fff;box-shadow:0 20px 60px -20px rgba(0,0,0,.6)}
+</style>
+</head>
+<body>
+
+<div class="app" role="application">
+
+<!-- Screen 1: Builder -->
+<div class="pg on" id="p1">
+  <div class="hdr">
+    <div class="logo">
+      <svg viewBox="548 400 415 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#00343d" d="M666.957 407.566L611.601 407.566L706.5 565.734L730.226 518.285L698.593 462.925L935.843 462.925L920.027 439.199C904.21 415.476 888.394 407.566 864.667 407.566Z"/>
+        <path fill="#10bb82" d="M690.683 652.726L572.058 455.015L556.242 478.742C548.332 502.468 548.332 518.285 556.242 542.007L611.601 629L659.05 708.085L682.777 755.535L769.769 605.277L714.41 605.277Z"/>
+        <path fill="#c7fae9" d="M769.769 526.191L801.402 573.64L856.761 573.64L746.042 771.351L777.675 771.351C793.492 771.351 817.218 763.441 825.125 739.718L880.484 644.816L927.933 573.64L951.66 526.191Z"/>
+      </svg>
+      <div><div class="logo-name">Triple Braided</div><div class="logo-tag">SMART · ACCURATE · EFFICIENT</div></div>
+    </div>
+    <div class="qbadge">PROPOSAL CREATOR</div>
+  </div>
+
+  <div class="p1h wrap">
+    <div class="p1sub">PROPOSAL CREATOR</div>
+    <div class="p1t">إنشاء عرض سعر</div>
+    <div class="p1d">اختر الخدمات والأسعار، واحصل على عرض احترافي جاهز للعميل</div>
+  </div>
+
+  <div class="form wrap">
+
+    <div class="fld">
+      <div class="fld-l">اسم العميل</div>
+      <input class="fin" id="clientName" placeholder="مثال: شركة الأمانة للتجارة" oninput="updBtn()"/>
+    </div>
+
+    <div class="fld">
+      <div class="fld-l">الخدمات المحاسبية</div>
+      <div class="grid" id="servicesGrid"></div>
+    </div>
+
+    <div class="fld">
+      <div class="fld-l">التقارير المالية</div>
+      <div class="grid" id="reportsGrid"></div>
+    </div>
+
+    <div class="fld">
+      <div class="fld-l">خدمات إضافية (Custom)</div>
+      <div class="custom-row">
+        <input class="fin" id="customIn" placeholder="اكتب خدمة إضافية ثم اضغط إضافة..." onkeydown="if(event.key==='Enter')addCustom()"/>
+        <button class="cadd" onclick="addCustom()">إضافة</button>
+      </div>
+      <div class="chips" id="customChips"></div>
+    </div>
+
+    <div class="fld">
+      <div class="fld-l">الأسعار</div>
+      <div class="price-row">
+        <div class="price-fld">
+          <div class="price-fld-l">سعر الاشتراك الشهري</div>
+          <div class="price-inwrap"><input class="price-in" id="priceMonthly" type="number" inputmode="numeric" placeholder="1000" oninput="updBtn()"/><span class="price-cur">ريال</span></div>
+        </div>
+        <div class="price-fld hi" id="firstMonthCard">
+          <div class="price-fld-l-row">
+            <div class="price-fld-l">سعر الشهر الأول</div>
+            <label class="toggle">
+              <input type="checkbox" id="hasFirstToggle" checked onchange="toggleFirst()"/>
+              <span class="toggle-track"><span class="toggle-thumb"></span></span>
+            </label>
+          </div>
+          <div class="price-inwrap"><input class="price-in" id="priceFirst" type="number" inputmode="numeric" placeholder="700" oninput="updBtn()"/><span class="price-cur">ريال</span></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="p1f wrap">
+    <button class="bcf" id="confirmBtn" disabled onclick="generate()">
+      <i class="ti ti-sparkles" aria-hidden="true" style="font-size:18px"></i>تأكيد وإنشاء العرض
+    </button>
+  </div>
+</div>
+
+<!-- Screen 2: Preview -->
+<div class="pg" id="p2">
+  <div class="pv-bar">
+    <div class="pv-title">معاينة العرض — <span id="pvName"></span></div>
+    <div class="pv-actions">
+      <button class="bdl ghost" onclick="show('p1')"><i class="ti ti-arrow-right"></i>تعديل</button>
+      <button class="bdl ghost" onclick="newProposal()"><i class="ti ti-plus"></i>عرض جديد</button>
+      <button class="bdl" onclick="download()"><i class="ti ti-download"></i>تحميل HTML</button>
+    </div>
+  </div>
+  <div class="pv-frame-wrap wrap">
+    <iframe class="pv-frame" id="pvFrame" title="معاينة العرض"></iframe>
+  </div>
+</div>
+
+</div>
+
+<script>
+const LOGO_SVG=`<svg viewBox="548 400 415 380" fill="none" xmlns="http://www.w3.org/2000/svg" width="56" height="56"><path fill="#00343d" d="M666.957 407.566L611.601 407.566L706.5 565.734L730.226 518.285L698.593 462.925L935.843 462.925L920.027 439.199C904.21 415.476 888.394 407.566 864.667 407.566Z"/><path fill="#10bb82" d="M690.683 652.726L572.058 455.015L556.242 478.742C548.332 502.468 548.332 518.285 556.242 542.007L611.601 629L659.05 708.085L682.777 755.535L769.769 605.277L714.41 605.277Z"/><path fill="#c7fae9" d="M769.769 526.191L801.402 573.64L856.761 573.64L746.042 771.351L777.675 771.351C793.492 771.351 817.218 763.441 825.125 739.718L880.484 644.816L927.933 573.64L951.66 526.191Z"/></svg>`;
+
+const SERVICES=[
+ {id:"daily",icon:"📊",t:"تسجيل العمليات المالية اليومية",pts:["المبيعات (كاش / شبكة / تحويل / أونلاين)","المشتريات والمصاريف التشغيلية","التحويلات البنكية والتحصيلات والمدفوعات","المرتجعات وعمولات بوابات الدفع"]},
+ {id:"coa",icon:"🌳",t:"إعداد الشجرة المحاسبية",pts:["الأصول (الكاش، البنك، المخزون...)","الالتزامات (الموردين، القروض...)","الإيرادات والمصروفات وحقوق الملكية"]},
+ {id:"einv",icon:"🧾",t:"إصدار الفواتير الإلكترونية",pts:["فواتير منظمة وجاهزة للمتطلبات الضريبية","متوافقة مع متطلبات هيئة الزكاة والضريبة"]},
+ {id:"arap",icon:"👥",t:"إدارة الذمم المدينة والدائنة",pts:["مين باقي عليه؟ كم المبلغ؟ متى موعد السداد؟","تقارير أعمار الديون ومتابعة التحصيل","فواتير الموردين ومواعيد الاستحقاق والدفعات"]},
+ {id:"close",icon:"🔒",t:"الإقفالات المالية",pts:["الإقفالات الشهرية والسنوية الاحترافية","التسويات المحاسبية ومطابقة البنوك","مراجعة الأرصدة والمخزون وتجهيز البيانات الضريبية"]},
+ {id:"emp",icon:"💼",t:"إدارة حسابات الموظفين",pts:["السلف والبدلات والمكافآت والخصومات","تسوية حساب الموظف نهاية الشهر أو نهاية الخدمة"]},
+ {id:"tax",icon:"📋",t:"الضريبة والزكاة",pts:["إقرارات ضريبة القيمة المضافة","الإقرار الزكوي","رفع القوائم المالية السنوية"]}
+];
+const REPORTS=[
+ {id:"pl",icon:"📈",t:"قائمة الأرباح والخسائر",pts:["الإيرادات","المصروفات","صافي الربح"]},
+ {id:"bs",icon:"🏛️",t:"قائمة المركز المالي",pts:["الأصول","الالتزامات","حقوق الملكية"]},
+ {id:"cf",icon:"💧",t:"قائمة التدفقات النقدية",pts:["كم دخل؟ وكم طلع؟","هل السيولة تزيد أو تنقص؟"]},
+ {id:"meet",icon:"🗓️",t:"اجتماع شهري للتحليل المالي",pts:["نجلس معك كل شهر ونحلل الأرقام ونوجهك بشكل استراتيجي"]}
+];
+
+const sel=new Set(SERVICES.map(s=>s.id).concat(REPORTS.map(r=>r.id))); // default: all selected
+const customItems=[];
+let proposalHtml="";
+
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+
+function renderGrids(){
+  document.getElementById("servicesGrid").innerHTML=SERVICES.map(s=>cardHtml(s)).join("");
+  document.getElementById("reportsGrid").innerHTML=REPORTS.map(s=>cardHtml(s)).join("");
+}
+function cardHtml(s){
+  const on=sel.has(s.id);
+  return `<div class="scard${on?" sel":""}" id="card_${s.id}" onclick="toggle('${s.id}')">
+    <div class="scard-top"><span class="scard-ic">${s.icon}</span><span class="scard-t">${esc(s.t)}</span><span class="scard-chk">✓</span></div>
+    <ul class="scard-pts">${s.pts.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
+  </div>`;
+}
+function toggle(id){
+  if(sel.has(id))sel.delete(id);else sel.add(id);
+  document.getElementById("card_"+id).classList.toggle("sel",sel.has(id));
+  updBtn();
+}
+function addCustom(){
+  const inp=document.getElementById("customIn");
+  const v=inp.value.trim();
+  if(!v)return;
+  customItems.push(v);inp.value="";renderChips();updBtn();
+}
+function removeCustom(i){customItems.splice(i,1);renderChips();updBtn();}
+function renderChips(){
+  document.getElementById("customChips").innerHTML=customItems.map((c,i)=>`<div class="chip"><span>${esc(c)}</span><i class="ti ti-x" onclick="removeCustom(${i})"></i></div>`).join("");
+}
+function toggleFirst(){
+  const on=document.getElementById("hasFirstToggle").checked;
+  const card=document.getElementById("firstMonthCard");
+  const inp=document.getElementById("priceFirst");
+  card.classList.toggle("dim",!on);
+  inp.disabled=!on;
+  if(!on)inp.value="";
+  updBtn();
+}
+function updBtn(){
+  const name=document.getElementById("clientName").value.trim();
+  const m=document.getElementById("priceMonthly").value.trim();
+  const hasFirst=document.getElementById("hasFirstToggle").checked;
+  const f=document.getElementById("priceFirst").value.trim();
+  const anySel=sel.size>0||customItems.length>0;
+  const firstOk=!hasFirst||!!f;
+  document.getElementById("confirmBtn").disabled=!(name&&m&&firstOk&&anySel);
+}
+
+function show(id){
+  document.querySelectorAll(".pg").forEach(p=>p.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+  window.scrollTo(0,0);
+}
+function newProposal(){
+  document.getElementById("clientName").value="";
+  document.getElementById("priceMonthly").value="";
+  document.getElementById("priceFirst").value="";
+  document.getElementById("priceFirst").disabled=false;
+  document.getElementById("hasFirstToggle").checked=true;
+  document.getElementById("firstMonthCard").classList.remove("dim");
+  sel.clear();SERVICES.forEach(s=>sel.add(s.id));REPORTS.forEach(r=>sel.add(r.id));
+  customItems.length=0;renderChips();renderGrids();updBtn();
+  show("p1");
+}
+
+function generate(){
+  const name=document.getElementById("clientName").value.trim();
+  const monthly=parseInt(document.getElementById("priceMonthly").value,10)||0;
+  const hasFirst=document.getElementById("hasFirstToggle").checked;
+  const first=hasFirst?(parseInt(document.getElementById("priceFirst").value,10)||0):0;
+  const svc=SERVICES.filter(s=>sel.has(s.id));
+  const rep=REPORTS.filter(r=>sel.has(r.id));
+  proposalHtml=buildProposal({name,monthly,first,hasFirst,svc,rep,custom:[...customItems]});
+  document.getElementById("pvName").textContent=name;
+  document.getElementById("pvFrame").srcdoc=proposalHtml;
+  show("p2");
+}
+
+function download(){
+  const b=new Blob([proposalHtml],{type:"text/html;charset=utf-8"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);
+  const nm=document.getElementById("clientName").value.trim()||"client";
+  a.download=`عرض_Triple_Braided_${nm}.html`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+
+function buildProposal(d){
+  const validUntil=Date.now()+2*24*60*60*1000;
+  const vuDate=new Date(validUntil).toLocaleDateString("ar-SA",{year:"numeric",month:"long",day:"numeric"});
+  const save=(d.hasFirst&&d.monthly>d.first)?(d.monthly-d.first):0;
+
+  const cardBlock=(item)=>`
+    <div class="svc">
+      <div class="svc-head"><span class="svc-ic">${item.icon}</span><h3>${esc(item.t)}</h3></div>
+      <ul>${item.pts.map(p=>`<li>${esc(p)}</li>`).join("")}</ul>
+    </div>`;
+
+  const svcHtml=d.svc.map(cardBlock).join("");
+  const repHtml=d.rep.map(cardBlock).join("");
+  const customHtml=d.custom.length?`
+    <section class="sec">
+      <div class="sec-label">خدمات إضافية</div>
+      <h2 class="sec-title">مُخصّص لاحتياجك</h2>
+      <div class="grid">${d.custom.map(c=>`<div class="svc"><div class="svc-head"><span class="svc-ic">✨</span><h3>${esc(c)}</h3></div></div>`).join("")}</div>
+    </section>`:"";
+
+  const repSection=d.rep.length?`
+    <section class="sec">
+      <div class="sec-label">التقارير المالية</div>
+      <h2 class="sec-title">التقارير اللي توصلك</h2>
+      <p class="sec-sub">تفهم وضعك المالي بوضوح تام</p>
+      <div class="grid">${repHtml}</div>
+    </section>`:"";
+
+  const svcSection=d.svc.length?`
+    <section class="sec">
+      <div class="sec-label">الخدمات المقدمة</div>
+      <h2 class="sec-title">وش نسوّي لك بالضبط</h2>
+      <p class="sec-sub">كل الأعمال المحاسبية اللي تحتاجها في مكان واحد</p>
+      <div class="grid">${svcHtml}</div>
+    </section>`:"";
+
+  return `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>عرض Triple Braided — ${esc(d.name)}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--g:#10bb82;--gd:#00343d;--gm:#c7fae9;--bg:#04100b;--card:rgba(255,255,255,.025);--bdr:rgba(16,187,130,.18);--txt:#f4faf7;--sub:#9fc1b2;--mut:#6f8a7d}
+html,body{background:var(--bg);font-family:'Cairo',system-ui,sans-serif;color:var(--txt);line-height:1.7;direction:rtl;-webkit-font-smoothing:antialiased}
+body{background:radial-gradient(circle at 20% 0%,rgba(16,187,130,.08),transparent 45%),radial-gradient(circle at 85% 30%,rgba(0,52,61,.5),transparent 50%),var(--bg);min-height:100vh}
+.page{max-width:860px;margin:0 auto;padding:0 22px 60px}
+.hero{text-align:center;padding:64px 0 40px}
+.hero .logo{display:inline-flex;align-items:center;gap:12px;margin-bottom:30px}
+.hero .logo .nm{font-size:18px;font-weight:700;color:var(--g);letter-spacing:.5px}
+.hero .badge{display:inline-block;font-size:11px;letter-spacing:3px;color:var(--g);border:.5px solid var(--bdr);border-radius:20px;padding:6px 16px;margin-bottom:22px;font-weight:600;background:rgba(16,187,130,.05)}
+.hero h1{font-size:42px;font-weight:800;letter-spacing:-1px;line-height:1.2;margin-bottom:14px}
+.hero h1 .c{background:linear-gradient(120deg,var(--g),var(--gm));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:15px;color:var(--sub);max-width:520px;margin:0 auto}
+.divider{height:1px;background:linear-gradient(90deg,transparent,var(--bdr),transparent);margin:14px 0 8px}
+.sec{padding:34px 0}
+.sec-label{font-size:11px;letter-spacing:3px;color:var(--g);font-weight:600;margin-bottom:10px}
+.sec-title{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px}
+.sec-sub{font-size:14px;color:var(--sub);margin-bottom:24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.svc{background:var(--card);border:.5px solid var(--bdr);border-radius:16px;padding:22px;transition:transform .25s,border-color .25s;backdrop-filter:blur(6px)}
+.svc:hover{transform:translateY(-3px);border-color:rgba(16,187,130,.4)}
+.svc-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.svc-ic{font-size:24px;line-height:1}
+.svc-head h3{font-size:17px;font-weight:700;line-height:1.4}
+.svc ul{list-style:none;padding:0;margin:0}
+.svc ul li{font-size:13.5px;color:var(--sub);padding:5px 0;padding-right:18px;position:relative;line-height:1.65}
+.svc ul li::before{content:"";position:absolute;right:0;top:12px;width:6px;height:6px;border-radius:50%;background:var(--g);box-shadow:0 0 6px rgba(16,187,130,.5)}
+/* guarantee */
+.guarantee{margin:34px 0;background:linear-gradient(120deg,rgba(16,187,130,.1),rgba(0,52,61,.25));border:1px solid rgba(16,187,130,.35);border-radius:20px;padding:32px;text-align:center;position:relative;overflow:hidden}
+.guarantee::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(16,187,130,.12),transparent 60%);pointer-events:none}
+.guarantee .shield{font-size:46px;margin-bottom:12px}
+.guarantee h2{font-size:24px;font-weight:800;margin-bottom:10px;color:var(--gm)}
+.guarantee p{font-size:15px;color:var(--sub);max-width:560px;margin:0 auto}
+.guarantee strong{color:var(--g)}
+/* pricing */
+.pricing{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:34px 0}
+.pricing.single{grid-template-columns:1fr;max-width:340px;margin:34px auto}
+.pcard{background:var(--card);border:.5px solid var(--bdr);border-radius:18px;padding:28px 24px;text-align:center;position:relative}
+.pcard.hi{border:1.5px solid var(--g);background:linear-gradient(160deg,rgba(16,187,130,.1),transparent);box-shadow:0 12px 40px -16px rgba(16,187,130,.4)}
+.pcard .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--g);color:#03100a;font-size:11px;font-weight:800;padding:4px 14px;border-radius:14px;white-space:nowrap}
+.pcard .plabel{font-size:13px;color:var(--sub);margin-bottom:14px;font-weight:600}
+.pcard .pamount{font-size:46px;font-weight:900;letter-spacing:-1px;line-height:1;direction:ltr}
+.pcard.hi .pamount{color:var(--g)}
+.pcard .pcur{font-size:14px;color:var(--mut);margin-top:6px}
+.pcard .save{margin-top:10px;font-size:12px;color:var(--g);font-weight:700;background:rgba(16,187,130,.1);border-radius:14px;padding:4px 12px;display:inline-block}
+/* scarcity */
+.scarcity{margin:30px 0 10px;background:linear-gradient(120deg,rgba(255,170,48,.08),rgba(255,170,48,.02));border:1px solid rgba(255,170,48,.35);border-radius:18px;padding:26px;text-align:center}
+.scarcity .stop{font-size:13px;color:#ffc266;font-weight:700;letter-spacing:1px;margin-bottom:6px}
+.scarcity h3{font-size:22px;font-weight:800;color:#ffd699;margin-bottom:6px}
+.scarcity .sdate{font-size:13px;color:var(--sub);margin-bottom:18px}
+.countdown{display:flex;gap:12px;justify-content:center;direction:ltr}
+.cd-box{background:rgba(0,0,0,.35);border:.5px solid rgba(255,170,48,.3);border-radius:12px;padding:12px 16px;min-width:66px}
+.cd-num{font-size:30px;font-weight:900;color:#ffd699;line-height:1}
+.cd-lbl{font-size:10px;color:var(--mut);margin-top:6px;letter-spacing:1px}
+.cd-done{font-size:18px;font-weight:800;color:#ff8a8a}
+/* closing */
+.closing{text-align:center;padding:40px 0 10px}
+.closing h2{font-size:24px;font-weight:800;margin-bottom:8px}
+.closing p{font-size:14px;color:var(--sub)}
+.footer{text-align:center;padding:30px 0 0;border-top:.5px solid var(--bdr);margin-top:30px}
+.footer .logo{display:inline-flex;align-items:center;gap:10px;margin-bottom:8px}
+.footer .nm{font-size:14px;font-weight:700;color:var(--g)}
+.footer .cp{font-size:11px;color:var(--mut)}
+@media(max-width:560px){.hero h1{font-size:32px}.pricing{grid-template-columns:1fr}.sec-title{font-size:23px}}
+</style></head>
+<body>
+<div class="page">
+
+  <header class="hero">
+    <div class="logo">${LOGO_SVG}<span class="nm">Triple Braided</span></div>
+    <div class="badge">عرض أعمال محاسبية</div>
+    <h1>عرض خاص لـ <span class="c">${esc(d.name)}</span></h1>
+    <p>جهّزنا لك باقة محاسبية متكاملة تغطي كل احتياجاتك — بشفافية، بدقة، وبدون أي رسوم خفية.</p>
+  </header>
+
+  <div class="divider"></div>
+
+  ${svcSection}
+  ${repSection}
+  ${customHtml}
+
+  <section class="guarantee">
+    <div class="shield">🛡️</div>
+    <h2>ضمان استرجاع كامل</h2>
+    <p>إذا ما ناسبك الشغل خلال <strong>أول شهر</strong>، تسترجع فلوسك <strong>كاملة</strong> — بدون أي أسئلة. نحن واثقون من جودة خدمتنا.</p>
+  </section>
+
+  <section>
+    <div class="sec-label" style="text-align:center">الاستثمار</div>
+    <h2 class="sec-title" style="text-align:center">الأسعار</h2>
+    <div class="pricing${d.hasFirst?"":" single"}">
+      <div class="pcard${d.hasFirst?"":" hi"}">
+        <div class="plabel">الاشتراك الشهري</div>
+        <div class="pamount">${d.monthly.toLocaleString("en-US")}</div>
+        <div class="pcur">ريال / شهرياً</div>
+      </div>
+      ${d.hasFirst?`
+      <div class="pcard hi">
+        <div class="tag">عرض الشهر الأول</div>
+        <div class="plabel">سعر الشهر الأول</div>
+        <div class="pamount">${d.first.toLocaleString("en-US")}</div>
+        <div class="pcur">ريال فقط</div>
+        ${save>0?`<div class="save">توفير ${save.toLocaleString("en-US")} ريال</div>`:""}
+      </div>`:""}
+    </div>
+  </section>
+
+  ${d.hasFirst?`
+  <section class="scarcity">
+    <div class="stop">⏳ فرصة محدودة</div>
+    <h3>هذا العرض متاح لمدة يومين فقط</h3>
+    <div class="sdate">صالح حتى ${vuDate}</div>
+    <div class="countdown" id="cd" data-until="${validUntil}">
+      <div class="cd-box"><div class="cd-num" id="cdD">--</div><div class="cd-lbl">يوم</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdH">--</div><div class="cd-lbl">ساعة</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdM">--</div><div class="cd-lbl">دقيقة</div></div>
+      <div class="cd-box"><div class="cd-num" id="cdS">--</div><div class="cd-lbl">ثانية</div></div>
+    </div>
+  </section>`:""}
+
+  <section class="closing">
+    <h2>جاهزون نبدأ معك</h2>
+    <p>كل اللي تحتاجه إنك توافق، وإحنا نتكفّل بالباقي.</p>
+  </section>
+
+  <footer class="footer">
+    <div class="logo">${LOGO_SVG}<span class="nm">Triple Braided</span></div>
+    <div class="cp">© ${new Date().getFullYear()} — Triple Braided · مسك دفاتر</div>
+  </footer>
+
+</div>
+<script>
+(function(){
+  var el=document.getElementById("cd");if(!el)return;
+  var until=parseInt(el.getAttribute("data-until"),10);
+  function pad(n){return n<10?"0"+n:""+n;}
+  function tick(){
+    var diff=until-Date.now();
+    if(diff<=0){el.innerHTML='<div class="cd-done">انتهى العرض — تواصل معنا لمعرفة العروض الحالية</div>';return;}
+    var d=Math.floor(diff/86400000);
+    var h=Math.floor(diff%86400000/3600000);
+    var m=Math.floor(diff%3600000/60000);
+    var s=Math.floor(diff%60000/1000);
+    document.getElementById("cdD").textContent=d;
+    document.getElementById("cdH").textContent=pad(h);
+    document.getElementById("cdM").textContent=pad(m);
+    document.getElementById("cdS").textContent=pad(s);
+    setTimeout(tick,1000);
+  }
+  tick();
+})();
+<\/script>
+</body></html>`;
+}
+
+renderGrids();renderChips();updBtn();
+</script>
+</body>
+</html>

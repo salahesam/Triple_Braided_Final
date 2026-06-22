@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>نسخة النص — تيمبليت الإيميل</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 2rem 1rem;
+    background: #0d0d0d;
+    font-family: 'Cairo', sans-serif;
+    color: #e0e0e0;
+  }
+
+  .page-title {
+    max-width: 720px;
+    margin: 0 auto 1.5rem;
+    font-size: 13px;
+    color: #10bb82;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .badge {
+    font-size: 11px;
+    background: rgba(16,187,130,0.1);
+    border: 1px solid rgba(16,187,130,0.2);
+    color: #10bb82;
+    padding: 3px 10px;
+    border-radius: 100px;
+  }
+
+  .card {
+    max-width: 720px;
+    margin: 0 auto 1.5rem;
+    background: #161616;
+    border: 1px solid #252525;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .card-header {
+    background: #111;
+    border-bottom: 1px solid #252525;
+    padding: 0.7rem 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .card-header span {
+    font-size: 12px;
+    color: #666;
+    font-weight: 500;
+  }
+
+  .copy-btn {
+    font-family: 'Cairo', sans-serif;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: #10bb82;
+    background: rgba(16,187,130,0.08);
+    border: 1px solid rgba(16,187,130,0.2);
+    padding: 4px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  .copy-btn:hover { background: rgba(16,187,130,0.15); }
+  .copy-btn.copied { color: #fff; background: #10bb82; border-color: #10bb82; }
+
+  .text-block {
+    padding: 1.3rem 1.5rem;
+    font-size: 14px;
+    line-height: 2;
+    color: #ccc;
+    white-space: pre-wrap;
+    word-break: break-word;
+    direction: rtl;
+    text-align: right;
+  }
+
+  .ph {
+    background: rgba(232, 160, 32, 0.12);
+    border: 1px dashed rgba(232, 160, 32, 0.4);
+    border-radius: 4px;
+    padding: 1px 6px;
+    color: #e8a020;
+    font-weight: 700;
+  }
+
+  .note {
+    max-width: 720px;
+    margin: 0 auto 1.2rem;
+    background: rgba(16,187,130,0.04);
+    border: 1px solid rgba(16,187,130,0.15);
+    border-radius: 8px;
+    padding: 0.9rem 1.2rem;
+    font-size: 13px;
+    color: #888;
+    line-height: 1.8;
+  }
+
+  .note strong { color: #10bb82; }
+
+  .divider {
+    max-width: 720px;
+    margin: 0 auto 1.2rem;
+    height: 1px;
+    background: #1e1e1e;
+  }
+
+  .section-label {
+    max-width: 720px;
+    margin: 0 auto 0.6rem;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #555;
+    text-transform: uppercase;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  نسخة Copy-Paste — تيمبليت الإيميل
+  <span class="badge">Triple Braided</span>
+</div>
+
+<div class="note">
+  <strong>طريقة الاستخدام:</strong> اضغط "نسخ" على أي قسم، ثم الصقه مباشرة في إيميلك.
+  الـ placeholders باللون الأصفر — استبدلها قبل الإرسال.
+  <br>
+  <strong>السطر الأول (Subject):</strong> انسخه كـ subject line للإيميل.
+</div>
+
+<!-- ===== SUBJECT ===== -->
+<div class="section-label">Subject Line</div>
+<div class="card">
+  <div class="card-header">
+    <span>سطر الموضوع</span>
+    <button class="copy-btn" onclick="copyBlock('subject')">نسخ</button>
+  </div>
+  <div class="text-block" id="subject">تفاصيل اشتراكك في Triple Braided — يُرجى المراجعة قبل الدفع</div>
+</div>
+
+<!-- ===== FULL EMAIL ===== -->
+<div class="section-label">نص الإيميل الكامل</div>
+<div class="card">
+  <div class="card-header">
+    <span>الإيميل الكامل — الصق مباشرة في Gmail / Outlook</span>
+    <button class="copy-btn" onclick="copyBlock('full')">نسخ الكل</button>
+  </div>
+  <div class="text-block" id="full">أهلاً [اسم العميل]،
+
+شكراً على تواصلك مع Triple Braided. فيما يلي ملخص الاتفاق الكامل قبل البدء.
+
+━━━━━━━━━━━━━━━━━
+📦 تفاصيل الباقة
+━━━━━━━━━━━━━━━━━
+الباقة: [اسم الباقة]
+حجم التعاملات الشهرية: حتى [حجم التعاملات]
+الخدمات: مسك دفاتر + قوائم مالية + إقرار ضريبي وزكوي
+سعر الشهر الأول: [السعر الأول] ريال (بدلاً من [السعر العادي])
+السعر من الشهر الثاني: [السعر العادي] ريال / شهر
+النوع: اشتراك شهري — قابل للإلغاء في أي وقت
+
+━━━━━━━━━━━━━━━━━
+💳 تفاصيل الدفع
+━━━━━━━━━━━━━━━━━
+طريقة الدفع: [طريقة الدفع]
+التفاصيل / الرابط: [تفاصيل الدفع]
+المبلغ المطلوب الآن: [السعر الأول] ريال
+العرض صالح حتى: [تاريخ انتهاء العرض]
+
+━━━━━━━━━━━━━━━━━
+🛡️ ضمان الرضا
+━━━━━━━━━━━━━━━━━
+ضمان استرجاع كامل خلال أول 30 يومًا — بدون أسئلة وبدون أي شروط.
+
+━━━━━━━━━━━━━━━━━
+📋 الشروط والأحكام
+━━━━━━━━━━━━━━━━━
+تعاملنا معًا يخضع للشروط والأحكام المنشورة على موقعنا الرسمي.
+للاطلاع على الشروط الكاملة: https://triple-braided.com/terms
+
+━━━━━━━━━━━━━━━━━
+✅ خطوة التأكيد
+━━━━━━━━━━━━━━━━━
+<strong style="font-size:16px;">لإتمام الاشتراك، أرسل لنا إيصال الدفع رداً على هذا الإيميل.</strong>
+إرسالك للإيصال يُعدّ قبولاً صريحًا للشروط والأحكام والموافقة على المضي في الاشتراك.
+
+أي سؤال؟ تواصل معنا مباشرةً.
+نتطلع للعمل معك. 🚀
+
+فريق Triple Braided
+hello@triple-braided.com
+whop.com/joined/triple-braided</div>
+</div>
+
+<!-- ===== PAYMENT ONLY ===== -->
+<div class="section-label">نسخة مختصرة — لو العميل يعرف الباقة وبس محتاج تفاصيل الدفع</div>
+<div class="card">
+  <div class="card-header">
+    <span>نسخة مختصرة للمتابعة</span>
+    <button class="copy-btn" onclick="copyBlock('short')">نسخ</button>
+  </div>
+  <div class="text-block" id="short">أهلاً [اسم العميل]،
+
+تفاصيل الدفع لباقة [اسم الباقة]:
+
+المبلغ: [السعر الأول] ريال (الشهر الأول)
+طريقة الدفع: [طريقة الدفع]
+التفاصيل: [تفاصيل الدفع]
+العرض صالح حتى: [تاريخ انتهاء العرض]
+
+الشروط والأحكام الكاملة: https://triple-braided.com/terms
+إرسالك للإيصال يُعدّ موافقةً على الشروط والأحكام.
+
+Triple Braided — hello@triple-braided.com</div>
+</div>
+
+<!-- ===== WESTERN UNION NOTE ===== -->
+<div class="section-label">إضافة اختيارية — لو الدفع عبر Western Union</div>
+<div class="card">
+  <div class="card-header">
+    <span>تفاصيل Western Union — ألصقها في مكان [تفاصيل الدفع]</span>
+    <button class="copy-btn" onclick="copyBlock('wu')">نسخ</button>
+  </div>
+  <div class="text-block" id="wu">الدفع عبر Western Union:
+الاسم: [الاسم الكامل كما في الحساب]
+البلد: [البلد]
+المبلغ: [السعر الأول] ريال سعودي
+بعد التحويل، أرسل لنا:
+  • صورة إيصال التحويل
+  • رقم الـ MTCN (رقم التتبع)</div>
+</div>
+
+<script>
+function copyBlock(id) {
+  const el = document.getElementById(id);
+  const text = el.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = el.closest('.card').querySelector('.copy-btn');
+    btn.textContent = '✓ تم النسخ';
+    btn.classList.add('copied');
+    setTimeout(() => {
+      btn.textContent = 'نسخ';
+      btn.classList.remove('copied');
+    }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>

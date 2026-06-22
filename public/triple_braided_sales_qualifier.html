@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Triple Braided — Sales Qualifier</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tabler-icons/2.47.0/tabler-icons.min.css">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--font-sans:'Cairo',system-ui,sans-serif;--g:#10bb82;--gd:#00343d;--gm:#c7fae9;--bg:#000;--s1:#070d09;--s2:#0a1410;--s3:#0f1d15;--card:#0a1510;--bdr:rgba(16,187,130,.16);--bdr2:rgba(16,187,130,.4);--txt:#f8faf8;--sub:#8aa896;--mut:rgba(138,168,150,.55);--red:#ff5252;--ylw:#ffaa30;--wrap:880px}
+html,body{background:#000;font-family:var(--font-sans)}
+body{margin:0;padding:0}
+.app{background:var(--bg);overflow:hidden;font-family:var(--font-sans);min-height:100vh;width:100%;position:relative}
+.app::before{content:"";position:fixed;inset:0;background:radial-gradient(circle at 30% 20%,rgba(16,187,130,.04),transparent 60%),radial-gradient(circle at 80% 80%,rgba(16,187,130,.03),transparent 50%);pointer-events:none;animation:bgp 8s ease-in-out infinite;z-index:0}
+@keyframes bgp{0%,100%{opacity:.6}50%{opacity:1}}
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sl{from{opacity:0;transform:translateX(28px)}to{opacity:1;transform:translateX(0)}}
+@keyframes pop{from{opacity:0;transform:scale(.9)}to{opacity:1;transform:scale(1)}}
+@keyframes bounceIn{0%{transform:scale(.9)}50%{transform:scale(1.08)}100%{transform:scale(1.04)}}
+@keyframes pulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.15)}}
+@keyframes ripple{0%{transform:scale(0);opacity:.7}100%{transform:scale(5);opacity:0}}
+@keyframes letterSpread{from{letter-spacing:.3em;opacity:0}to{letter-spacing:0;opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.fu1{animation:fu .4s .04s both}.fu2{animation:fu .4s .12s both}.fu3{animation:fu .4s .20s both}.fu4{animation:fu .4s .28s both}.fu5{animation:fu .4s .36s both}
+.pg{display:none;position:relative;z-index:1}
+.pg.on{display:block;animation:fu .35s ease both}
+.wrap{max-width:var(--wrap);margin:0 auto}
+
+.hdr{display:flex;align-items:center;justify-content:space-between;padding:16px 28px;border-bottom:.5px solid var(--bdr);position:relative;z-index:2;background:rgba(0,0,0,.4)}
+.logo{display:flex;align-items:center;gap:10px}
+.logo svg{width:34px;height:34px;flex-shrink:0;animation:float 3s ease-in-out infinite}
+.logo-name{font-size:14px;font-weight:600;color:var(--g);letter-spacing:.3px;line-height:1.3}
+.logo-tag{font-size:9px;color:rgba(16,187,130,.4);letter-spacing:2px;margin-top:1px}
+.qbadge{font-size:9px;color:rgba(16,187,130,.6);letter-spacing:3.5px;font-weight:600;padding:5px 11px;border:.5px solid var(--bdr);border-radius:14px}
+.btn-gh{display:flex;align-items:center;gap:6px;background:transparent;border:.5px solid var(--bdr);border-radius:8px;padding:8px 14px;font-size:12px;color:var(--sub);cursor:pointer;font-family:inherit;transition:all .25s}
+.btn-gh:hover{border-color:var(--bdr2);color:var(--txt);transform:translateY(-1px)}
+
+.p1b{padding:8vh 32px 50px;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:2}
+.p1l{width:104px;height:104px;margin-bottom:24px;animation:pop .5s .1s both}
+.p1n{font-size:34px;font-weight:600;color:var(--txt);margin-bottom:6px;letter-spacing:-.5px;animation:fu .4s .25s both}
+.p1q{font-size:11px;color:var(--gm);letter-spacing:4px;margin-bottom:48px;opacity:.7;animation:letterSpread .5s .35s both}
+.p1f{width:100%;max-width:420px}
+.flb{font-size:10px;color:var(--sub);letter-spacing:2px;margin-bottom:9px;text-align:right;direction:rtl;font-weight:600}
+.fin{width:100%;background:var(--s1);border:.5px solid var(--bdr);border-radius:11px;padding:16px 20px;font-size:20px;color:var(--txt);font-family:inherit;direction:rtl;outline:none;transition:all .3s;text-align:right}
+.fin::placeholder{color:rgba(138,168,150,.2)}
+.fin:focus{border-color:var(--g);background:var(--s2);box-shadow:0 0 0 4px rgba(16,187,130,.08)}
+.bst{width:100%;margin-top:18px;padding:16px;background:var(--g);border:none;border-radius:11px;font-size:15px;font-weight:600;color:#03100a;cursor:pointer;font-family:inherit;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:9px;position:relative;overflow:hidden}
+.bst::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-100%);transition:transform .6s}
+.bst:disabled{opacity:.18;cursor:not-allowed}
+.bst:not(:disabled):hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(16,187,130,.5)}
+.bst:not(:disabled):hover::before{transform:translateX(100%)}
+
+.p2h{padding:40px 24px 22px;text-align:center;position:relative;z-index:2;border-bottom:.5px solid var(--bdr)}
+.p2sub{font-size:11px;color:rgba(16,187,130,.55);letter-spacing:3px;margin-bottom:14px;font-weight:600;animation:fu .35s .05s both}
+.p2name{font-size:52px;font-weight:600;line-height:1.05;letter-spacing:-1.2px;direction:rtl;margin-bottom:8px;animation:bounceIn .5s .15s both;background:linear-gradient(180deg,var(--txt),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.p2tag{font-size:13px;color:var(--sub);direction:rtl;animation:fu .35s .25s both}
+.prog-w{padding:16px 24px;display:flex;align-items:center;gap:14px;border-bottom:.5px solid var(--bdr);position:sticky;top:0;z-index:5;background:rgba(0,0,0,.85);backdrop-filter:blur(8px)}
+.prog{display:flex;gap:3px;flex:1;flex-wrap:wrap}
+.pd{height:3px;flex:1;min-width:8px;background:var(--s2);border-radius:2px;transition:all .4s}
+.pd.done{background:var(--g);box-shadow:0 0 8px rgba(16,187,130,.4)}
+.pd.cur{background:rgba(16,187,130,.4);animation:pulse 1.5s ease infinite}
+.prog-c{font-size:11px;color:var(--sub);font-weight:600;direction:ltr;flex-shrink:0}
+.prog-c b{color:var(--g)}
+.save-row{padding:8px 24px;height:24px;display:flex;align-items:center;direction:rtl;position:relative;z-index:2}
+.smsg{font-size:10px;color:rgba(16,187,130,.55);display:flex;align-items:center;gap:6px;font-weight:600}
+.sdot{width:6px;height:6px;border-radius:50%;background:var(--g);flex-shrink:0;opacity:0;transition:opacity .25s}
+.sdot.on{opacity:.8;animation:pulse 1.2s ease infinite}
+.sdot.err{background:var(--red);opacity:1;animation:none}
+.p2b{padding:18px 24px 30px;direction:rtl;position:relative;z-index:2}
+.qsec{margin-top:30px;animation:sl .4s ease both}
+.qsec-h{font-size:11px;color:var(--g);letter-spacing:3px;margin-bottom:6px;display:flex;align-items:center;gap:10px;font-weight:600}
+.qsec-h::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--g);box-shadow:0 0 10px rgba(16,187,130,.5);flex-shrink:0}
+.qsec-h::after{content:"";flex:1;height:.5px;background:linear-gradient(90deg,var(--bdr),transparent)}
+.qsec-d{font-size:11px;color:var(--mut);margin-bottom:16px;line-height:1.6;font-style:italic;padding-right:17px}
+.qb{background:var(--card);border:.5px solid var(--bdr);border-radius:12px;padding:18px 20px;margin-bottom:10px;transition:all .3s;position:relative;overflow:hidden}
+.qb::after{content:"";position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,var(--g),transparent);transform:scaleX(0);transition:transform .35s;transform-origin:right}
+.qb.on{border-color:var(--bdr2);background:var(--s2)}.qb.on::after{transform:scaleX(1)}
+.qb.cond{border-style:dashed;border-color:rgba(16,187,130,.3)}
+.qlb{font-size:17px;color:var(--txt);margin-bottom:6px;font-weight:600;line-height:1.55;letter-spacing:-.2px}
+.qnt{font-size:13px;color:var(--sub);margin:8px 0 11px;font-style:italic;line-height:1.6;padding-right:12px;border-right:2px solid var(--bdr)}
+.qhint{font-size:11px;color:var(--mut);margin-bottom:11px;line-height:1.55}
+.qmh{font-size:10px;color:var(--mut);margin-bottom:9px;letter-spacing:1px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;direction:rtl}
+.opt{font-size:14px;padding:10px 18px;border-radius:22px;border:.5px solid var(--bdr);background:var(--bg);color:var(--sub);cursor:pointer;font-family:inherit;transition:all .25s;position:relative;overflow:hidden;direction:rtl;font-weight:500}
+.opt::after{content:"";position:absolute;top:50%;left:50%;width:10px;height:10px;background:rgba(16,187,130,.5);border-radius:50%;transform:translate(-50%,-50%) scale(0);pointer-events:none}
+.opt:hover{border-color:var(--bdr2);color:var(--txt);transform:translateY(-2px) scale(1.04);background:var(--s1)}
+.opt.sel{background:rgba(16,187,130,.12);border-color:var(--g);color:var(--g);font-weight:600;animation:bounceIn .35s ease;box-shadow:0 0 16px rgba(16,187,130,.2)}
+.opt.sel::after{animation:ripple .55s ease}
+.opt.multi.sel::before{content:"\2713  ";font-weight:700}
+.txt-ans{width:100%;background:var(--s1);border:.5px solid var(--bdr);border-radius:10px;padding:13px 16px;font-size:15px;color:var(--txt);font-family:inherit;direction:rtl;outline:none;transition:all .3s}
+.txt-ans::placeholder{color:rgba(138,168,150,.2)}
+.txt-ans:focus{border-color:var(--g);background:var(--s2);box-shadow:0 0 0 3px rgba(16,187,130,.07)}
+.area-ans{width:100%;background:var(--s1);border:.5px solid var(--bdr);border-radius:10px;padding:13px 16px;font-size:15px;color:var(--txt);font-family:inherit;direction:rtl;outline:none;transition:all .3s;resize:vertical;min-height:86px;line-height:1.7}
+.area-ans::placeholder{color:rgba(138,168,150,.2)}
+.area-ans:focus{border-color:var(--g);background:var(--s2);box-shadow:0 0 0 3px rgba(16,187,130,.07)}
+.notes-w{margin-top:12px}
+.notes-l{font-size:9px;color:var(--mut);letter-spacing:2px;margin-bottom:6px;font-weight:600}
+.nta{width:100%;background:var(--s1);border:.5px solid var(--bdr);border-radius:9px;padding:11px 14px;font-size:14px;color:var(--txt);font-family:inherit;direction:rtl;outline:none;resize:vertical;min-height:64px;line-height:1.7;transition:all .25s}
+.nta::placeholder{color:rgba(138,168,150,.2)}
+.nta:focus{border-color:var(--bdr2);background:var(--s2)}
+.p2f{padding:0 24px 40px;position:relative;z-index:2}
+.bcf{width:100%;padding:17px;background:var(--g);border:none;border-radius:12px;font-size:15px;font-weight:600;color:#03100a;cursor:pointer;font-family:inherit;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:10px;position:relative;overflow:hidden}
+.bcf::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:translateX(-100%);transition:transform .6s}
+.bcf:hover{transform:translateY(-2px);box-shadow:0 10px 30px -8px rgba(16,187,130,.5)}
+.bcf:hover::before{transform:translateX(100%)}
+
+.p3b{padding:40px 24px 48px;direction:rtl;position:relative;z-index:2}
+.r-for{font-size:10px;color:var(--sub);letter-spacing:2px;margin-bottom:6px;font-weight:600;animation:fu .35s .04s both}
+.r-pkg{font-size:44px;font-weight:600;margin-bottom:4px;letter-spacing:-.7px;animation:bounceIn .5s .12s both;background:linear-gradient(135deg,var(--txt),var(--g));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.r-rng{font-size:12px;color:var(--sub);margin-bottom:22px;animation:fu .35s .25s both}
+.bump{display:inline-flex;align-items:center;gap:6px;font-size:11px;color:var(--ylw);background:rgba(255,170,48,.08);border:.5px solid rgba(255,170,48,.3);border-radius:18px;padding:5px 12px;margin-bottom:18px;font-weight:600;animation:fu .4s .3s both}
+.bump.info{color:var(--g);background:rgba(16,187,130,.08);border-color:rgba(16,187,130,.3)}
+.pr-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;animation:fu .4s .32s both}
+.pc{background:var(--card);border:.5px solid var(--bdr);border-radius:12px;padding:16px 18px;transition:all .3s}
+.pc:hover{transform:translateY(-2px);border-color:var(--bdr2)}
+.pc.hi{border-color:var(--bdr2)}
+.pc-l{font-size:10px;color:var(--sub);letter-spacing:1.5px;margin-bottom:6px;font-weight:600}
+.pc-v{font-size:28px;font-weight:600;color:var(--txt);direction:ltr;text-align:right;letter-spacing:-.5px}
+.pc.hi .pc-v{color:var(--g)}
+.pc-u{font-size:11px;color:var(--mut);margin-top:3px}
+.cx{background:var(--card);border:.5px solid var(--bdr);border-radius:12px;padding:16px 18px;margin-bottom:14px;animation:fu .4s .42s both}
+.cxt{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.cxl{font-size:10px;color:var(--sub);letter-spacing:2px;font-weight:600}
+.cxb{font-size:11px;padding:3px 12px;border-radius:18px;font-weight:600}
+.cxtr{height:3px;background:var(--s2);border-radius:2px;overflow:hidden;margin-bottom:14px}
+.cxf{height:100%;border-radius:2px;width:0;transition:width 1s .4s cubic-bezier(.4,0,.2,1)}
+.con-t{font-size:10px;color:var(--sub);letter-spacing:2px;margin-bottom:9px;font-weight:600}
+.con{display:flex;align-items:flex-start;gap:8px;font-size:13px;padding:10px 12px;border-radius:9px;border:.5px solid;margin-bottom:6px;line-height:1.65;transition:transform .2s;animation:sl .35s ease both;cursor:default}
+.con:hover{transform:translateX(4px)}.con i{font-size:14px;margin-top:1px;flex-shrink:0}
+.cd{border-color:rgba(255,82,82,.2);background:rgba(255,82,82,.05);color:#ff7070}
+.cw{border-color:rgba(255,170,48,.2);background:rgba(255,170,48,.05);color:#ffb84d}
+.co{border-color:rgba(16,187,130,.22);background:rgba(16,187,130,.05);color:var(--g)}
+.r-d{height:.5px;background:var(--bdr);margin:16px 0;animation:fu .35s .55s both}
+.r-a{display:flex;flex-direction:column;gap:8px;animation:fu .4s .58s both}
+.dlr{display:flex;gap:8px;direction:ltr}
+.bdl{flex:1;padding:12px 10px;background:var(--card);border:.5px solid var(--bdr);border-radius:10px;font-size:12px;color:var(--sub);cursor:pointer;font-family:inherit;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:6px;font-weight:600}
+.bdl:hover{border-color:var(--bdr2);color:var(--g);transform:translateY(-2px);background:var(--s2)}.bdl i{font-size:14px}
+.bsd{width:100%;padding:13px;background:var(--g);border:none;border-radius:10px;font-size:13px;font-weight:600;color:#03100a;cursor:pointer;font-family:inherit;transition:all .25s;position:relative;overflow:hidden}
+.bsd:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(16,187,130,.5)}
+.bbk{width:100%;padding:11px;background:transparent;border:.5px solid var(--bdr);border-radius:10px;font-size:12px;color:var(--sub);cursor:pointer;font-family:inherit;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:7px;direction:rtl;font-weight:600}
+.bbk:hover{border-color:var(--bdr2);color:var(--txt);transform:translateY(-1px)}
+.read-t{font-size:10px;color:var(--sub);letter-spacing:2px;margin:22px 0 9px;font-weight:600;direction:rtl}
+.read-box{background:var(--s1);border:.5px solid var(--bdr);border-radius:10px;padding:14px 16px;direction:rtl;animation:fu .4s .5s both}
+.read-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:.5px solid rgba(16,187,130,.08);font-size:12.5px}
+.read-row:last-child{border-bottom:none}
+.read-k{color:var(--sub);flex-shrink:0}
+.read-v{color:var(--txt);font-weight:600;text-align:left}
+</style>
+</head>
+<body>
+
+<div class="app" role="application">
+
+<!-- Screen 1: Client Name -->
+<div class="pg on" id="p1">
+  <div class="hdr">
+    <div class="logo">
+      <svg viewBox="548 400 415 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#00343d" d="M666.957 407.566L611.601 407.566L706.5 565.734L730.226 518.285L698.593 462.925L935.843 462.925L920.027 439.199C904.21 415.476 888.394 407.566 864.667 407.566Z"/>
+        <path fill="#10bb82" d="M690.683 652.726L572.058 455.015L556.242 478.742C548.332 502.468 548.332 518.285 556.242 542.007L611.601 629L659.05 708.085L682.777 755.535L769.769 605.277L714.41 605.277Z"/>
+        <path fill="#c7fae9" d="M769.769 526.191L801.402 573.64L856.761 573.64L746.042 771.351L777.675 771.351C793.492 771.351 817.218 763.441 825.125 739.718L880.484 644.816L927.933 573.64L951.66 526.191Z"/>
+      </svg>
+      <div><div class="logo-name">Triple Braided</div><div class="logo-tag">SMART · ACCURATE · EFFICIENT</div></div>
+    </div>
+    <div class="qbadge">SALES QUALIFIER</div>
+  </div>
+  <div class="p1b wrap">
+    <svg class="p1l" viewBox="548 400 415 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path fill="#00343d" d="M666.957 407.566L611.601 407.566L706.5 565.734L730.226 518.285L698.593 462.925L935.843 462.925L920.027 439.199C904.21 415.476 888.394 407.566 864.667 407.566Z"/>
+      <path fill="#10bb82" d="M690.683 652.726L572.058 455.015L556.242 478.742C548.332 502.468 548.332 518.285 556.242 542.007L611.601 629L659.05 708.085L682.777 755.535L769.769 605.277L714.41 605.277Z"/>
+      <path fill="#c7fae9" d="M769.769 526.191L801.402 573.64L856.761 573.64L746.042 771.351L777.675 771.351C793.492 771.351 817.218 763.441 825.125 739.718L880.484 644.816L927.933 573.64L951.66 526.191Z"/>
+    </svg>
+    <div class="p1n">Triple Braided</div>
+    <div class="p1q">SALES QUALIFIER</div>
+    <div class="p1f">
+      <div class="flb fu4">اسم العميل</div>
+      <input class="fin fu4" id="nameIn" placeholder="مثال: شركة الأمانة للتجارة" oninput="chk()"/>
+      <button class="bst fu5" id="startBtn" disabled onclick="go2()">
+        <i class="ti ti-arrow-left" aria-hidden="true"></i>بدء جلسة التأهيل
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Screen 2: Questions -->
+<div class="pg" id="p2">
+  <div class="hdr">
+    <div class="logo">
+      <svg viewBox="548 400 415 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#00343d" d="M666.957 407.566L611.601 407.566L706.5 565.734L730.226 518.285L698.593 462.925L935.843 462.925L920.027 439.199C904.21 415.476 888.394 407.566 864.667 407.566Z"/>
+        <path fill="#10bb82" d="M690.683 652.726L572.058 455.015L556.242 478.742C548.332 502.468 548.332 518.285 556.242 542.007L611.601 629L659.05 708.085L682.777 755.535L769.769 605.277L714.41 605.277Z"/>
+        <path fill="#c7fae9" d="M769.769 526.191L801.402 573.64L856.761 573.64L746.042 771.351L777.675 771.351C793.492 771.351 817.218 763.441 825.125 739.718L880.484 644.816L927.933 573.64L951.66 526.191Z"/>
+      </svg>
+      <div><div class="logo-name">Triple Braided</div><div class="logo-tag">SALES QUALIFIER</div></div>
+    </div>
+    <button class="btn-gh" onclick="show('p1')"><i class="ti ti-arrow-right" aria-hidden="true"></i>رجوع</button>
+  </div>
+  <div class="p2h wrap">
+    <div class="p2sub">QUALIFICATION SESSION</div>
+    <div class="p2name" id="hero"></div>
+    <div class="p2tag">جلسة تأهيل · مسك دفاتر</div>
+  </div>
+  <div class="prog-w">
+    <div class="wrap" style="display:flex;align-items:center;gap:14px;width:100%">
+      <div class="prog" id="prog"></div>
+      <div class="prog-c"><b id="pdone">0</b> / <span id="ptotal">0</span></div>
+    </div>
+  </div>
+  <div class="save-row wrap"><div class="smsg"><span class="sdot" id="sdot"></span><span id="slbl"></span></div></div>
+  <div class="p2b wrap" id="qarea"></div>
+  <div class="p2f wrap">
+    <button class="bcf" onclick="go3()">
+      <i class="ti ti-check" aria-hidden="true" style="font-size:17px"></i>تأكيد ومعاينة
+    </button>
+  </div>
+</div>
+
+<!-- Screen 3: Result -->
+<div class="pg" id="p3">
+  <div class="hdr">
+    <div class="logo">
+      <svg viewBox="548 400 415 380" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#00343d" d="M666.957 407.566L611.601 407.566L706.5 565.734L730.226 518.285L698.593 462.925L935.843 462.925L920.027 439.199C904.21 415.476 888.394 407.566 864.667 407.566Z"/>
+        <path fill="#10bb82" d="M690.683 652.726L572.058 455.015L556.242 478.742C548.332 502.468 548.332 518.285 556.242 542.007L611.601 629L659.05 708.085L682.777 755.535L769.769 605.277L714.41 605.277Z"/>
+        <path fill="#c7fae9" d="M769.769 526.191L801.402 573.64L856.761 573.64L746.042 771.351L777.675 771.351C793.492 771.351 817.218 763.441 825.125 739.718L880.484 644.816L927.933 573.64L951.66 526.191Z"/>
+      </svg>
+      <div><div class="logo-name">Triple Braided</div><div class="logo-tag">SALES QUALIFIER</div></div>
+    </div>
+    <button class="btn-gh" onclick="show('p2')"><i class="ti ti-arrow-right" aria-hidden="true"></i>رجوع</button>
+  </div>
+  <div class="p3b wrap">
+    <div class="r-for" id="rFor"></div>
+    <div class="r-pkg" id="rPkg">—</div>
+    <div class="r-rng" id="rRange"></div>
+    <div id="bumpWrap"></div>
+    <div class="pr-row">
+      <div class="pc"><div class="pc-l">السعر العام</div><div class="pc-v" id="rPrice">—</div><div class="pc-u">ريال / شهر</div></div>
+      <div class="pc hi"><div class="pc-l">أول شهر</div><div class="pc-v" id="rFirst">—</div><div class="pc-u">ريال فقط</div></div>
+    </div>
+
+    <div class="read-t">القراءة المحاسبية السريعة</div>
+    <div class="read-box" id="readBox"></div>
+
+    <div class="cx" style="margin-top:14px">
+      <div class="cxt"><span class="cxl">مستوى التعقيد المحاسبي</span><span class="cxb" id="cxBadge">—</span></div>
+      <div class="cxtr"><div class="cxf" id="cxFill"></div></div>
+      <div class="con-t">الملاحظات والالتزامات</div>
+      <div id="concList"></div>
+    </div>
+    <div class="r-d"></div>
+    <div class="r-a">
+      <div class="dlr">
+        <button class="bdl" onclick="xport(false)"><i class="ti ti-file-text" aria-hidden="true"></i>تحميل الأسئلة فقط</button>
+        <button class="bdl" onclick="xport(true)"><i class="ti ti-file-analytics" aria-hidden="true"></i>التقرير الكامل</button>
+      </div>
+      <button class="bsd" onclick="sendSum()">إرسال الملخص لكلود ↗</button>
+      <button class="bbk" onclick="show('p1')"><i class="ti ti-plus" aria-hidden="true"></i>عميل جديد</button>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+const SECS=[
+ {id:"overview",ttl:"نظرة عامة وقانونية",desc:"يستشف منها المحاسب: زكاة أم ضريبة دخل، موعد الإقفال السنوي، وحجم الكيان.",qs:[
+  {id:"activity",lbl:"وصف النشاط بالتفصيل",type:"area",placeholder:"بيبيع إيه / بيقدّم خدمة إيه بالظبط؟ (اضغط Enter لسطر جديد)"},
+  {id:"legal",lbl:"الشكل القانوني",opts:["مؤسسة فردية","شركة شخص واحد","ذات مسؤولية محدودة","شراكة","أخرى"]},
+  {id:"legal_other",lbl:"حدّد الشكل القانوني",type:"text",placeholder:"اكتب الشكل القانوني...",showIf:{q:"legal",in:["أخرى"]}},
+  {id:"nat",lbl:"جنسية المُلّاك",note:"سعودي/خليجي = زكاة · أجنبي = ضريبة دخل · مختلط = الاثنان بالنِّسَب",opts:["سعودي / خليجي","أجنبي","مختلط"]},
+  {id:"age",lbl:"عمر الشركة",note:"الشركات الجديدة تحتاج إعداد شجرة محاسبية من الصفر",opts:["أقل من سنة","1–3 سنوات","أكثر من 3 سنوات"]},
+  {id:"fye",lbl:"نهاية السنة المالية",hint:"ماذا يحدد نهاية السنة المالية؟ غالباً تُحدَّد في عقد التأسيس / السجل التجاري، والافتراضي 31 ديسمبر.",opts:["31 ديسمبر","أخرى"]},
+  {id:"branches",lbl:"عدد الفروع / المواقع",opts:["موقع واحد","2–3","أكثر من 3"]}
+ ]},
+ {id:"model",ttl:"نموذج العمل والإيراد",desc:"يستشف منها: طريقة الاعتراف بالإيراد وشكل قائمة الدخل.",qs:[
+  {id:"rev",lbl:"نموذج الإيراد",opts:["بيع منتجات مباشر","تقديم خدمات","عمولة / وساطة (Marketplace)","اشتراكات دورية","مختلط"]},
+  {id:"comm",lbl:"نسبة العمولة التقريبية",type:"text",placeholder:"مثال: 15٪",showIf:{q:"rev",in:["عمولة / وساطة (Marketplace)"]}},
+  {id:"cust",lbl:"نوع العملاء",opts:["أفراد (B2C)","شركات (B2B)","مختلط"]},
+  {id:"curr",lbl:"العملة",opts:["ريال فقط","متعددة العملات"]},
+  {id:"ltc",lbl:"هل توجد عقود طويلة المدى / مشاريع ممتدة؟",note:"تغيّر طريقة الاعتراف بالإيراد (نسبة الإنجاز للمقاولات / عقد سنوي للخدمات)",opts:["لا","نعم، مشاريع بنسبة إنجاز","نعم، عقود سنوية / دورية"]},
+  {id:"recur",lbl:"هل يوجد إيراد متكرر / عقود صيانة دورية؟",note:"الإيراد المتكرر له معالجة مختلفة عن البيع لمرة واحدة",opts:["لا","نعم، جزء من النشاط","نعم، أساس النشاط"]}
+ ]},
+ {id:"flow",ttl:"تدفق الأموال (كيف تدخل الفلوس)",desc:"يستشف منها: حجم المطابقة البنكية وتعقيد التحصيل.",qs:[
+  {id:"collect",lbl:"طرق التحصيل",type:"multi",opts:["كاش","تحويل بنكي","شبكة POS","بوابة دفع أونلاين","عبر تطبيق","تابي","تمارا (تقسيط)"]},
+  {id:"gateway",lbl:"بوابة الدفع المستخدمة",type:"area",placeholder:"myfattorah / PayTabs / تابي / تمارا / لا يوجد... (اضغط Enter لسطر جديد)"},
+  {id:"gwfee",lbl:"نسبة بوابة الدفع أو بوابة التقسيط",type:"text",placeholder:"مثال: 2.5٪ + 7 ريال تسوية / تابي 6٪..."},
+  {id:"settle",lbl:"متى تصل الفلوس للحساب البنكي؟",opts:["فوري","يومي","أسبوعي","شهري (تسوية)"]},
+  {id:"refund",lbl:"هل توجد مرتجعات / استرجاع؟",opts:["لا","نادر","متكرر"]}
+ ]},
+ {id:"tx",ttl:"حجم المعاملات",desc:"المحدد الرئيسي للباقة والسعر.",qs:[
+  {id:"sales",lbl:"المبيعات الشهرية التقريبية",note:"المحدد الرئيسي للباقة",opts:["أقل من 50 ألف","50–100 ألف","100–200 ألف","200–300 ألف","أكثر من 300 ألف"]},
+  {id:"invout",lbl:"فواتير البيع الصادرة شهريًا",opts:["أقل من 50","50–100","100–200","أكثر من 200"]},
+  {id:"invin",lbl:"فواتير المشتريات والمصاريف الواردة",opts:["أقل من 30","30–80","80–150","أكثر من 150"]},
+  {id:"pos",lbl:"هل يوجد نقاط بيع (POS)؟",note:"POS = معاملات يومية عالية الحجم",opts:["لا","نعم، نقطة واحدة","نعم، أكثر من نقطة"]},
+  {id:"chan",lbl:"قنوات البيع",hint:"ما هي قنوات البيع؟ (محل، متجر إلكتروني، تطبيق، سوشيال، جملة...)",opts:["قناة واحدة","محل + أونلاين","جملة + تجزئة","أكثر من 3 قنوات"]},
+  {id:"mktg",lbl:"الميزانية التسويقية الشهرية",hint:"تؤثر على بند مصروف التسويق وكيفية تسجيله",opts:["لا يوجد","أقل من 5 آلاف","5–15 ألف","أكثر من 15 ألف"]}
+ ]},
+ {id:"comp",ttl:"مكوّنات الحسابات",desc:"يستشف منها: أي وحدات (modules) يحتاجها في الشجرة المحاسبية. وجود فقط — بدون قيم.",qs:[
+  {id:"fixed",lbl:"أصول ثابتة؟ (سيارات، معدات، أجهزة)",opts:["لا","نعم، عدد بسيط","نعم، كثيرة"]},
+  {id:"intang",lbl:"أصول غير ملموسة؟ (تطبيق، برمجيات، تراخيص)",note:"لها معالجة إطفاء مختلفة عن الأصول الملموسة",opts:["لا","نعم"]},
+  {id:"stock",lbl:"هل يوجد مخزون؟",opts:["لا","نعم، بسيط","نعم، كثير ومعقد"]},
+  {id:"supp",lbl:"عدد الموردين الثابتين",opts:["لا يوجد","1–5","6–15","أكثر من 15"]},
+  {id:"recv",lbl:"عملاء بالأجل (ذمم مدينة)؟",opts:["لا","نعم، أقل من 10 عملاء","نعم، أكثر من 10 عملاء"]},
+  {id:"loan",lbl:"قروض أو تمويل قائم؟",opts:["لا","نعم"]},
+  {id:"emp",lbl:"موظفون برواتب ثابتة؟",note:"يحدد الحاجة لوحدة رواتب + تأمينات (GOSI)",opts:["لا","1–5","6–20","أكثر من 20"]},
+  {id:"expat",lbl:"هل ضمن الموظفين عمالة وافدة؟",note:"العمالة الوافدة = التزامات إضافية (إقامات، تأمين طبي، تذاكر، نهاية خدمة) — شغل محاسبي أعلى",opts:["لا، كلهم سعوديون","نعم، عدد قليل","نعم، الأغلبية"],showIf:{q:"emp",in:["1–5","6–20","أكثر من 20"]}}
+ ]},
+ {id:"current",ttl:"الوضع المحاسبي الحالي",desc:"يستشف منها: حجم مجهود التأسيس وترحيل الأرصدة.",qs:[
+  {id:"prev",lbl:"هل يوجد إعداد محاسبي سابق؟",note:"'من الصفر' = بناء شجرة الحسابات كاملة",opts:["لا، من الصفر","نعم، غير منتظم","نعم، منتظم ومرتب"]},
+  {id:"system",lbl:"النظام المستخدم حالياً",type:"text",placeholder:"دفترة / قيود / أودو / Excel / لا يوجد..."},
+  {id:"records",lbl:"جودة السجلات الحالية",opts:["لا توجد","Excel أو يدوي","برنامج محاسبي"]}
+ ]},
+ {id:"tax",ttl:"الضرائب والامتثال",desc:"يستشف منها: الالتزامات النظامية ومواعيدها ومخاطرها.",qs:[
+  {id:"vat",lbl:"هل مسجّل في ضريبة القيمة المضافة؟",opts:["لا","نعم، منتظم","نعم، فيه تأخيرات"]},
+  {id:"vatdate",lbl:"تاريخ التسجيل الضريبي",type:"text",placeholder:"مثال: مارس 2024 / غير مسجّل..."},
+  {id:"einv",lbl:"مرحلة الفاتورة الإلكترونية (فاتورة)",note:"إلزامية في السعودية — الورقي مخالفة",opts:["لم تبدأ بعد","لسه ورقي","المرحلة الأولى (الإصدار)","المرحلة الثانية (الربط مع ZATCA)"]},
+  {id:"zakat",lbl:"إقرارات الزكاة / ضريبة الدخل",opts:["منتظم","غير منتظم","لم يُقدَّم بعد"]},
+  {id:"seas",lbl:"هل النشاط موسمي؟",opts:["لا، ثابت طوال السنة","موسمية خفيفة","موسمية عالية"]}
+ ]},
+ {id:"client",ttl:"أسئلة وطلبات العميل",desc:"يستشف منها المحاسب: توقعات العميل ومتطلباته الخاصة قبل البدء.",qs:[
+  {id:"cquest",lbl:"هل لدى العميل أسئلة معينة؟",type:"area",placeholder:"اكتب أسئلة العميل هنا... (اضغط Enter لسطر جديد)"},
+  {id:"creq",lbl:"طلبات خاصة / متطلبات إضافية؟",type:"area",placeholder:"أي طلبات أو متطلبات خاصة طلبها العميل... (اضغط Enter لسطر جديد)"}
+ ]}
+];
+
+// Pricing ladder driven by estimated monthly accountant workload (hours), NOT sales value.
+// Each step maps an hours-range to a price from 700 (simplest) to 2000 (max).
+const PKGS=[
+ {name:"الباقة الأساسية",range:"شغل بسيط · حتى 5 ساعات/شهر",price:700,first:500,hMax:5},
+ {name:"الباقة الثانية",range:"شغل خفيف · 6–9 ساعات/شهر",price:1000,first:800,hMax:9},
+ {name:"الباقة الثالثة",range:"شغل منتظم · 10–13 ساعة/شهر",price:1250,first:1000,hMax:13},
+ {name:"الباقة الرابعة",range:"شغل يومي · 14–18 ساعة/شهر",price:1500,first:1250,hMax:18},
+ {name:"الباقة الخامسة",range:"شغل يومي مكثف · 19–24 ساعة/شهر",price:1750,first:1500,hMax:24},
+ {name:"الباقة السادسة",range:"تفرّغ شبه كامل · أكثر من 24 ساعة/شهر",price:2000,first:1750,hMax:Infinity}
+];
+
+const SK="tbq_sales_db";
+const ans={};const notes={};
+let cid=null;let lastRes=null;
+let saveQ=Promise.resolve();
+const hasStore=(typeof window!=="undefined"&&window.storage);
+
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")}
+function disp(v){return Array.isArray(v)?v.join("، "):(v||"");}
+function chk(){document.getElementById("startBtn").disabled=!document.getElementById("nameIn").value.trim()}
+
+async function dbGet(){if(!hasStore)return {};try{const r=await window.storage.get(SK);if(r&&r.value){const p=JSON.parse(r.value);if(p&&typeof p==="object")return p;}}catch(_){}return {};}
+async function dbSet(obj){if(!hasStore)return true;try{const r=await window.storage.set(SK,JSON.stringify(obj),false);return r!==null;}catch(e){return false;}}
+
+function showSv(msg,state){
+  const d=document.getElementById("sdot");const l=document.getElementById("slbl");
+  if(!d||!l)return;
+  d.className="sdot"+(state==="on"?" on":state==="err"?" on err":"");
+  l.textContent=msg||"";
+  if(state==="ok")setTimeout(()=>showSv("",""),1500);
+}
+async function saveNow(){
+  const name=document.getElementById("nameIn").value.trim();
+  if(!name||!cid)return;
+  showSv("جاري الحفظ...","on");
+  const db=await dbGet();
+  db[cid]={name,answers:{...ans},notes:{...notes},result:lastRes,ts:Date.now()};
+  const ok=await dbSet(db);
+  showSv(ok?"تم الحفظ ✓":"فشل الحفظ",ok?"ok":"err");
+}
+function queueSave(){saveQ=saveQ.then(saveNow).catch(()=>{});return saveQ;}
+
+function show(id){
+  document.querySelectorAll(".pg").forEach(p=>p.classList.remove("on"));
+  const pg=document.getElementById(id);pg.classList.add("on");
+  window.scrollTo(0,0);
+  if(id==="p1"){
+    Object.keys(ans).forEach(k=>delete ans[k]);
+    Object.keys(notes).forEach(k=>delete notes[k]);
+    cid="c"+Date.now()+"_"+Math.random().toString(36).slice(2,6);
+    lastRes=null;
+    document.getElementById("nameIn").value="";chk();
+  }
+}
+
+function go2(){
+  const name=document.getElementById("nameIn").value.trim();
+  if(!name)return;
+  document.getElementById("hero").textContent=name;
+  buildQs();
+  document.querySelectorAll(".pg").forEach(p=>p.classList.remove("on"));
+  document.getElementById("p2").classList.add("on");
+  window.scrollTo(0,0);
+  queueSave();
+}
+
+async function go3(){
+  await saveQ.catch(()=>{});
+  compute();
+  document.querySelectorAll(".pg").forEach(p=>p.classList.remove("on"));
+  document.getElementById("p3").classList.add("on");
+  window.scrollTo(0,0);
+  setTimeout(()=>{const p=document.getElementById("cxFill").dataset.pct||0;document.getElementById("cxFill").style.width=p+"%";},250);
+}
+
+function buildQs(){
+  const area=document.getElementById("qarea");area.innerHTML="";
+  let totalCountable=0;
+  SECS.forEach((sec,si)=>{
+    const w=document.createElement("div");w.className="qsec";w.style.animationDelay=(si*.08)+"s";
+    let h=`<div class="qsec-h">${esc(sec.ttl)}</div>`;
+    if(sec.desc)h+=`<div class="qsec-d">${esc(sec.desc)}</div>`;
+    sec.qs.forEach(q=>{
+      const counts=(q.type!=="text"&&q.type!=="area");
+      if(counts) totalCountable++;
+      const filled=q.type==="multi"?(ans[q.id]&&ans[q.id].length):(ans[q.id]&&String(ans[q.id]).trim());
+      h+=`<div class="qb${filled?" on":""}${q.showIf?" cond":""}" id="qb_${q.id}">`;
+      h+=`<div class="qlb">${esc(q.lbl)}</div>`;
+      if(q.note)h+=`<div class="qnt">${esc(q.note)}</div>`;
+      if(q.hint)h+=`<div class="qhint">${esc(q.hint)}</div>`;
+      if(q.type==="text"){
+        h+=`<input class="txt-ans" type="text" id="qa_${q.id}" placeholder="${esc(q.placeholder||"")}" value="${esc(ans[q.id]||"")}" oninput="onText('${q.id}',this)"/>`;
+      } else if(q.type==="area"){
+        h+=`<textarea class="area-ans" id="qa_${q.id}" rows="3" placeholder="${esc(q.placeholder||"")}" oninput="onText('${q.id}',this)">${esc(ans[q.id]||"")}</textarea>`;
+      } else if(q.type==="multi"){
+        h+=`<div class="qmh">اختيار متعدد — اضغط على كل ما ينطبق</div><div class="opts">`;
+        const cur=ans[q.id]||[];
+        q.opts.forEach(o=>{h+=`<button class="opt multi${cur.includes(o)?" sel":""}" onclick="pickMulti('${q.id}',this)">${esc(o)}</button>`;});
+        h+=`</div>`;
+      } else {
+        h+=`<div class="opts">`;
+        q.opts.forEach(o=>{h+=`<button class="opt${ans[q.id]===o?" sel":""}" onclick="pick('${q.id}',this)">${esc(o)}</button>`;});
+        h+=`</div>`;
+      }
+      h+=`</div>`;
+    });
+    h+=`<div class="notes-w"><div class="notes-l">ملاحظات القسم</div><textarea class="nta" placeholder="أضف ملاحظاتك هنا... (Enter لسطر جديد)" id="n_${sec.id}" rows="2" oninput="notes['${sec.id}']=this.value;queueSave()">${esc(notes[sec.id]||"")}</textarea></div>`;
+    w.innerHTML=h;area.appendChild(w);
+  });
+  let dots="";for(let i=0;i<totalCountable;i++)dots+=`<div class="pd" id="d${i}"></div>`;
+  document.getElementById("prog").innerHTML=dots;
+  document.getElementById("ptotal").textContent=totalCountable;
+  refreshConditionals();
+  updProg();
+}
+
+function refreshConditionals(){
+  SECS.forEach(s=>s.qs.forEach(q=>{
+    if(!q.showIf)return;
+    const cont=document.getElementById("qb_"+q.id);
+    if(!cont)return;
+    const met=(q.showIf.in||[]).includes(ans[q.showIf.q]);
+    cont.style.display=met?"":"none";
+    if(!met&&ans[q.id]){
+      ans[q.id]="";
+      const inp=document.getElementById("qa_"+q.id);if(inp)inp.value="";
+      cont.classList.remove("on");
+    }
+  }));
+}
+
+function onText(id,el){
+  ans[id]=el.value;
+  document.getElementById("qb_"+id).classList.toggle("on",!!el.value.trim());
+  queueSave();
+}
+
+function pick(id,btn){
+  ans[id]=btn.textContent;
+  btn.closest(".opts").querySelectorAll(".opt").forEach(b=>b.classList.remove("sel"));
+  btn.classList.add("sel");
+  document.getElementById("qb_"+id).classList.add("on");
+  refreshConditionals();
+  updProg();queueSave();
+}
+function pickMulti(id,btn){
+  if(!Array.isArray(ans[id]))ans[id]=[];
+  const v=btn.textContent.replace(/^\u2713\s*/,"");
+  const i=ans[id].indexOf(v);
+  if(i>=0){ans[id].splice(i,1);btn.classList.remove("sel");}
+  else{ans[id].push(v);btn.classList.add("sel");}
+  document.getElementById("qb_"+id).classList.toggle("on",ans[id].length>0);
+  updProg();queueSave();
+}
+function updProg(){
+  let i=0,done=0;
+  SECS.forEach(s=>s.qs.forEach(q=>{
+    if(q.type==="text"||q.type==="area")return;
+    const ok=q.type==="multi"?!!(ans[q.id]&&ans[q.id].length):!!(ans[q.id]&&String(ans[q.id]).trim());
+    if(ok)done++;
+    const el=document.getElementById("d"+i);
+    if(el)el.className="pd"+(ok?" done":i===done?" cur":"");
+    i++;
+  }));
+  const pd=document.getElementById("pdone");if(pd)pd.textContent=done;
+}
+
+function compute(){
+  // ════════════════════════════════════════════════════════════════════
+  //  PRICING PHILOSOPHY: price = estimated monthly accountant WORKLOAD only.
+  //  Sales value (in SAR) does NOT affect the package — it's informational only.
+  //  Workload = base hours from transaction volume + extra hours from the
+  //  complexity factors that actually generate recurring daily work.
+  // ════════════════════════════════════════════════════════════════════
+
+  // ── (A) BASE HOURS from transaction volume (incoming + outgoing combined) ──
+  const invOutMid={"أقل من 50":25,"50–100":75,"100–200":150,"أكثر من 200":250};
+  const invInMid={"أقل من 30":15,"30–80":55,"80–150":115,"أكثر من 150":180};
+  const totalTx=(invOutMid[ans.invout]||25)+(invInMid[ans.invin]||15);
+  let baseHours;
+  if(totalTx>400)baseHours=16;
+  else if(totalTx>250)baseHours=11;
+  else if(totalTx>150)baseHours=7;
+  else if(totalTx>80)baseHours=5;
+  else baseHours=4;
+
+  // ── (B) EXTRA HOURS from daily-work complexity factors only ──
+  // These are the factors that genuinely consume recurring accountant time.
+  // (Legal form, currency, loans, intangibles etc. are NOT counted here —
+  //  they stay as notes only, with no effect on workload/price.)
+  let extraHours=0;const workDrivers=[];
+  const addWork=(h,label)=>{extraHours+=h;workDrivers.push({h,label});};
+  if(ans.emp==="أكثر من 20")addWork(6,"رواتب أكثر من 20 موظف");
+  else if(ans.emp==="6–20")addWork(3,"رواتب 6–20 موظف");
+  // Expat labor adds real recurring work on top of payroll (iqama renewals, medical
+  // insurance, tickets, end-of-service) — only meaningful when there are employees.
+  if(ans.emp&&ans.emp!=="لا"){
+    if(ans.expat==="نعم، الأغلبية")addWork(3,"عمالة وافدة (الأغلبية)");
+    else if(ans.expat==="نعم، عدد قليل")addWork(1,"عمالة وافدة");
+  }
+  if(ans.pos==="نعم، أكثر من نقطة")addWork(5,"نقاط بيع متعددة");
+  else if(ans.pos==="نعم، نقطة واحدة")addWork(2,"نقطة بيع واحدة");
+  // Suppliers: avoid double-counting. When incoming-invoice volume is already high
+  // (80+), those invoices ARE the supplier work — it's already in baseHours, so add
+  // little/nothing. Only count supplier hours when invoice volume is low (the supplier
+  // relationships add work not already reflected in a small invoice count).
+  const highInvIn = (ans.invin==="80–150"||ans.invin==="أكثر من 150");
+  if(ans.supp==="أكثر من 15"){ if(!highInvIn)addWork(3,"أكثر من 15 مورد"); }
+  else if(ans.supp==="6–15"){ if(!highInvIn)addWork(1,"6–15 مورد"); }
+  if(ans.chan==="أكثر من 3 قنوات")addWork(3,"أكثر من 3 قنوات بيع");
+  if(ans.stock==="نعم، كثير ومعقد")addWork(4,"مخزون كثير ومعقد");
+  if(ans.recv==="نعم، أكثر من 10 عملاء")addWork(2,"ذمم مدينة لأكثر من 10 عملاء");
+
+  const totalHours=baseHours+extraHours;
+
+  // ── (C) MAP total hours → package on the 700→2000 ladder ──
+  let tierIdx=PKGS.findIndex(p=>totalHours<=p.hMax);
+  if(tierIdx<0)tierIdx=PKGS.length-1;
+  let tier=tierIdx+1;
+
+  // sales is kept only as a display value (no effect on tier)
+  const salesDisp=ans.sales||"—";
+
+  let cx=0;const cs=[];
+  const A=(l,i,t)=>cs.push({l,i,t});
+
+  // ── Legal / tax obligation reading ──
+  if(ans.nat==="مختلط"){cx++;A("cw","ti-scale","مُلّاك مختلطون — يخضع للزكاة وضريبة الدخل معاً بالنِّسَب");}
+  else if(ans.nat==="أجنبي"){A("co","ti-scale","مُلّاك أجانب — يخضع لضريبة الدخل (وليس الزكاة)");}
+  else if(ans.nat==="سعودي / خليجي"){A("co","ti-scale","مُلّاك سعوديون/خليجيون — يخضع للزكاة");}
+  if(ans.fye==="أخرى"){cx++;A("cw","ti-calendar","سنة مالية غير ميلادية — انتبه لمواعيد الإقفال المخصصة");}
+  if(ans.branches==="أكثر من 3"){cx+=2;A("cd","ti-building-store","أكثر من 3 فروع — قد يحتاج فصل مراكز تكلفة لكل فرع");}
+  else if(ans.branches==="2–3"){cx++;A("cw","ti-building-store","عدة فروع — متابعة منفصلة لكل موقع");}
+
+  // ── Revenue model reading ──
+  if(ans.rev==="عمولة / وساطة (Marketplace)"){cx+=2;A("cd","ti-arrows-exchange","نموذج وساطة — يلزم حسم الاعتراف بالإيراد (إجمالي مقابل صافي) وفصل حقوق مزودي الخدمة");}
+  if(ans.rev==="اشتراكات دورية"){cx++;A("cw","ti-repeat","اشتراكات دورية — معالجة إيراد مؤجل (Deferred Revenue)");}
+  if(ans.rev==="مختلط"){cx++;A("cw","ti-category","نموذج إيراد مختلط — فصل مصادر الإيراد في الشجرة");}
+  if(ans.curr==="متعددة العملات"){cx+=2;A("cd","ti-currency-dollar","متعدد العملات — معالجة فروق أسعار الصرف وإعادة التقييم");}
+  if(ans.ltc==="نعم، مشاريع بنسبة إنجاز"){A("cw","ti-progress","مشاريع طويلة المدى — اعتراف بالإيراد بنسبة الإنجاز (Percentage of Completion)");}
+  else if(ans.ltc==="نعم، عقود سنوية / دورية"){A("co","ti-file-description","عقود سنوية/دورية — توزيع الإيراد على مدة العقد");}
+  if(ans.recur==="نعم، أساس النشاط"){A("co","ti-repeat","إيراد متكرر أساسي — معالجة كاشتراكات/عقود متجددة");}
+  else if(ans.recur==="نعم، جزء من النشاط"){A("co","ti-repeat","إيراد متكرر جزئي — فصله عن إيراد البيع لمرة واحدة");}
+
+  // ── Money flow reading ──
+  const col=Array.isArray(ans.collect)?ans.collect:[];
+  if(col.includes("بوابة دفع أونلاين")){cx++;A("cw","ti-credit-card","تحصيل عبر بوابة دفع — تسجيل العمولات ومطابقة التسويات");}
+  if(col.includes("تابي")||col.includes("تمارا (تقسيط)")){cx++;A("cw","ti-cash-banknote","تقسيط (تابي/تمارا) — رسوم أعلى وتأخر في وصول كامل المبلغ");}
+  if(ans.settle==="أسبوعي"||ans.settle==="شهري (تسوية)"){A("co","ti-clock","تسوية مؤجلة — حساب وسيط لأموال بوابة الدفع قيد التحصيل");}
+  if(ans.refund==="متكرر"){cx++;A("cw","ti-arrow-back-up","مرتجعات متكررة — قيود عكسية وتسويات منتظمة");}
+
+  // ── Volume reading ──
+  if(ans.invin==="أكثر من 150"){cx+=2;A("cd","ti-file-invoice","أكثر من 150 فاتورة واردة شهرياً — حجم إدخال مرتفع");}
+  else if(ans.invin==="80–150"){cx++;A("cw","ti-file-invoice","80–150 فاتورة واردة — حجم متوسط مرتفع");}
+  if(ans.invout==="أكثر من 200"){cx+=2;A("cd","ti-file-export","أكثر من 200 فاتورة بيع شهرياً — حجم إصدار مرتفع");}
+  if(ans.pos==="نعم، أكثر من نقطة"){cx+=2;A("cd","ti-device-desktop","عدة نقاط بيع — معاملات يومية كثيفة جداً");}
+  else if(ans.pos==="نعم، نقطة واحدة"){cx++;A("cw","ti-device-desktop","نقطة بيع — معاملات يومية عالية الحجم");}
+  if(ans.chan==="أكثر من 3 قنوات"){cx+=2;A("cd","ti-chart-bar","أكثر من 3 قنوات بيع — تقارير منفصلة لكل قناة");}
+  else if(ans.chan==="جملة + تجزئة"||ans.chan==="محل + أونلاين"){cx++;A("cw","ti-chart-bar","قنوات متعددة — فصل التقارير");}
+  if(ans.mktg==="أكثر من 15 ألف"){A("co","ti-speakerphone","ميزانية تسويق كبيرة — بند مصروف ملموس يستحق متابعة");}
+
+  // ── Account components reading ──
+  if(ans.fixed==="نعم، كثيرة"){cx+=2;A("cd","ti-building","أصول ثابتة كثيرة — جدول إهلاك دوري");}
+  else if(ans.fixed==="نعم، عدد بسيط"){cx++;A("cw","ti-building","أصول ثابتة — متابعة الإهلاك شهرياً");}
+  if(ans.intang==="نعم"){cx++;A("cw","ti-device-laptop","أصول غير ملموسة — جدول إطفاء (Amortization) منفصل");}
+  if(ans.stock==="نعم، كثير ومعقد"){cx+=2;A("cd","ti-package","مخزون كثير ومعقد — متابعة COGS وجرد دوري");}
+  else if(ans.stock==="نعم، بسيط"){cx++;A("cw","ti-package","مخزون موجود — متابعة دورية");}
+  if(ans.supp==="أكثر من 15"){cx+=2;A("cd","ti-truck","أكثر من 15 مورد — حسابات دائنة معقدة");}
+  else if(ans.supp==="6–15"){cx++;A("cw","ti-truck","6–15 مورد — متابعة منتظمة للدائنين");}
+  if(ans.recv==="نعم، أكثر من 10 عملاء"){cx+=2;A("cd","ti-users","ذمم مدينة لأكثر من 10 عملاء — متابعة تحصيل مكثفة");}
+  else if(ans.recv==="نعم، أقل من 10 عملاء"){cx++;A("cw","ti-users","ذمم مدينة — متابعة التحصيل");}
+  if(ans.loan==="نعم"){cx++;A("cw","ti-businessplan","تمويل قائم — متابعة التزامات وأقساط وفوائد");}
+  if(ans.emp==="أكثر من 20"){cx+=2;A("cd","ti-users-group","أكثر من 20 موظف — وحدة رواتب وتأمينات (GOSI) كاملة");}
+  else if(ans.emp==="6–20"){cx++;A("cw","ti-users-group","6–20 موظف — وحدة رواتب + GOSI");}
+  else if(ans.emp==="1–5"){A("co","ti-users-group","موظفون قليلون — رواتب مبسّطة");}
+
+  // ── Current state reading ──
+  if(ans.age==="أقل من سنة"||ans.prev==="لا، من الصفر"){cx++;A("cw","ti-alert-triangle","يحتاج إعداد شجرة محاسبية من الصفر — وقت إضافي في التأسيس");}
+  else if(ans.prev==="نعم، غير منتظم"){cx++;A("cw","ti-file-shredder","سجلات غير منتظمة — تحتاج تنظيف وترحيل قبل البدء");}
+  if(ans.system&&ans.system.trim()&&ans.system.trim()!=="لا يوجد"){A("co","ti-cloud","النظام الحالي: "+ans.system.trim());}
+
+  // ── Tax & compliance reading ──
+  if(ans.vat==="نعم، فيه تأخيرات"){cx+=2;A("cd","ti-receipt-tax","تأخيرات في الـ VAT — خطر غرامات عاجل");}
+  if(ans.einv==="لم تبدأ بعد"){A("co","ti-rocket","النشاط لم يبدأ بعد — تجهيز فوترة إلكترونية متوافقة قبل الإطلاق");}
+  else if(ans.einv==="لسه ورقي"){cx+=2;A("cd","ti-file-alert","فواتير ورقية — مخالفة لإلزام الفاتورة الإلكترونية، تصحيح عاجل مطلوب");}
+  else if(ans.einv==="المرحلة الأولى (الإصدار)"){A("co","ti-file-check","فاتورة إلكترونية مرحلة أولى — التحقق من جاهزية الربط (المرحلة الثانية)");}
+  if(ans.zakat==="غير منتظم"||ans.zakat==="لم يُقدَّم بعد"){cx++;A("cw","ti-receipt-tax","إقرارات الزكاة/الدخل غير منتظمة");}
+  if(ans.seas==="موسمية عالية"){cx++;A("cw","ti-calendar-event","نشاط موسمي عالي — ضغط مضاعف في بعض الشهور");}
+
+  if(!cs.length)A("co","ti-check","لا توجد مخاوف جوهرية — ملف بسيط نسبياً");
+
+  const pkg=PKGS[tier-1];
+  const name=document.getElementById("nameIn").value.trim();
+  document.getElementById("rFor").textContent="تقرير تأهيل: "+name;
+  document.getElementById("rPkg").textContent=pkg.name;
+  document.getElementById("rRange").textContent=pkg.range;
+  document.getElementById("rPrice").textContent=pkg.price.toLocaleString();
+  document.getElementById("rFirst").textContent=pkg.first.toLocaleString();
+
+  // ── Transparent workload breakdown: how the hours (and therefore the price) were built ──
+  let driverNote=`<div class="bump info"><i class="ti ti-clock-hour-4"></i>`
+    +`الباقة محسوبة على حجم الشغل اليومي للمحاسب: ~${totalHours} ساعة/شهر `
+    +`(${baseHours} أساسية من المعاملات`
+    +(extraHours>0?` + ${extraHours} من: ${workDrivers.map(w=>w.label).join("، ")}`:"")
+    +`) — حجم المبيعات لا يؤثر على السعر`;
+  driverNote+=`</div>`;
+  document.getElementById("bumpWrap").innerHTML = driverNote;
+
+  // quick accounting read box
+  const taxBasis=ans.nat==="أجنبي"?"ضريبة دخل":ans.nat==="مختلط"?"زكاة + ضريبة دخل":ans.nat==="سعودي / خليجي"?"زكاة":"—";
+  const legalDisp = ans.legal==="أخرى" ? ("أخرى — "+(ans.legal_other||"غير محدد")) : (ans.legal||"—");
+  const read=[
+    ["حجم الشغل المقدّر","~"+totalHours+" ساعة / شهر"],
+    ["المبيعات (معلومة فقط)",salesDisp+" — لا تؤثر على السعر"],
+    ["نموذج الإيراد",ans.rev||"—"],
+    ["الأساس الضريبي",taxBasis],
+    ["الشكل القانوني",legalDisp],
+    ["تسجيل VAT",ans.vat||"—"],
+    ["الفاتورة الإلكترونية",ans.einv||"—"],
+    ["وحدات مطلوبة",modulesNeeded()]
+  ];
+  document.getElementById("readBox").innerHTML=read.map(r=>`<div class="read-row"><span class="read-k">${esc(r[0])}</span><span class="read-v">${esc(r[1])}</span></div>`).join("");
+
+  const pct=Math.min(Math.round(cx/16*100),100);
+  const lvl=cx===0?"بسيط":cx<=4?"متوسط":cx<=8?"مرتفع":"معقد جداً";
+  const clr=cx===0?"#10bb82":cx<=4?"#ffaa30":cx<=8?"#ff7a30":"#ff5252";
+  const fill=document.getElementById("cxFill");fill.style.background=clr;fill.dataset.pct=pct;fill.style.width="0";
+  const badge=document.getElementById("cxBadge");badge.textContent=lvl;
+  badge.style.cssText=`background:${clr}1a;color:${clr};border:.5px solid ${clr}50;border-radius:18px;padding:3px 12px;font-size:11px;font-weight:600`;
+  document.getElementById("concList").innerHTML=cs.map((c,i)=>`<div class="con ${c.l}" style="animation-delay:${.5+i*.05}s"><i class="ti ${c.i}" aria-hidden="true"></i><span>${esc(c.t)}</span></div>`).join("");
+  lastRes={pkgName:pkg.name,pkgRange:pkg.range,price:pkg.price,first:pkg.first,cx,lvl,taxBasis,baseHours,extraHours,totalHours,workDrivers,salesDisp,modules:modulesNeeded(),concs:cs};
+  queueSave();
+}
+
+function modulesNeeded(){
+  const m=["دفتر الأستاذ العام"];
+  if(ans.fixed&&ans.fixed!=="لا")m.push("أصول ثابتة وإهلاك");
+  if(ans.intang==="نعم")m.push("أصول غير ملموسة وإطفاء");
+  if(ans.stock&&ans.stock!=="لا")m.push("مخزون");
+  if(ans.supp&&ans.supp!=="لا يوجد")m.push("حسابات دائنة");
+  if(ans.recv&&ans.recv!=="لا")m.push("حسابات مدينة");
+  if(ans.emp&&ans.emp!=="لا")m.push("رواتب وGOSI");
+  if(ans.loan==="نعم")m.push("قروض");
+  if(ans.vat&&ans.vat!=="لا")m.push("VAT");
+  return m.join("، ");
+}
+
+function buildHtml(full){
+  const name=document.getElementById("nameIn").value.trim();
+  const d=new Date().toLocaleDateString("ar-SA",{year:"numeric",month:"long",day:"numeric"});
+  let b=`<h1 style="color:#10bb82;font-size:24px;margin-bottom:4px">${esc(name)}</h1><p style="color:#666;font-size:12px;margin-bottom:26px">تاريخ الجلسة: ${d} · Sales Qualifier</p>`;
+  SECS.forEach(s=>{
+    b+=`<h2 style="font-size:14px;color:#222;border-bottom:1px solid #eee;padding-bottom:6px;margin:18px 0 10px">${esc(s.ttl)}</h2>`;
+    s.qs.forEach(q=>{
+      if(q.showIf){const met=(q.showIf.in||[]).includes(ans[q.showIf.q]);if(!met)return;}
+      const val=esc(disp(ans[q.id])).replace(/\n/g,"<br>")||"—";
+      b+=`<div style="margin-bottom:8px"><span style="font-size:11px;color:#888">${esc(q.lbl)}</span><br><strong style="font-size:13px;color:#10bb82">${val}</strong></div>`;
+    });
+    if(notes[s.id]&&notes[s.id].trim())b+=`<div style="background:#f5f5f5;border-right:3px solid #10bb82;padding:8px 12px;margin:6px 0;font-size:12px;color:#555">${esc(notes[s.id]).replace(/\n/g,"<br>")}</div>`;
+  });
+  if(full&&lastRes){
+    const{pkgName,pkgRange,price,first,lvl,taxBasis,modules,baseHours,extraHours,totalHours,workDrivers,salesDisp}=lastRes;
+    b+=`<h2 style="font-size:14px;color:#222;border-bottom:1px solid #eee;padding-bottom:6px;margin:22px 0 12px">القراءة المحاسبية والتوصية</h2>`;
+    let driverLine=`<div style="margin-top:10px;font-size:11px;color:#1a7">⏱ حجم الشغل المقدّر: ~${totalHours} ساعة/شهر (${baseHours} أساسية من المعاملات`
+      +((workDrivers&&workDrivers.length)?` + ${extraHours} من: ${workDrivers.map(w=>w.label).join("، ")}`:"")
+      +`) — المبيعات لا تؤثر على السعر</div>`;
+    b+=`<div style="background:#f0faf6;border-radius:8px;padding:16px;margin-bottom:12px"><div style="font-size:20px;font-weight:bold;color:#10bb82;margin-bottom:4px">${esc(pkgName)}</div><div style="color:#666;font-size:12px;margin-bottom:10px">${esc(pkgRange)}</div><div style="display:flex;gap:20px"><div><div style="font-size:10px;color:#999">السعر العام</div><div style="font-size:18px;font-weight:bold;color:#222">${price.toLocaleString()} ريال</div></div><div><div style="font-size:10px;color:#999">أول شهر</div><div style="font-size:18px;font-weight:bold;color:#10bb82">${first.toLocaleString()} ريال</div></div></div>${driverLine}</div>`;
+    b+=`<div style="font-size:12px;color:#444;line-height:1.9;margin-bottom:10px"><div><strong>المبيعات (معلومة فقط):</strong> ${esc(salesDisp)}</div><div><strong>الأساس الضريبي:</strong> ${esc(taxBasis)}</div><div><strong>الوحدات المحاسبية المطلوبة:</strong> ${esc(modules)}</div><div><strong>مستوى التعقيد:</strong> ${esc(lvl)}</div></div>`;
+    (lastRes.concs||[]).forEach(c=>{const cl=c.l==="cd"?"#c33":(c.l==="cw"?"#a60":"#1a7");b+=`<div style="padding:7px 11px;border-right:3px solid ${cl};background:${cl}11;margin-bottom:5px;font-size:12px;color:#333">${esc(c.t)}</div>`;});
+  }
+  return `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>تقرير — ${esc(name)}</title><style>body{font-family:Arial,sans-serif;max-width:680px;margin:40px auto;color:#222;line-height:1.7;direction:rtl}</style></head><body><div style="text-align:center;margin-bottom:28px"><div style="font-size:18px;font-weight:bold;color:#10bb82">Triple Braided · Sales Qualifier</div></div>${b}<div style="margin-top:36px;text-align:center;font-size:10px;color:#bbb">Triple Braided © ${new Date().getFullYear()}</div></body></html>`;
+}
+function xport(full){
+  const h=buildHtml(full);const b=new Blob([h],{type:"text/html;charset=utf-8"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);
+  const nm=document.getElementById("nameIn").value.trim()||"client";
+  a.download=`تقرير_${nm}_${full?"كامل":"اسئلة"}.html`;
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function sendSum(){
+  const nm=document.getElementById("nameIn").value.trim();
+  const lines=["ملخص جلسة تأهيل العميل (Sales Qualifier): "+nm+"\n"];
+  SECS.forEach(s=>{lines.push("\n■ "+s.ttl);s.qs.forEach(q=>{if(q.showIf){const met=(q.showIf.in||[]).includes(ans[q.showIf.q]);if(!met)return;}if(ans[q.id]&&disp(ans[q.id]))lines.push("• "+q.lbl+": "+disp(ans[q.id]));});if(notes[s.id])lines.push("ملاحظات: "+notes[s.id]);});
+  if(lastRes){lines.push("\nالباقة المقترحة: "+lastRes.pkgName+" — "+lastRes.price.toLocaleString()+" ريال/شهر");lines.push("حجم الشغل المقدّر: ~"+lastRes.totalHours+" ساعة/شهر (المبيعات لا تؤثر على السعر)");lines.push("الأساس الضريبي: "+lastRes.taxBasis);lines.push("الوحدات المطلوبة: "+lastRes.modules);}
+  lines.push("\nبصفتك محلل أنظمة مالية: من هذه المعطيات، كيف تتخيّل النظام المحاسبي لهذا العميل؟ وما الالتزامات والمخاطر؟ وما النقاط التي يجب تأكيدها في مرحلة الـ Onboarding؟");
+  if(typeof sendPrompt==="function")sendPrompt(lines.join("\n"));
+  else{navigator.clipboard&&navigator.clipboard.writeText(lines.join("\n"));alert("تم نسخ الملخص (sendPrompt غير متاح خارج Claude).");}
+}
+
+cid="c"+Date.now()+"_"+Math.random().toString(36).slice(2,6);
+</script>
+</body>
+</html>
