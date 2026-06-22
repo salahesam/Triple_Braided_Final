@@ -305,7 +305,8 @@ const SECS=[
   {id:"recv",lbl:"عملاء بالأجل (ذمم مدينة)؟",opts:["لا","نعم، أقل من 10 عملاء","نعم، أكثر من 10 عملاء"]},
   {id:"loan",lbl:"قروض أو تمويل قائم؟",opts:["لا","نعم"]},
   {id:"emp",lbl:"موظفون برواتب ثابتة؟",note:"يحدد الحاجة لوحدة رواتب + تأمينات (GOSI)",opts:["لا","1–5","6–20","أكثر من 20"]},
-  {id:"expat",lbl:"هل ضمن الموظفين عمالة وافدة؟",note:"العمالة الوافدة = التزامات إضافية (إقامات، تأمين طبي، تذاكر، نهاية خدمة) — شغل محاسبي أعلى",opts:["لا، كلهم سعوديون","نعم، عدد قليل","نعم، الأغلبية"],showIf:{q:"emp",in:["1–5","6–20","أكثر من 20"]}}
+  {id:"expat",lbl:"هل ضمن الموظفين عمالة وافدة؟",note:"العمالة الوافدة = التزامات إضافية (إقامات، تأمين طبي، تذاكر، نهاية خدمة) — شغل محاسبي أعلى",opts:["لا، كلهم سعوديون","نعم، عدد قليل","نعم، الأغلبية"],showIf:{q:"emp",in:["1–5","6–20","أكثر من 20"]}},
+  {id:"reps",lbl:"هل من ضمن الموظفين مناديب مبيعات/توزيع؟",note:"المندوب يحمل عُهد نقدية، مصاريف توزيع (بنزين/صيانة)، وغالباً عمولات متغيرة — شغل محاسبي إضافي بغض النظر عن إجمالي عدد الموظفين",opts:["لا","نعم، عدد قليل (1–4)","نعم، عدد أكبر"],showIf:{q:"emp",in:["1–5","6–20","أكثر من 20"]}}
  ]},
  {id:"current",ttl:"الوضع المحاسبي الحالي",desc:"يستشف منها: حجم مجهود التأسيس وترحيل الأرصدة.",qs:[
   {id:"prev",lbl:"هل يوجد إعداد محاسبي سابق؟",note:"'من الصفر' = بناء شجرة الحسابات كاملة",opts:["لا، من الصفر","نعم، غير منتظم","نعم، منتظم ومرتب"]},
@@ -328,12 +329,13 @@ const SECS=[
 // Pricing ladder driven by estimated monthly accountant workload (hours), NOT sales value.
 // Each step maps an hours-range to a price from 700 (simplest) to 2000 (max).
 const PKGS=[
- {name:"الباقة الأساسية",range:"شغل بسيط · حتى 5 ساعات/شهر",price:700,first:500,hMax:5},
- {name:"الباقة الثانية",range:"شغل خفيف · 6–9 ساعات/شهر",price:1000,first:800,hMax:9},
- {name:"الباقة الثالثة",range:"شغل منتظم · 10–13 ساعة/شهر",price:1250,first:1000,hMax:13},
- {name:"الباقة الرابعة",range:"شغل يومي · 14–18 ساعة/شهر",price:1500,first:1250,hMax:18},
- {name:"الباقة الخامسة",range:"شغل يومي مكثف · 19–24 ساعة/شهر",price:1750,first:1500,hMax:24},
- {name:"الباقة السادسة",range:"تفرّغ شبه كامل · أكثر من 24 ساعة/شهر",price:2000,first:1750,hMax:Infinity}
+ {name:"الباقة الأساسية",range:"شغل بسيط · حتى 4 ساعات/شهر",price:700,first:500,hMax:4},
+ {name:"الباقة الثانية",range:"شغل خفيف · 5–7 ساعات/شهر",price:900,first:700,hMax:7},
+ {name:"الباقة الثالثة",range:"شغل منتظم · 8–10 ساعات/شهر",price:1100,first:900,hMax:10},
+ {name:"الباقة الرابعة",range:"شغل منتظم مرتفع · 11–13 ساعة/شهر",price:1300,first:1100,hMax:13},
+ {name:"الباقة الخامسة",range:"شغل يومي · 14–16 ساعة/شهر",price:1500,first:1250,hMax:16},
+ {name:"الباقة السادسة",range:"شغل يومي مكثف · 17–20 ساعة/شهر",price:1700,first:1450,hMax:20},
+ {name:"الباقة السابعة",range:"تفرّغ شبه كامل · أكثر من 20 ساعة/شهر",price:2000,first:1750,hMax:Infinity}
 ];
 
 const SK="tbq_sales_db";
@@ -524,6 +526,13 @@ function compute(){
   if(ans.emp&&ans.emp!=="لا"){
     if(ans.expat==="نعم، الأغلبية")addWork(3,"عمالة وافدة (الأغلبية)");
     else if(ans.expat==="نعم، عدد قليل")addWork(1,"عمالة وافدة");
+    // Sales/distribution reps carry cash advances, distribution expenses (fuel,
+    // maintenance), and often variable commissions — real recurring accountant work.
+    // In small firms (1-5 staff) a few reps are absorbed into routine work, so they
+    // only add hours in larger firms or when the rep count is larger.
+    const smallFirm = (ans.emp==="1–5");
+    if(ans.reps==="نعم، عدد أكبر")addWork(2,"مناديب مبيعات/توزيع (عدد أكبر) — عُهد ومصاريف توزيع وعمولات");
+    else if(ans.reps==="نعم، عدد قليل (1–4)" && !smallFirm)addWork(1,"مناديب مبيعات/توزيع — عُهد ومصاريف توزيع");
   }
   if(ans.pos==="نعم، أكثر من نقطة")addWork(5,"نقاط بيع متعددة");
   else if(ans.pos==="نعم، نقطة واحدة")addWork(2,"نقطة بيع واحدة");
@@ -536,7 +545,8 @@ function compute(){
   else if(ans.supp==="6–15"){ if(!highInvIn)addWork(1,"6–15 مورد"); }
   if(ans.chan==="أكثر من 3 قنوات")addWork(3,"أكثر من 3 قنوات بيع");
   if(ans.stock==="نعم، كثير ومعقد")addWork(4,"مخزون كثير ومعقد");
-  if(ans.recv==="نعم، أكثر من 10 عملاء")addWork(2,"ذمم مدينة لأكثر من 10 عملاء");
+  const isSmallFirm = (ans.emp==="1–5" || ans.emp==="لا" || !ans.emp);
+  if(ans.recv==="نعم، أكثر من 10 عملاء" && !isSmallFirm)addWork(2,"ذمم مدينة لأكثر من 10 عملاء");
 
   const totalHours=baseHours+extraHours;
 
