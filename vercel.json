@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    { "source": "/qualifier", "destination": "/triple_braided_sales_qualifier.html" },
+    { "source": "/proposal", "destination": "/triple_braided_proposal_creator.html" },
+    { "source": "/bot-control", "destination": "/bot-control.html" },
+    { "source": "/email-template", "destination": "/email_template_copyable.html" }
+  ],
   "headers": [
     {
       "source": "/(assets|certificates|logos|icons)/(.*)",
@@ -10,7 +16,7 @@
       ]
     },
     {
-      "source": "/(.*).(png|jpg|jpeg|gif|webp|svg|ico|css|js|woff2|woff)",
+      "source": "/(.*)(png|jpg|jpeg|gif|webp|svg|ico|css|js|woff2|woff)",
       "headers": [
         {
           "key": "Cache-Control",
