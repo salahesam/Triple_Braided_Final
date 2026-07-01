@@ -12,7 +12,30 @@
     </script>
     <!-- Event snippet for Contact conversion -->
     <script>
+    function report_x_conversion() {
+      try {
+        fetch('/api/x-conversion', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            conversions: [
+              {
+                conversion_time: new Date().toISOString(),
+                event_id: 'tw-rd6se-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
+                event_source_url: window.location.href
+              }
+            ]
+          })
+        }).catch(err => console.error('X Conversion error:', err));
+      } catch (e) {
+        console.error('X Conversion setup error:', e);
+      }
+    }
+
     function gtag_report_conversion(url) {
+      report_x_conversion();
       var callback = function () {
         if (typeof(url) != 'undefined') {
           window.location = url;
