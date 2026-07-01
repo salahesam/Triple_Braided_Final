@@ -12,8 +12,18 @@
     </script>
     <!-- Event snippet for Contact conversion -->
     <script>
-    function report_x_conversion() {
+    function report_x_conversion(conversionId) {
       try {
+        // Trigger Client-side X Pixel
+        if (typeof twq === 'function') {
+          twq('event', 'tw-rd6se-rdb6b', {
+            conversion_id: conversionId,
+            email_address: null,
+            phone_number: null
+          });
+        }
+
+        // Trigger Server-side Conversion API
         fetch('/api/x-conversion', {
           method: 'POST',
           headers: {
@@ -23,19 +33,21 @@
             conversions: [
               {
                 conversion_time: new Date().toISOString(),
-                event_id: 'tw-rd6se-' + Date.now() + '-' + Math.floor(Math.random() * 1000),
-                event_source_url: window.location.href
+                event_id: 'tw-rd6se-rdb6b',
+                event_source_url: window.location.href,
+                conversion_id: conversionId
               }
             ]
           })
-        }).catch(err => console.error('X Conversion error:', err));
+        }).catch(err => console.error('X Conversion API error:', err));
       } catch (e) {
         console.error('X Conversion setup error:', e);
       }
     }
 
     function gtag_report_conversion(url) {
-      report_x_conversion();
+      var conversionId = 'click-' + Date.now() + '-' + Math.floor(Math.random() * 1000);
+      report_x_conversion(conversionId);
       var callback = function () {
         if (typeof(url) != 'undefined') {
           window.location = url;
