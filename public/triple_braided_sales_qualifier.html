@@ -330,9 +330,9 @@ const SECS=[
   {id:"supp",lbl:"عدد الموردين الثابتين",opts:["لا يوجد","1–5","6–15","أكثر من 15"]},
   {id:"recv",lbl:"عملاء بالأجل (ذمم مدينة)؟",opts:["لا","نعم، أقل من 10 عملاء","نعم، أكثر من 10 عملاء"]},
   {id:"loan",lbl:"قروض أو تمويل قائم؟",opts:["لا","نعم"]},
-  {id:"emp",lbl:"موظفون برواتب ثابتة؟",note:"يحدد الحاجة لوحدة رواتب + تأمينات (GOSI)",opts:["لا","1–5","6–20","أكثر من 20"]},
-  {id:"expat",lbl:"هل ضمن الموظفين عمالة وافدة؟",note:"العمالة الوافدة = التزامات إضافية (إقامات، تأمين طبي، تذاكر، نهاية خدمة) — شغل محاسبي أعلى",opts:["لا، كلهم سعوديون","نعم، عدد قليل","نعم، الأغلبية"],showIf:{q:"emp",in:["1–5","6–20","أكثر من 20"]}},
-  {id:"reps",lbl:"هل من ضمن الموظفين مناديب مبيعات/توزيع؟",note:"المندوب يحمل عُهد نقدية، مصاريف توزيع (بنزين/صيانة)، وغالباً عمولات متغيرة — شغل محاسبي إضافي بغض النظر عن إجمالي عدد الموظفين",opts:["لا","نعم، عدد قليل (1–4)","نعم، عدد أكبر"],showIf:{q:"emp",in:["1–5","6–20","أكثر من 20"]}},
+  {id:"emp",lbl:"موظفون برواتب ثابتة؟",note:"يحدد الحاجة لوحدة رواتب + تأمينات (GOSI)",opts:["لا","1–5","6–10","10–20","20–30","30–50","أكثر من 50"]},
+  {id:"expat",lbl:"هل ضمن الموظفين عمالة وافدة؟",note:"مهمة سنوية لكل موظف (إقامة، تأمين طبي، تذكرة، نهاية خدمة) — تُذكر للمحاسب كملاحظة، لا تؤثر على السعر",opts:["لا، كلهم سعوديون","نعم، عدد قليل","نعم، الأغلبية"],showIf:{q:"emp",in:["1–5","6–10","10–20","20–30","30–50","أكثر من 50"]}},
+  {id:"reps",lbl:"هل من ضمن الموظفين مناديب مبيعات/توزيع؟",note:"المندوب يحمل عُهد نقدية، مصاريف توزيع (بنزين/صيانة)، وغالباً عمولات متغيرة — شغل محاسبي إضافي بغض النظر عن إجمالي عدد الموظفين",opts:["لا","نعم، عدد قليل (1–4)","نعم، عدد أكبر"],showIf:{q:"emp",in:["1–5","6–10","10–20","20–30","30–50","أكثر من 50"]}},
   {id:"attend",lbl:"هل يحتاج النظام حضور محاسب لعدد ساعات محدد؟",note:"الحضور بساعات ثابتة = التزام وقت أكبر على المحاسب، يزيد التكلفة",opts:["لا، في أي وقت (مرن)","نعم، ساعتين","نعم، 4 ساعات","نعم، 6 ساعات","نعم، 8 ساعات"]}
  ]},
  {id:"current",ttl:"الوضع المحاسبي الحالي",desc:"يستشف منها: حجم مجهود التأسيس وترحيل الأرصدة.",qs:[
@@ -618,15 +618,17 @@ function compute(){
   //  they stay as notes only, with no effect on workload/price.)
   let extraHours=0;const workDrivers=[];
   const addWork=(h,label)=>{extraHours+=h;workDrivers.push({h,label});};
-  if(ans.emp==="أكثر من 20")addWork(6,"رواتب أكثر من 20 موظف");
-  else if(ans.emp==="6–20")addWork(3,"رواتب 6–20 موظف");
-  // Expat labor adds real recurring work on top of payroll (iqama renewals, medical
-  // insurance, tickets, end-of-service) — only meaningful when there are employees.
+  if(ans.emp==="أكثر من 50")addWork(7,"رواتب أكثر من 50 موظف");
+  else if(ans.emp==="30–50")addWork(5,"رواتب 30–50 موظف");
+  else if(ans.emp==="20–30")addWork(2,"رواتب 20–30 موظف");
+  else if(ans.emp==="10–20")addWork(2,"رواتب 10–20 موظف");
+  else if(ans.emp==="6–10")addWork(1,"رواتب 6–10 موظف");
+  // Note: expat labor (iqama/medical/tickets renewals) is an ANNUAL task per employee,
+  // not a monthly recurring workload — so it no longer adds hours to the price. It still
+  // appears as a note for the accountant (see complexity notes below). Sales/distribution
+  // reps DO add hours because they carry real monthly recurring work: cash advances,
+  // distribution expense tracking, and often variable commissions.
   if(ans.emp&&ans.emp!=="لا"){
-    if(ans.expat==="نعم، الأغلبية")addWork(3,"عمالة وافدة (الأغلبية)");
-    else if(ans.expat==="نعم، عدد قليل")addWork(1,"عمالة وافدة");
-    // Sales/distribution reps carry cash advances, distribution expenses (fuel,
-    // maintenance), and often variable commissions — real recurring accountant work.
     // In small firms (1-5 staff) a few reps are absorbed into routine work, so they
     // only add hours in larger firms or when the rep count is larger.
     const smallFirm = (ans.emp==="1–5");
@@ -717,9 +719,18 @@ function compute(){
   if(ans.recv==="نعم، أكثر من 10 عملاء"){cx+=2;A("cd","ti-users","ذمم مدينة لأكثر من 10 عملاء — متابعة تحصيل مكثفة");}
   else if(ans.recv==="نعم، أقل من 10 عملاء"){cx++;A("cw","ti-users","ذمم مدينة — متابعة التحصيل");}
   if(ans.loan==="نعم"){cx++;A("cw","ti-businessplan","تمويل قائم — متابعة التزامات وأقساط وفوائد");}
-  if(ans.emp==="أكثر من 20"){cx+=2;A("cd","ti-users-group","أكثر من 20 موظف — وحدة رواتب وتأمينات (GOSI) كاملة");}
-  else if(ans.emp==="6–20"){cx++;A("cw","ti-users-group","6–20 موظف — وحدة رواتب + GOSI");}
+  if(ans.emp==="أكثر من 50"){cx+=2;A("cd","ti-users-group","أكثر من 50 موظف — وحدة رواتب وتأمينات (GOSI) كاملة");}
+  else if(ans.emp==="30–50"){cx+=2;A("cd","ti-users-group","30–50 موظف — وحدة رواتب وGOSI");}
+  else if(ans.emp==="20–30"){cx++;A("cw","ti-users-group","20–30 موظف — وحدة رواتب + GOSI");}
+  else if(ans.emp==="10–20"){cx++;A("cw","ti-users-group","10–20 موظف — وحدة رواتب + GOSI");}
+  else if(ans.emp==="6–10"){cx++;A("cw","ti-users-group","6–10 موظف — وحدة رواتب + GOSI");}
   else if(ans.emp==="1–5"){A("co","ti-users-group","موظفون قليلون — رواتب مبسّطة");}
+  // Expat labor: informational note only (no hours impact) — iqama/medical/tickets
+  // renewals are an annual task per employee, not a monthly recurring workload.
+  if(ans.emp&&ans.emp!=="لا"){
+    if(ans.expat==="نعم، الأغلبية")A("co","ti-id","عمالة وافدة (الأغلبية) — مهمة سنوية لكل موظف: تجديد إقامة/تأمين طبي/تذكرة، لا تؤثر على الساعات الشهرية");
+    else if(ans.expat==="نعم، عدد قليل")A("co","ti-id","عمالة وافدة (عدد قليل) — مهمة سنوية لكل موظف، لا تؤثر على الساعات الشهرية");
+  }
 
   // ── Current state reading ──
   if(ans.age==="أقل من سنة"||ans.prev==="لا، من الصفر"){cx++;A("cw","ti-alert-triangle","يحتاج إعداد شجرة محاسبية من الصفر — وقت إضافي في التأسيس");}
