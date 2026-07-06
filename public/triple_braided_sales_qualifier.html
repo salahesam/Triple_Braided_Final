@@ -271,7 +271,6 @@ const SECS=[
   {id:"legal_other",lbl:"حدّد الشكل القانوني",type:"text",placeholder:"اكتب الشكل القانوني...",showIf:{q:"legal",in:["أخرى"]}},
   {id:"nat",lbl:"جنسية المُلّاك",note:"سعودي/خليجي = زكاة · أجنبي = ضريبة دخل · مختلط = الاثنان بالنِّسَب",opts:["سعودي / خليجي","أجنبي","مختلط"]},
   {id:"age",lbl:"عمر الشركة",note:"الشركات الجديدة تحتاج إعداد شجرة محاسبية من الصفر",opts:["أقل من سنة","1–3 سنوات","أكثر من 3 سنوات"]},
-  {id:"fye",lbl:"نهاية السنة المالية",hint:"ماذا يحدد نهاية السنة المالية؟ غالباً تُحدَّد في عقد التأسيس / السجل التجاري، والافتراضي 31 ديسمبر.",opts:["31 ديسمبر","أخرى"]},
   {id:"branches",lbl:"عدد الفروع / المواقع",opts:["موقع واحد","2–3","أكثر من 3"]}
  ]},
  {id:"model",ttl:"نموذج العمل والإيراد",desc:"يستشف منها: طريقة الاعتراف بالإيراد وشكل قائمة الدخل.",qs:[
@@ -289,10 +288,10 @@ const SECS=[
   {id:"settle",lbl:"متى تصل الفلوس للحساب البنكي؟",opts:["فوري","يومي","أسبوعي","شهري (تسوية)"]},
   {id:"refund",lbl:"هل توجد مرتجعات / استرجاع؟",opts:["لا","نادر","متكرر"]}
  ]},
- {id:"tx",ttl:"حجم المعاملات",desc:"المحدد الرئيسي للباقة والسعر.",qs:[
-  {id:"sales",lbl:"المبيعات الشهرية التقريبية",note:"المحدد الرئيسي للباقة",opts:["أقل من 50 ألف","50–100 ألف","100–200 ألف","200–300 ألف","أكثر من 300 ألف"]},
-  {id:"invout",lbl:"فواتير البيع الصادرة شهريًا",opts:["أقل من 50","50–100","100–200","أكثر من 200"]},
-  {id:"invin",lbl:"فواتير المشتريات والمصاريف الواردة",opts:["أقل من 30","30–80","80–150","أكثر من 150"]},
+ {id:"tx",ttl:"حجم المعاملات",desc:"يُحسب منها حجم الشغل اليومي للمحاسب.",qs:[
+  {id:"sales",lbl:"المبيعات الشهرية التقريبية",opts:["أقل من 20 ألف","20–50 ألف","50–100 ألف","100–200 ألف","200–300 ألف","300–500 ألف","500–700 ألف","700 ألف – مليون"]},
+  {id:"invout",lbl:"عدد فواتير المبيعات الشهرية",opts:["0–20","20–50","50–100","100–200","200–300","300–400","400–600","600–800","800–1000"]},
+  {id:"invin",lbl:"عدد فواتير المشتريات الشهرية",opts:["0–20","20–50","50–100","100–200","200–300","300–400","400–600","600–800","800–1000"]},
   {id:"pos",lbl:"هل يوجد نقاط بيع (POS)؟",note:"POS = معاملات يومية عالية الحجم",opts:["لا","نعم، نقطة واحدة","نعم، أكثر من نقطة"]},
   {id:"chan",lbl:"قنوات البيع",hint:"ما هي قنوات البيع؟ (محل، متجر إلكتروني، تطبيق، سوشيال، جملة...)",opts:["قناة واحدة","محل + أونلاين","جملة + تجزئة","أكثر من 3 قنوات"]},
   {id:"mktg",lbl:"الميزانية التسويقية الشهرية",hint:"تؤثر على بند مصروف التسويق وكيفية تسجيله",opts:["لا يوجد","أقل من 5 آلاف","5–15 ألف","أكثر من 15 ألف"]}
@@ -306,7 +305,8 @@ const SECS=[
   {id:"loan",lbl:"قروض أو تمويل قائم؟",opts:["لا","نعم"]},
   {id:"emp",lbl:"موظفون برواتب ثابتة؟",note:"يحدد الحاجة لوحدة رواتب + تأمينات (GOSI)",opts:["لا","1–5","6–20","أكثر من 20"]},
   {id:"expat",lbl:"هل ضمن الموظفين عمالة وافدة؟",note:"العمالة الوافدة = التزامات إضافية (إقامات، تأمين طبي، تذاكر، نهاية خدمة) — شغل محاسبي أعلى",opts:["لا، كلهم سعوديون","نعم، عدد قليل","نعم، الأغلبية"],showIf:{q:"emp",in:["1–5","6–20","أكثر من 20"]}},
-  {id:"reps",lbl:"هل من ضمن الموظفين مناديب مبيعات/توزيع؟",note:"المندوب يحمل عُهد نقدية، مصاريف توزيع (بنزين/صيانة)، وغالباً عمولات متغيرة — شغل محاسبي إضافي بغض النظر عن إجمالي عدد الموظفين",opts:["لا","نعم، عدد قليل (1–4)","نعم، عدد أكبر"],showIf:{q:"emp",in:["1–5","6–20","أكثر من 20"]}}
+  {id:"reps",lbl:"هل من ضمن الموظفين مناديب مبيعات/توزيع؟",note:"المندوب يحمل عُهد نقدية، مصاريف توزيع (بنزين/صيانة)، وغالباً عمولات متغيرة — شغل محاسبي إضافي بغض النظر عن إجمالي عدد الموظفين",opts:["لا","نعم، عدد قليل (1–4)","نعم، عدد أكبر"],showIf:{q:"emp",in:["1–5","6–20","أكثر من 20"]}},
+  {id:"attend",lbl:"هل يحتاج النظام حضور محاسب لعدد ساعات محدد؟",note:"الحضور بساعات ثابتة = التزام وقت أكبر على المحاسب، يزيد التكلفة",opts:["لا، في أي وقت (مرن)","نعم، ساعتين","نعم، 4 ساعات","نعم، 6 ساعات","نعم، 8 ساعات"]}
  ]},
  {id:"current",ttl:"الوضع المحاسبي الحالي",desc:"يستشف منها: حجم مجهود التأسيس وترحيل الأرصدة.",qs:[
   {id:"prev",lbl:"هل يوجد إعداد محاسبي سابق؟",note:"'من الصفر' = بناء شجرة الحسابات كاملة",opts:["لا، من الصفر","نعم، غير منتظم","نعم، منتظم ومرتب"]},
@@ -503,15 +503,19 @@ function compute(){
   // ════════════════════════════════════════════════════════════════════
 
   // ── (A) BASE HOURS from transaction volume (incoming + outgoing combined) ──
-  const invOutMid={"أقل من 50":25,"50–100":75,"100–200":150,"أكثر من 200":250};
-  const invInMid={"أقل من 30":15,"30–80":55,"80–150":115,"أكثر من 150":180};
-  const totalTx=(invOutMid[ans.invout]||25)+(invInMid[ans.invin]||15);
+  const invMid={"0–20":10,"20–50":35,"50–100":75,"100–200":150,"200–300":250,"300–400":350,"400–600":500,"600–800":700,"800–1000":900};
+  const totalTx=(invMid[ans.invout]||10)+(invMid[ans.invin]||10);
+  // Finer resolution at the low end so 49+49 invoices ≠ 10+10 invoices, while keeping
+  // the mid/high mapping close to the previous calibration (setcom=700, assista=900).
   let baseHours;
-  if(totalTx>400)baseHours=16;
-  else if(totalTx>250)baseHours=11;
-  else if(totalTx>150)baseHours=7;
-  else if(totalTx>80)baseHours=5;
-  else baseHours=4;
+  if(totalTx>600)baseHours=99;   // beyond top package → flagged as "requires custom pricing"
+  else if(totalTx>450)baseHours=20;
+  else if(totalTx>300)baseHours=16;
+  else if(totalTx>180)baseHours=11;
+  else if(totalTx>110)baseHours=7;
+  else if(totalTx>60)baseHours=5;
+  else if(totalTx>30)baseHours=4;
+  else baseHours=3;
 
   // ── (B) EXTRA HOURS from daily-work complexity factors only ──
   // These are the factors that genuinely consume recurring accountant time.
@@ -540,17 +544,27 @@ function compute(){
   // (80+), those invoices ARE the supplier work — it's already in baseHours, so add
   // little/nothing. Only count supplier hours when invoice volume is low (the supplier
   // relationships add work not already reflected in a small invoice count).
-  const highInvIn = (ans.invin==="80–150"||ans.invin==="أكثر من 150");
+  const highInvIn = ["50–100","100–200","200–300","300–400","400–600","600–800","800–1000"].includes(ans.invin);
   if(ans.supp==="أكثر من 15"){ if(!highInvIn)addWork(3,"أكثر من 15 مورد"); }
   else if(ans.supp==="6–15"){ if(!highInvIn)addWork(1,"6–15 مورد"); }
   if(ans.chan==="أكثر من 3 قنوات")addWork(3,"أكثر من 3 قنوات بيع");
   if(ans.stock==="نعم، كثير ومعقد")addWork(4,"مخزون كثير ومعقد");
   const isSmallFirm = (ans.emp==="1–5" || ans.emp==="لا" || !ans.emp);
   if(ans.recv==="نعم، أكثر من 10 عملاء" && !isSmallFirm)addWork(2,"ذمم مدينة لأكثر من 10 عملاء");
+  // On-site / fixed-hours accountant attendance requirement — a real time commitment
+  // that scales with the required hours.
+  if(ans.attend==="نعم، 8 ساعات")addWork(4,"حضور محاسب 8 ساعات محددة");
+  else if(ans.attend==="نعم، 6 ساعات")addWork(3,"حضور محاسب 6 ساعات محددة");
+  else if(ans.attend==="نعم، 4 ساعات")addWork(2,"حضور محاسب 4 ساعات محددة");
+  else if(ans.attend==="نعم، ساعتين")addWork(1,"حضور محاسب ساعتين محددة");
 
   const totalHours=baseHours+extraHours;
 
   // ── (C) MAP total hours → package on the 700→2000 ladder ──
+  // If workload exceeds the top package (very high transaction volume, e.g. 300+ sales
+  // AND 300+ purchase invoices), flag it as requiring custom pricing beyond the ladder.
+  const topHours=PKGS[PKGS.length-1].hMax===Infinity?24:PKGS[PKGS.length-1].hMax;
+  const needsCustom = totalHours>28; // beyond what the 2000 package reasonably covers
   let tierIdx=PKGS.findIndex(p=>totalHours<=p.hMax);
   if(tierIdx<0)tierIdx=PKGS.length-1;
   let tier=tierIdx+1;
@@ -587,9 +601,10 @@ function compute(){
   if(ans.refund==="متكرر"){cx++;A("cw","ti-arrow-back-up","مرتجعات متكررة — قيود عكسية وتسويات منتظمة");}
 
   // ── Volume reading ──
-  if(ans.invin==="أكثر من 150"){cx+=2;A("cd","ti-file-invoice","أكثر من 150 فاتورة واردة شهرياً — حجم إدخال مرتفع");}
-  else if(ans.invin==="80–150"){cx++;A("cw","ti-file-invoice","80–150 فاتورة واردة — حجم متوسط مرتفع");}
-  if(ans.invout==="أكثر من 200"){cx+=2;A("cd","ti-file-export","أكثر من 200 فاتورة بيع شهرياً — حجم إصدار مرتفع");}
+  if(["200–300","300–400","400–600","600–800","800–1000"].includes(ans.invin)){cx+=2;A("cd","ti-file-invoice","حجم فواتير واردة مرتفع ("+ans.invin+" شهرياً) — إدخال كثيف");}
+  else if(["100–200"].includes(ans.invin)){cx++;A("cw","ti-file-invoice","فواتير واردة "+ans.invin+" شهرياً — حجم متوسط مرتفع");}
+  if(["300–400","400–600","600–800","800–1000"].includes(ans.invout)){cx+=2;A("cd","ti-file-export","حجم فواتير بيع مرتفع ("+ans.invout+" شهرياً) — إصدار كثيف");}
+  else if(["200–300"].includes(ans.invout)){cx++;A("cw","ti-file-export","فواتير بيع "+ans.invout+" شهرياً — حجم متوسط مرتفع");}
   if(ans.pos==="نعم، أكثر من نقطة"){cx+=2;A("cd","ti-device-desktop","عدة نقاط بيع — معاملات يومية كثيفة جداً");}
   else if(ans.pos==="نعم، نقطة واحدة"){cx++;A("cw","ti-device-desktop","نقطة بيع — معاملات يومية عالية الحجم");}
   if(ans.chan==="أكثر من 3 قنوات"){cx+=2;A("cd","ti-chart-bar","أكثر من 3 قنوات بيع — تقارير منفصلة لكل قناة");}
@@ -635,12 +650,16 @@ function compute(){
   document.getElementById("rFirst").textContent=pkg.first.toLocaleString();
 
   // ── Transparent workload breakdown: how the hours (and therefore the price) were built ──
+  const baseLabel = baseHours>=99 ? "حجم معاملات ضخم جداً" : `${baseHours} أساسية من المعاملات`;
   let driverNote=`<div class="bump info"><i class="ti ti-clock-hour-4"></i>`
-    +`الباقة محسوبة على حجم الشغل اليومي للمحاسب: ~${totalHours} ساعة/شهر `
-    +`(${baseHours} أساسية من المعاملات`
+    +`الباقة محسوبة على حجم الشغل اليومي للمحاسب: ~${totalHours>=99?"أكثر من 28":totalHours} ساعة/شهر `
+    +`(${baseLabel}`
     +(extraHours>0?` + ${extraHours} من: ${workDrivers.map(w=>w.label).join("، ")}`:"")
     +`) — حجم المبيعات لا يؤثر على السعر`;
   driverNote+=`</div>`;
+  if(needsCustom){
+    driverNote+=`<div class="bump" style="margin-top:8px"><i class="ti ti-alert-triangle"></i>حجم العمل يتجاوز أكبر باقة (2000 ريال) — هذا العميل يتطلب تسعيراً مخصصاً خارج السلّم القياسي</div>`;
+  }
   document.getElementById("bumpWrap").innerHTML = driverNote;
 
   // quick accounting read box
