@@ -143,6 +143,21 @@ body{margin:0;padding:0}
 .bbk:hover{border-color:var(--bdr2);color:var(--txt);transform:translateY(-1px)}
 .read-t{font-size:10px;color:var(--sub);letter-spacing:2px;margin:22px 0 9px;font-weight:600;direction:rtl}
 .read-box{background:var(--s1);border:.5px solid var(--bdr);border-radius:10px;padding:14px 16px;direction:rtl;animation:fu .4s .5s both}
+.wl-box{background:var(--s1);border:.5px solid var(--bdr);border-radius:12px;padding:16px;margin:16px 0;direction:rtl;animation:fu .4s .45s both}
+.wl-head{margin-bottom:14px}
+.wl-title{display:block;font-size:14px;font-weight:700;color:var(--g);margin-bottom:3px}
+.wl-hint{display:block;font-size:11px;color:var(--mut)}
+.wl-item{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:9px;border:.5px solid var(--bdr);margin-bottom:7px;transition:all .2s;background:rgba(255,255,255,.015)}
+.wl-item.off{opacity:.4}
+.wl-item.base{border-color:rgba(16,187,130,.3);background:rgba(16,187,130,.04)}
+.wl-check{width:22px;height:22px;border-radius:6px;border:1.5px solid var(--bdr);flex-shrink:0;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;color:transparent;font-size:13px;font-weight:800}
+.wl-item.on .wl-check{background:var(--g);border-color:var(--g);color:#03100a}
+.wl-label{flex:1;font-size:13px;color:var(--txt);line-height:1.4}
+.wl-hrs{font-size:12px;font-weight:700;color:var(--g);white-space:nowrap;background:rgba(16,187,130,.1);padding:3px 9px;border-radius:12px}
+.wl-sel{background:var(--s2);border:.5px solid var(--bdr);border-radius:7px;color:var(--txt);font-family:inherit;font-size:12px;padding:5px 8px;cursor:pointer;outline:none;direction:rtl}
+.wl-sel:focus{border-color:var(--g)}
+.wl-total{display:flex;align-items:center;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:.5px solid var(--bdr);font-size:13px;font-weight:600;color:var(--sub)}
+.wl-total-v{color:var(--g);font-weight:800;font-size:15px}
 .read-row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:.5px solid rgba(16,187,130,.08);font-size:12.5px}
 .read-row:last-child{border-bottom:none}
 .read-k{color:var(--sub);flex-shrink:0}
@@ -238,6 +253,18 @@ body{margin:0;padding:0}
     <div class="pr-row">
       <div class="pc"><div class="pc-l">السعر العام</div><div class="pc-v" id="rPrice">—</div><div class="pc-u">ريال / شهر</div></div>
       <div class="pc hi"><div class="pc-l">أول شهر</div><div class="pc-v" id="rFirst">—</div><div class="pc-u">ريال فقط</div></div>
+    </div>
+
+    <div class="wl-box" id="wlBox">
+      <div class="wl-head">
+        <span class="wl-title">تخصيص نطاق الخدمة</span>
+        <span class="wl-hint">فعّل أو ألغِ أي بند لتعديل الساعات والسعر مباشرة</span>
+      </div>
+      <div id="wlList"></div>
+      <div class="wl-total">
+        <span>إجمالي ساعات الشغل الشهري</span>
+        <span class="wl-total-v"><span id="wlHours">0</span> ساعة</span>
+      </div>
     </div>
 
     <div class="read-t">القراءة المحاسبية السريعة</div>
@@ -341,6 +368,74 @@ const PKGS=[
 const SK="tbq_sales_db";
 const ans={};const notes={};
 let cid=null;let lastRes=null;
+// Interactive workload state + hours→package mapping (shared by compute and the checklist)
+const WL={baseHoursAuto:0,baseHoursOverride:null,drivers:[],needsCustomAuto:false};
+// Transaction levels the user can switch between in the checklist dropdown
+const TX_LEVELS=[
+  {label:"معاملات قليلة جداً (حتى ~40 فاتورة)",h:3},
+  {label:"معاملات خفيفة (~40–90 فاتورة)",h:4},
+  {label:"معاملات متوسطة (~90–150 فاتورة)",h:5},
+  {label:"معاملات منتظمة (~150–250 فاتورة)",h:7},
+  {label:"معاملات مرتفعة (~250–400 فاتورة)",h:11},
+  {label:"معاملات كثيفة (~400–550 فاتورة)",h:16},
+  {label:"معاملات ضخمة (~550–650 فاتورة)",h:20},
+  {label:"أكبر من ذلك — تسعير مخصص",h:99}
+];
+function hoursToPkg(h){
+  let i=PKGS.findIndex(p=>h<=p.hMax);
+  if(i<0)i=PKGS.length-1;
+  return {pkg:PKGS[i], custom:h>28};
+}
+function renderWorkChecklist(){
+  const list=document.getElementById("wlList");
+  if(!list)return;
+  const baseH = WL.baseHoursOverride!=null ? WL.baseHoursOverride : WL.baseHoursAuto;
+  // find current tx level index
+  let txIdx=TX_LEVELS.findIndex(t=>t.h===baseH);
+  if(txIdx<0)txIdx=TX_LEVELS.reduce((best,t,i)=>Math.abs(t.h-baseH)<Math.abs(TX_LEVELS[best].h-baseH)?i:best,0);
+  let html="";
+  // base transactions row = dropdown (not a checkbox)
+  html+=`<div class="wl-item base on">
+    <span class="wl-check" style="cursor:default">✓</span>
+    <span class="wl-label">شغل المعاملات الأساسي (الفواتير)</span>
+    <select class="wl-sel" onchange="wlSetTx(this.value)">
+      ${TX_LEVELS.map((t,i)=>`<option value="${i}" ${i===txIdx?"selected":""}>${esc(t.label)} — ${t.h>=99?"28+":t.h} ساعة</option>`).join("")}
+    </select>
+  </div>`;
+  // driver rows = toggleable checkboxes
+  WL.drivers.forEach((d,i)=>{
+    html+=`<div class="wl-item ${d.on?"on":"off"}" onclick="wlToggle(${i})">
+      <span class="wl-check">✓</span>
+      <span class="wl-label">${esc(d.label)}</span>
+      <span class="wl-hrs">+${d.h} ساعة</span>
+    </div>`;
+  });
+  list.innerHTML=html;
+  wlRecalc();
+}
+function wlSetTx(idx){
+  WL.baseHoursOverride=TX_LEVELS[+idx].h;
+  renderWorkChecklist();
+}
+function wlToggle(i){
+  WL.drivers[i].on=!WL.drivers[i].on;
+  const el=document.querySelectorAll(".wl-item")[i+1]; // +1 for base row
+  if(el)el.classList.toggle("on",WL.drivers[i].on),el.classList.toggle("off",!WL.drivers[i].on);
+  wlRecalc();
+}
+function wlRecalc(){
+  const baseH = WL.baseHoursOverride!=null ? WL.baseHoursOverride : WL.baseHoursAuto;
+  const extra = WL.drivers.filter(d=>d.on).reduce((s,d)=>s+d.h,0);
+  const total = baseH + extra;
+  const {pkg,custom} = hoursToPkg(total);
+  const hoursEl=document.getElementById("wlHours");
+  if(hoursEl)hoursEl.textContent = total>=99? "أكثر من 28" : total;
+  document.getElementById("rPkg").textContent = custom? "تسعير مخصص" : pkg.name;
+  document.getElementById("rRange").textContent = custom? "حجم عمل يتجاوز أكبر باقة" : pkg.range;
+  document.getElementById("rPrice").textContent = custom? "—" : pkg.price.toLocaleString();
+  document.getElementById("rFirst").textContent = custom? "—" : pkg.first.toLocaleString();
+  if(lastRes){lastRes.totalHours=total>=99?"28+":total;lastRes.price=custom?null:pkg.price;lastRes.first=custom?null:pkg.first;lastRes.pkgName=custom?"تسعير مخصص":pkg.name;}
+}
 let saveQ=Promise.resolve();
 const hasStore=(typeof window!=="undefined"&&window.storage);
 
@@ -661,6 +756,13 @@ function compute(){
     driverNote+=`<div class="bump" style="margin-top:8px"><i class="ti ti-alert-triangle"></i>حجم العمل يتجاوز أكبر باقة (2000 ريال) — هذا العميل يتطلب تسعيراً مخصصاً خارج السلّم القياسي</div>`;
   }
   document.getElementById("bumpWrap").innerHTML = driverNote;
+
+  // ── Build interactive workload checklist (adjustable scope) ──
+  WL.baseHoursAuto = baseHours;
+  WL.baseHoursOverride = null;       // when user picks a different tx level
+  WL.drivers = workDrivers.map(d=>({label:d.label, h:d.h, on:true}));
+  WL.needsCustomAuto = needsCustom;
+  renderWorkChecklist();
 
   // quick accounting read box
   const taxBasis=ans.nat==="أجنبي"?"ضريبة دخل":ans.nat==="مختلط"?"زكاة + ضريبة دخل":ans.nat==="سعودي / خليجي"?"زكاة":"—";
