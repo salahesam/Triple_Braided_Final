@@ -320,6 +320,7 @@ const SECS=[
   {id:"invout",lbl:"عدد فواتير المبيعات الشهرية",opts:["0–20","20–50","50–100","100–200","200–300","300–400","400–600","600–800","800–1000"]},
   {id:"invin",lbl:"عدد فواتير المشتريات الشهرية",opts:["0–20","20–50","50–100","100–200","200–300","300–400","400–600","600–800","800–1000"]},
   {id:"pos",lbl:"هل يوجد نقاط بيع (POS)؟",note:"POS = معاملات يومية عالية الحجم",opts:["لا","نعم، نقطة واحدة","نعم، أكثر من نقطة"]},
+  {id:"posShare",lbl:"نسبة مبيعات الـPOS من إجمالي المبيعات؟",note:"يحدد حجم المطابقة الدورية المطلوبة فعلياً",opts:["أقل من 20% (جزء بسيط)","20–60% (جزء متوسط)","أكثر من 60% (معظم المبيعات)"],showIf:{q:"pos",in:["نعم، نقطة واحدة","نعم، أكثر من نقطة"]}},
   {id:"chan",lbl:"قنوات البيع",hint:"ما هي قنوات البيع؟ (محل، متجر إلكتروني، تطبيق، سوشيال، جملة...)",opts:["قناة واحدة","محل + أونلاين","جملة + تجزئة","أكثر من 3 قنوات"]},
   {id:"mktg",lbl:"الميزانية التسويقية الشهرية",hint:"تؤثر على بند مصروف التسويق وكيفية تسجيله",opts:["لا يوجد","أقل من 5 آلاف","5–15 ألف","أكثر من 15 ألف"]}
  ]},
@@ -635,8 +636,17 @@ function compute(){
     if(ans.reps==="نعم، عدد أكبر")addWork(2,"مناديب مبيعات/توزيع (عدد أكبر) — عُهد ومصاريف توزيع وعمولات");
     else if(ans.reps==="نعم، عدد قليل (1–4)" && !smallFirm)addWork(1,"مناديب مبيعات/توزيع — عُهد ومصاريف توزيع");
   }
-  if(ans.pos==="نعم، أكثر من نقطة")addWork(5,"نقاط بيع متعددة");
-  else if(ans.pos==="نعم، نقطة واحدة")addWork(2,"نقطة بيع واحدة");
+  // POS hours scale with its share of total sales — a POS that handles a small slice
+  // of sales needs lighter periodic reconciliation than one that IS most of the sales.
+  const posHoursTable = {
+    "نعم، نقطة واحدة": {"أقل من 20% (جزء بسيط)":1, "20–60% (جزء متوسط)":1.5, "أكثر من 60% (معظم المبيعات)":2, _default:2},
+    "نعم، أكثر من نقطة": {"أقل من 20% (جزء بسيط)":2, "20–60% (جزء متوسط)":3, "أكثر من 60% (معظم المبيعات)":5, _default:5}
+  };
+  if(posHoursTable[ans.pos]){
+    const t=posHoursTable[ans.pos];
+    const h=t[ans.posShare]!=null?t[ans.posShare]:t._default;
+    addWork(h, (ans.pos==="نعم، أكثر من نقطة"?"نقاط بيع متعددة":"نقطة بيع واحدة")+(ans.posShare?` (${ans.posShare})`:""));
+  }
   // Suppliers: avoid double-counting. When incoming-invoice volume is already high
   // (80+), those invoices ARE the supplier work — it's already in baseHours, so add
   // little/nothing. Only count supplier hours when invoice volume is low (the supplier
