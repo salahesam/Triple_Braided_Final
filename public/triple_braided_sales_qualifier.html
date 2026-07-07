@@ -646,6 +646,9 @@ function compute(){
   else if(ans.supp==="6–15"){ if(!highInvIn)addWork(1,"6–15 مورد"); }
   if(ans.chan==="أكثر من 3 قنوات")addWork(3,"أكثر من 3 قنوات بيع");
   if(ans.stock==="نعم، كثير ومعقد")addWork(4,"مخزون كثير ومعقد");
+  // Numerous fixed assets → multi-asset depreciation schedule (different useful lives,
+  // different categories) is real recurring monthly work, unlike a single simple asset.
+  if(ans.fixed==="نعم، كثيرة" && ans.emp!=="1–5" && ans.emp!=="لا" && ans.emp)addWork(2,"أصول ثابتة كثيرة — جدول إهلاك متعدد الأصول");
   const isSmallFirm = (ans.emp==="1–5" || ans.emp==="لا" || !ans.emp);
   if(ans.recv==="نعم، أكثر من 10 عملاء" && !isSmallFirm)addWork(2,"ذمم مدينة لأكثر من 10 عملاء");
   // On-site / fixed-hours accountant attendance requirement — a real time commitment
@@ -713,7 +716,12 @@ function compute(){
   else if(ans.fixed==="نعم، عدد بسيط"){cx++;A("cw","ti-building","أصول ثابتة — متابعة الإهلاك شهرياً");}
   if(ans.intang==="نعم"){cx++;A("cw","ti-device-laptop","أصول غير ملموسة — جدول إطفاء (Amortization) منفصل");}
   if(ans.stock==="نعم، كثير ومعقد"){cx+=2;A("cd","ti-package","مخزون كثير ومعقد — متابعة COGS وجرد دوري");}
-  else if(ans.stock==="نعم، بسيط"){cx++;A("cw","ti-package","مخزون موجود — متابعة دورية");}
+  else if(ans.stock==="نعم، بسيط"){cx++;A("cw","ti-package","مخزون موجود — متابعة دورية");
+    const bioKeywords=["استزراع","مزرعة","أسماك","دواجن","ماشية","أبقار","أغنام","نحل","دواجن","حيوان"];
+    if(bioKeywords.some(k=>(ans.activity||"").includes(k))){
+      A("cd","ti-fish","نشاط زراعي/حيواني — المخزون قد يكون أصلاً بيولوجياً (تقييم متغيّر) لا مخزوناً بسيطاً، يُنصح بمراجعة يدوية");
+    }
+  }
   if(ans.supp==="أكثر من 15"){cx+=2;A("cd","ti-truck","أكثر من 15 مورد — حسابات دائنة معقدة");}
   else if(ans.supp==="6–15"){cx++;A("cw","ti-truck","6–15 مورد — متابعة منتظمة للدائنين");}
   if(ans.recv==="نعم، أكثر من 10 عملاء"){cx+=2;A("cd","ti-users","ذمم مدينة لأكثر من 10 عملاء — متابعة تحصيل مكثفة");}
