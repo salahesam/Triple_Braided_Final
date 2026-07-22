@@ -3,7 +3,7 @@
     { "source": "/qualifier", "destination": "/triple_braided_sales_qualifier.html" },
     { "source": "/proposal", "destination": "/triple_braided_proposal_creator.html" },
     { "source": "/bot-control", "destination": "/bot-control.html" },
-    { "source": "/email-template", "destination": "/email_template_copyable.html" }
+    { "source": "/email-template", "destination": "/email_template_copyable.html" },
     { "source": "/financial-report-generator", "destination": "/triple_braided_financial_report_generator.html" }
   ],
   "headers": [
