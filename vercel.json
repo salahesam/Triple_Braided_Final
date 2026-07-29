@@ -4,7 +4,8 @@
     { "source": "/proposal", "destination": "/triple_braided_proposal_creator.html" },
     { "source": "/bot-control", "destination": "/bot-control.html" },
     { "source": "/email-template", "destination": "/email_template_copyable.html" },
-    { "source": "/financial-report-creator", "destination": "/triple_braided_financial_report_creator.html" }
+    { "source": "/financial-report-creator", "destination": "/triple_braided_financial_report_creator.html" },
+    { "source": "/feedback-survey", "destination": "/triple_braided_feedback_survey.html" }
   ],
   "headers": [
     {
